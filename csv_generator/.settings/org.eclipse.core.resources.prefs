@@ -1,5 +1,9 @@
-#Tue Jul 26 01:46:57 CEST 2011
+#Tue Jul 26 21:33:59 CEST 2011
 eclipse.preferences.version=1
 encoding//app/views/Application/index.html=UTF-8
 encoding//app/views/Application/step1.html=UTF-8
+encoding//app/views/Application/step2.html=UTF-8
+encoding//app/views/Application/step3.html=UTF-8
+encoding//app/views/Application/step4.html=UTF-8
+encoding//app/views/Application/step5.html=UTF-8
 encoding/<project>=UTF-8

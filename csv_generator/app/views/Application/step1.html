@@ -2,4 +2,17 @@
 #{set title:'Home' /}
 
 <h1>Generátor CSV souborů</h1>
-<h2>Krok 1. </h2>
+<h2>Krok 1.</h2>
+<form action="@{Application.step2}">
+#{field 'generationSession.rows'} 
+<label for="row">Počet řádků:</label>
+<input id="row" type="text" />
+#{/field}
+<br/>
+#{field 'generationSession.columns'}
+<label for="column">Počet sloupců:</label>
+<input id="column" type="text" />
+#{/field}
+<br/>
+<input type="submit" value="Další" />
+</form>

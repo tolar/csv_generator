@@ -1,0 +1,15 @@
+what,kind,bundleId,bundleVersion,description,time
+stopped,bundle,org.eclipse.help.ui,3.3.100.v20080521,org.eclipse.help.ui,1312142085910
+stopped,bundle,org.eclipse.jsch.ui,1.1.100.I20080415,org.eclipse.jsch.ui,1312142085910
+stopped,bundle,org.eclipse.ui.browser,3.2.200.v20080507,org.eclipse.ui.browser,1312142085911
+stopped,bundle,org.eclipse.datatools.sqltools.data.ui,1.1.0.v200805310400,org.eclipse.datatools.sqltools.data.ui,1312142085912
+stopped,bundle,org.eclipse.datatools.enablement.sybase.asa,1.0.1.v200805310538,org.eclipse.datatools.enablement.sybase.asa,1312142085913
+stopped,bundle,org.eclipse.datatools.enablement.sybase.asa.models,1.0.0.v200805152355,org.eclipse.datatools.enablement.sybase.asa.models,1312142085914
+stopped,bundle,org.eclipse.datatools.enablement.sybase.ase,1.0.1.v200806040735,org.eclipse.datatools.enablement.sybase.ase,1312142085915
+stopped,bundle,org.eclipse.datatools.enablement.sybase.ase.models,1.0.1.v200805152355,org.eclipse.datatools.enablement.sybase.ase.models,1312142085916
+stopped,bundle,org.eclipse.datatools.enablement.sybase.ui,1.0.0.v200806041138,org.eclipse.datatools.enablement.sybase.ui,1312142085917
+stopped,bundle,org.eclipse.datatools.enablement.sybase,1.0.1.v200805310538,org.eclipse.datatools.enablement.sybase,1312142085917
+stopped,bundle,org.eclipse.jpt.eclipselink.core,1.0.0.v200806050000,org.eclipse.jpt.eclipselink.core,1312142085918
+stopped,bundle,org.eclipse.jpt.core,2.0.0.v200805220000,org.eclipse.jpt.core,1312142085919
+stopped,bundle,org.eclipse.jpt.db,1.1.1.v200805020000,org.eclipse.jpt.db,1312142085964
+stopped,bundle,org.eclipse.datatools.sqltools.editor.core,1.0.0.v200805152355,org.eclipse.datatools.sqltools.editor.core,1312142085966
