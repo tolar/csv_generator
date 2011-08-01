@@ -1,0 +1,11 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+<h1>Generátor CSV souborů</h1>
+<h2>Krok 5. </h2>
+<form action="@{Application.step4}">
+<input type="submit" value="Předchozí" />
+</form>
+<form action="@{Application.generate}">
+<input type="submit" value="Generovat" />
+</form>
