@@ -3,16 +3,16 @@
 
 <h1>Generátor CSV souborů</h1>
 <h2>Krok 1.</h2>
-<form action="@{Application.step2}">
-#{field 'generationSession.rows'} 
+#{form @Application.step2()}
+#{field 'gs.rows'}
 <label for="row">Počet řádků:</label>
-<input id="row" type="text" />
+<input id="row" type="text" value="${field.value}"/>
 #{/field}
 <br/>
-#{field 'generationSession.columns'}
+#{field 'gs.columns'}
 <label for="column">Počet sloupců:</label>
-<input id="column" type="text" />
+<input id="column" type="text" value="${field.value}" />
 #{/field}
 <br/>
 <input type="submit" value="Další" />
-</form>
+#{/form}

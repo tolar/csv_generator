@@ -10,12 +10,13 @@ import java.util.*;
 import models.*;
 
 public class Application extends Controller {
-	
+
     public static void index() {
         render();
     }
 
     public static void step1() {
+    	System.out.println("step1");
     	GenerationSession gs = Cache.get(getCacheId(), GenerationSession.class);
     	if (gs == null) {
     		gs = new GenerationSession();
@@ -23,27 +24,32 @@ public class Application extends Controller {
     	}
         render(gs);
     }
-    
+
     public static void step2(@Valid GenerationSession generationSession) {
+    	System.out.println("step2:" + generationSession);
+        if(validation.hasErrors()) {
+        	System.out.println("errors");
+            render("@step1");
+        }
         render();
     }
-    
+
     public static void step3() {
         render();
     }
-   
+
     public static void step4() {
         render();
     }
-    
+
     public static void step5() {
         render();
-    }      
-    
-    public static void generate() {
-        
     }
-    
+
+    public static void generate() {
+
+    }
+
 	private static String getCacheId() {
 		return session.getId() + "generation";
 	}
