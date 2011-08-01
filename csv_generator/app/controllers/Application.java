@@ -25,8 +25,8 @@ public class Application extends Controller {
         render(gs);
     }
 
-    public static void step2(@Valid GenerationSession generationSession) {
-    	System.out.println("step2:" + generationSession);
+    public static void step2(@Valid GenerationSession gs) {
+    	System.out.println("step2:" + gs);
         if(validation.hasErrors()) {
         	System.out.println("errors");
             render("@step1");

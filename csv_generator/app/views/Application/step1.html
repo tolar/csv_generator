@@ -3,15 +3,15 @@
 
 <h1>Generátor CSV souborů</h1>
 <h2>Krok 1.</h2>
-#{form @Application.step2()}
+#{form @Application.step2(), method:'POST' }
 #{field 'gs.rows'}
-<label for="row">Počet řádků:</label>
-<input id="row" type="text" value="${field.value}"/>
+<label for="${field.id}">Počet řádků:</label>
+<input id="${field.id}" name="${field.name}" type="text" value="${field.value}"/>
 #{/field}
 <br/>
 #{field 'gs.columns'}
-<label for="column">Počet sloupců:</label>
-<input id="column" type="text" value="${field.value}" />
+<label for="${field.id}">Počet sloupců:</label>
+<input id="${field.id}" name="${field.name}" type="text" value="${field.value}" />
 #{/field}
 <br/>
 <input type="submit" value="Další" />
