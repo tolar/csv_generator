@@ -3,6 +3,8 @@ package models;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import play.data.validation.Min;
 import play.data.validation.Max;
@@ -20,12 +22,15 @@ public class GenerationSession implements Serializable  {
 	@Max(value=50, message="Počet sloupců nesmí být větší než 50")
 	public String columns;
 
-	public List<String> cellValues = new ArrayList<String>();
+	public Set<String> cellValues = new TreeSet<String>();
 
 	@Override
 	public String toString() {
-		return "GenerationSession [rows=" + rows + ", columns=" + columns + "]";
+		return "GenerationSession [rows=" + rows + ", columns=" + columns
+				+ ", cellValues=" + cellValues + "]";
 	}
+
+
 
 
 

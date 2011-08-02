@@ -1,8 +1,8 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-<h1>Gener·tor CSV soubor˘</h1>
-<h2>Krok 2. - definov·nÌ hodnot</h2>
+<h1>Gener√°tor CSV soubor≈Ø</h1>
+<h2>Krok 2. - definov√°n√≠ hodnot</h2>
 
 #{list items:gs.cellValues, as:'cell'}
     <li>${cell}</li>
@@ -10,16 +10,16 @@
 
 #{form @Application.step2_addCellValue(cellValue), method:'POST' }
 
-<label for="cellValue">Nov· hodnota pro buÚky:</label>
+<label for="cellValue">Nov√° hodnota pro bu≈àky:</label>
 <input id="cellValue" name="cellValue" type="text" value="${cellValue}" />
-<input type="submit" value="P¯idat" />
+<input type="submit" value="P≈ôidat" />
 
 #{/form}
 
 
 <form action="@{Application.step1}">
-<input type="submit" value="P¯edchozÌ" />
+<input type="submit" value="P≈ôedchoz√≠" />
 </form>
 <form action="@{Application.step3}">
-<input type="submit" value="DalöÌ" />
+<input type="submit" value="Dal≈°√≠" />
 </form>

@@ -24,13 +24,17 @@ public class Application extends Controller {
     }
 
     public static void step2_fromStep1(@Valid GenerationSession gs) {
-    	System.out.println("step2:" + gs);
+    	System.out.println("step2:");
+    	
     	gs = synchronizeWithSession(gs);
+    	
     	renderArgs.put("gs", gs);
         if(validation.hasErrors()) {
         	System.out.println("step1 errors");
+     
             render("@step1");
         }
+        
         render("@step2");
     }
 
@@ -42,6 +46,7 @@ public class Application extends Controller {
         }
     	GenerationSession gs = synchronizeWithSession();
     	gs.cellValues.add(cellValue);
+    	gs = synchronizeWithSession(gs);
     	renderArgs.put("gs", gs);
         render("@step2");
     }
@@ -79,6 +84,7 @@ public class Application extends Controller {
 			System.out.println("SYNC: gs was in cache");
 			//cachedGs = gs;
 		} else {
+			System.out.println("SYNC: replace gs on session");
 			Cache.replace(getCacheId(), gs);
 		}
 		System.out.println("SYNC:result" + gs);
