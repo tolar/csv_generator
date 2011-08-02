@@ -1,11 +1,25 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-<h1>GenerÃ¡tor CSV souborÅ¯</h1>
-<h2>Krok 2. </h2>
+<h1>Generátor CSV souborù</h1>
+<h2>Krok 2. - definování hodnot</h2>
+
+#{list items:gs.cellValues, as:'cell'}
+    <li>${cell}</li>
+#{/list}
+
+#{form @Application.step2_addCellValue(cellValue), method:'POST' }
+
+<label for="cellValue">Nová hodnota pro buòky:</label>
+<input id="cellValue" name="cellValue" type="text" value="${cellValue}" />
+<input type="submit" value="Pøidat" />
+
+#{/form}
+
+
 <form action="@{Application.step1}">
-<input type="submit" value="PÅ™edchozÃ­" />
+<input type="submit" value="Pøedchozí" />
 </form>
 <form action="@{Application.step3}">
-<input type="submit" value="DalÅ¡Ã­" />
+<input type="submit" value="Další" />
 </form>

@@ -2,17 +2,37 @@
 #{set title:'Home' /}
 
 <h1>Generátor CSV souborů</h1>
-<h2>Krok 1.</h2>
-#{form @Application.step2(), method:'POST' }
+<h2>Krok 1. - definování dimenzí</h2>
+
+#{ifErrors}
+<div class="error">
+    <h3>Opravte, prosím, následující chyby ve formuláři</h2>
+	<ul>
+		#{errors 'gs.rows'}
+	    	<li>${error}</li>
+	    #{/errors}
+		#{errors 'gs.columns'}
+	    	<li>${error}</li>
+	    #{/errors}
+	</ul>
+
+</div>
+#{/ifErrors}
+
+#{form @Application.step2_fromStep1(), method:'POST' }
+
 #{field 'gs.rows'}
 <label for="${field.id}">Počet řádků:</label>
 <input id="${field.id}" name="${field.name}" type="text" value="${field.value}"/>
 #{/field}
+
 <br/>
+
 #{field 'gs.columns'}
 <label for="${field.id}">Počet sloupců:</label>
 <input id="${field.id}" name="${field.name}" type="text" value="${field.value}" />
 #{/field}
 <br/>
 <input type="submit" value="Další" />
+
 #{/form}
