@@ -12,18 +12,28 @@ import play.data.validation.Required;
 
 public class GenerationSession implements Serializable  {
 
-	@Required(message="Počet řádků je povinný")
-	@Min(value=1, message="Počet řádků musí být větší než 0")
-	@Max(value=50, message="Počet řádků nesmí být větší než 50")
 	public String rows;
 
-	@Required(message="Počet sloupců je povinný")
-	@Min(value=1, message="Počet sloupců musí být větší než 0")
-	@Max(value=50, message="Počet sloupců nesmí být větší než 50")
 	public String columns;
 
 	public Set<String> cellValues = new TreeSet<String>();
 
+	public GenerationSession() {
+		super();
+	}
+
+	public Step1Params getStep1Params() {
+		Step1Params params = new Step1Params();
+		params.columns = columns;
+		params.rows = rows;
+		return params;
+	}
+	
+	public Step2Params getStep2Params() {
+		Step2Params params = new Step2Params();
+		return params;
+	}	
+	
 	@Override
 	public String toString() {
 		return "GenerationSession [rows=" + rows + ", columns=" + columns

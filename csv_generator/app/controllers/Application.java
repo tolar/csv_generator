@@ -16,43 +16,72 @@ public class Application extends Controller {
         render();
     }
 
-    public static void step1(GenerationSession gs) {
-    	System.out.println("step1" + gs);
-    	gs = synchronizeWithSession(gs);
-    	System.out.println("step1" + gs);
-        render(gs);
+    public static void step1() {
+    	//System.out.println("step1" + gs);
+    	GenerationSession gs = getSessionValue();
+    	//System.out.println("PARAMS:" + params);
+    	//Step1Params params = gs.getStep1Params(gs);
+    	//Step1Params step1 = new Step1Params();
+    	//step1.columns = "22";
+    	
+    	renderArgs.put("step1", gs.getStep1Params());
+        render();
     }
 
-    public static void step2_fromStep1(@Valid GenerationSession gs) {
+    public static void step2_fromStep1(@Valid Step1Params step1) {
     	System.out.println("step2:");
     	
-    	gs = synchronizeWithSession(gs);
-    	
+    	GenerationSession gs = updateSession(step1);
     	renderArgs.put("gs", gs);
+    	
         if(validation.hasErrors()) {
         	System.out.println("step1 errors");
-     
+        	renderArgs.put("step1", step1);
             render("@step1");
         }
+        Step2Params step2 = gs.getStep2Params();
+        renderArgs.put("step2", step2);
+        
+        render("@step2");
+    }
+    
+	public static void step2_addCellValue(@Valid Step2Params step2) {
+    	System.out.println("step2:" + step2);
+	
+		GenerationSession gs = getSessionValue();
+    	renderArgs.put("gs", gs);
+    	
+        if(validation.hasErrors()) {
+        	System.out.println("step2 errors");
+        	renderArgs.put("step2", step2);
+            render("@step2");
+        }
+  
+        gs = updateSession(step2);
+        step2.cellValue = "";
+        renderArgs.put("step2", step2);
+        render("@step2");
+    }    
+	
+    public static void step2_fromStep3() {
+    	System.out.println("step2:");
+    	
+    	GenerationSession gs = getSessionValue();
+    	renderArgs.put("gs", gs);
         
         render("@step2");
     }
 
-    public static void step2_addCellValue(@Required String cellValue) {
-    	System.out.println("step2:" + cellValue);
-        if(validation.hasErrors()) {
-        	System.out.println("step2 errors");
-            render("@step2");
-        }
-    	GenerationSession gs = synchronizeWithSession();
-    	gs.cellValues.add(cellValue);
-    	gs = synchronizeWithSession(gs);
-    	renderArgs.put("gs", gs);
-        render("@step2");
-    }
 
-    public static void step3() {
-        render();
+
+
+
+
+
+	public static void step3() {
+    	GenerationSession gs = getSessionValue();
+    	renderArgs.put("gs", gs);
+        render("@step3");
     }
 
     public static void step4() {
@@ -70,30 +99,64 @@ public class Application extends Controller {
 	private static String getCacheId() {
 		return session.getId() + "generation";
 	}
-
-	private static GenerationSession synchronizeWithSession(GenerationSession gs) {
+	
+	private static GenerationSession getSessionValue() {
+		
+		GenerationSession gs = Cache.get(getCacheId(), GenerationSession.class);
 		if (gs == null) {
-			System.out.println("SYNC:in:null");
-			gs = Cache.get(getCacheId(), GenerationSession.class);
-			if (gs == null) {
-				System.out.println("SYNC: gs is not in cache");
-				gs = new GenerationSession();
-				Cache.add(getCacheId(), gs);
-				System.out.println("SYNC: gs added cache");
-			}
-			System.out.println("SYNC: gs was in cache");
+						
+			gs = new GenerationSession();
+			Cache.add(getCacheId(), gs);
+				
+		
+			System.out.println("GSV: gs added to cache");
 			//cachedGs = gs;
-		} else {
-			System.out.println("SYNC: replace gs on session");
-			Cache.replace(getCacheId(), gs);
-		}
-		System.out.println("SYNC:result" + gs);
+		} 
+		System.out.println("GSV:cache value:" + gs);
 		return gs;
 	}
-
-	private static GenerationSession synchronizeWithSession() {
-		return Cache.get(getCacheId(), GenerationSession.class);
+	
+	private static void updateSessionValue(GenerationSession gs) {
+		System.out.println("USV:cache value:" + gs);
+		Cache.replace(getCacheId(), gs);
 	}
+	
+    private static GenerationSession updateSession(Step1Params step1) {    	
+    	GenerationSession gs = getSessionValue();
+    	gs.columns = step1.columns;
+    	gs.rows = step1.rows;
+    	updateSessionValue(gs);
+    	return gs;
+	}
+    
+    private static GenerationSession updateSession(Step2Params step2) {
+    	GenerationSession gs = getSessionValue();
+    	gs.cellValues.add(step2.cellValue);
+    	updateSessionValue(gs);
+    	return gs;
+	}    	
+
+//	private static GenerationSession synchronizeWithSession() {
+//		
+//		GenerationSession gs = Cache.get(getCacheId(), GenerationSession.class);
+//		if (gs == null) {
+//			System.out.println("SYNC:in:null");
+//			gs = Cache.get(getCacheId(), GenerationSession.class);
+//			if (gs == null) {
+//				System.out.println("SYNC: gs is not in cache");
+//				gs = new GenerationSession();
+//				Cache.add(getCacheId(), gs);
+//				System.out.println("SYNC: gs added cache");
+//			}
+//			System.out.println("SYNC: gs was in cache");
+//			//cachedGs = gs;
+//		} else {
+//			System.out.println("SYNC: replace gs on session");
+//			
+//		}
+//		System.out.println("SYNC:result" + gs);
+//		return gs;
+//	}
 
 
 }

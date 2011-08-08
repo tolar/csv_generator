@@ -4,15 +4,29 @@
 <h1>Generátor CSV souborů</h1>
 <h2>Krok 2. - definování hodnot</h2>
 
+#{ifErrors}
+<div class="error">
+    <h3>Opravte, prosím, následující chyby ve formuláři</h2>
+	<ul>
+		#{errors 'step2.cellValue'}
+	    	<li>${error}</li>
+	    #{/errors}
+	</ul>
+
+</div>
+#{/ifErrors}
+
 #{list items:gs.cellValues, as:'cell'}
     <li>${cell}</li>
 #{/list}
 
-#{form @Application.step2_addCellValue(cellValue), method:'POST' }
+#{form @Application.step2_addCellValue(), method:'POST' }
 
+#{field 'step2.cellValue'}
 <label for="cellValue">Nová hodnota pro buňky:</label>
-<input id="cellValue" name="cellValue" type="text" value="${cellValue}" />
+<input id="${field.id}" name="${field.name}" type="text" value="${field.value}" />
 <input type="submit" value="Přidat" />
+#{/field}
 
 #{/form}
 

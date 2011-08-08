@@ -2,8 +2,22 @@
 #{set title:'Home' /}
 
 <h1>Generátor CSV souborů</h1>
-<h2>Krok 3. - sestaven� souboru</h2>
-<form action="@{Application.step2}">
+<h2>Krok 3. - sestavení souboru</h2>
+
+<table>
+#{list items:0..Integer.parseInt(gs.rows), as:'row'}
+    <tr>
+    #{list items:0..Integer.parseInt(gs.columns), as:'column'}
+    	<td>
+    		#{select 'cellValues', items:gs.cellValues, valueProperty:'id', labelProperty:'name' /}
+    	</td>
+    #{/list}
+    </tr>
+#{/list}
+</table>
+
+
+<form action="@{Application.step2_fromStep3}">
 <input type="submit" value="Předchozí" />
 </form>
 <form action="@{Application.step4}">
