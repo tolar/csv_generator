@@ -4,22 +4,22 @@
 <h1>Generátor CSV souborů</h1>
 <h2>Krok 3. - sestavení souboru</h2>
 
+#{form @Application.step2_newMatrix(), method:'POST' }
+#{form @Application.step4_newMatrix(), method:'POST' }
 <table>
-#{list items:0..Integer.parseInt(gs.rows), as:'row'}
+#{list items:1..Integer.parseInt(gs.rows), as:'row'}
     <tr>
-    #{list items:0..Integer.parseInt(gs.columns), as:'column'}
+    #{list items:1..Integer.parseInt(gs.columns), as:'column'}
     	<td>
-    		#{select 'cellValues', items:gs.cellValues, valueProperty:'id', labelProperty:'name' /}
+    		#{select 'matrix[]', items:gs.cellValues, id:'select', value:gs.matrix[row-1][column-1] }
+    			#{option }  #{/option}
+    		#{/select}
     	</td>
     #{/list}
     </tr>
 #{/list}
 </table>
-
-
-<form action="@{Application.step2_fromStep3}">
 <input type="submit" value="Předchozí" />
-</form>
-<form action="@{Application.step4}">
-<input type="submit" value="Další" />
-</form>
+#{/form}
+<input type="submit" value="Další"  />
+#{/form}

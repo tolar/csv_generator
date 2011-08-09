@@ -17,6 +17,8 @@ public class GenerationSession implements Serializable  {
 	public String columns;
 
 	public Set<String> cellValues = new TreeSet<String>();
+	
+	public String[][] matrix;
 
 	public GenerationSession() {
 		super();
@@ -33,6 +35,10 @@ public class GenerationSession implements Serializable  {
 		Step2Params params = new Step2Params();
 		return params;
 	}	
+	
+	public void reallocateMatrix() {
+		matrix = new String[Integer.parseInt(rows)][Integer.parseInt(columns)];
+	}
 	
 	@Override
 	public String toString() {

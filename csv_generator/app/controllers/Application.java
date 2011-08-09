@@ -63,19 +63,6 @@ public class Application extends Controller {
         render("@step2");
     }    
 	
-    public static void step2_fromStep3() {
-    	System.out.println("step2:");
-    	
-    	GenerationSession gs = getSessionValue();
-    	renderArgs.put("gs", gs);
-        
-        render("@step2");
-    }
-
-
-
-
-
 
 
 	public static void step3() {
@@ -83,6 +70,31 @@ public class Application extends Controller {
     	renderArgs.put("gs", gs);
         render("@step3");
     }
+	
+	public static void step2_newMatrix(List<String> matrix) {
+	
+		System.out.println("matrix:" + matrix);
+    	GenerationSession gs = getSessionValue();
+    	int rows = Integer.parseInt(gs.rows);
+    	int columns = Integer.parseInt(gs.columns);
+    	int index = 0;
+    	String[][] gsMatrix = new String[rows][columns];
+    	for (int i = 0; i < rows; i++) {
+    		for (int j = 0; j < columns; j++) {
+    			gsMatrix[i][j] = matrix.get(index++);
+    		}
+    	}  
+    	gs = updateSession(gsMatrix);
+    	renderArgs.put("gs", gs);
+		render("@step2");
+	}
+	
+
+
+	public static void step4_newMatrix(List<String> matrix) {
+		System.out.println("matrix:" + matrix);
+		render("@step4");
+	}	
 
     public static void step4() {
         render();
@@ -125,6 +137,7 @@ public class Application extends Controller {
     	GenerationSession gs = getSessionValue();
     	gs.columns = step1.columns;
     	gs.rows = step1.rows;
+    	gs.reallocateMatrix();
     	updateSessionValue(gs);
     	return gs;
 	}
@@ -136,6 +149,13 @@ public class Application extends Controller {
     	return gs;
 	}    	
 
+	private static GenerationSession updateSession(String[][] gsMatrix) {
+    	GenerationSession gs = getSessionValue();
+    	gs.matrix = gsMatrix;
+    	updateSessionValue(gs);
+    	return gs;
+	}
+    
 //	private static GenerationSession synchronizeWithSession() {
 //		
 //		GenerationSession gs = Cache.get(getCacheId(), GenerationSession.class);
