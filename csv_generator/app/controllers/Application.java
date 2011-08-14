@@ -71,8 +71,20 @@ public class Application extends Controller {
         render("@step3");
     }
 	
-	public static void step2_newMatrix(List<String> matrix) {
+	public static void newMatrix(String submitPrev, String submitNext, List<String> matrix) {
+		System.out.println("submitPrev:" + submitPrev);
+		System.out.println("submitNext:" + submitNext);
+		if (submitPrev != null) {
+			processMatrix(matrix);
+			render("@step2");
+		} else {
+			processMatrix(matrix);
+			render("@step4");
+		}
+	}
 	
+
+	private static void processMatrix(List<String> matrix) {
 		System.out.println("matrix:" + matrix);
     	GenerationSession gs = getSessionValue();
     	int rows = Integer.parseInt(gs.rows);
@@ -86,16 +98,8 @@ public class Application extends Controller {
     	}  
     	gs = updateSession(gsMatrix);
     	renderArgs.put("gs", gs);
-		render("@step2");
 	}
 	
-
-
-	public static void step4_newMatrix(List<String> matrix) {
-		System.out.println("matrix:" + matrix);
-		render("@step4");
-	}	
-
     public static void step4() {
         render();
     }
