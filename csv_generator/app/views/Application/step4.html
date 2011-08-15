@@ -3,9 +3,22 @@
 
 <h1>Generátor CSV souborů</h1>
 <h2>Krok 4. - rekapitulace</h2>
+
+<table>
+#{list items:1..Integer.parseInt(gs.rows), as:'row'}
+    <tr>
+    #{list items:1..Integer.parseInt(gs.columns), as:'column'}
+    	<td>
+    		${gs.matrix[row-1][column-1]}
+    	</td>
+    #{/list}
+    </tr>
+#{/list}
+</table>
+
 <form action="@{Application.step3}">
 <input type="submit" value="Předchozí" />
 </form>
 <form action="@{Application.step5}">
-<input type="submit" value="Další" />
+<input type="submit" value="Generovat" />
 </form>

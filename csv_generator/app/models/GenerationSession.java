@@ -2,6 +2,7 @@ package models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -37,7 +38,19 @@ public class GenerationSession implements Serializable  {
 	}	
 	
 	public void reallocateMatrix() {
+		
+		final String[][] oldMatrix = matrix;
 		matrix = new String[Integer.parseInt(rows)][Integer.parseInt(columns)];
+		
+		if (matrix != null) {
+			int rowMin = oldMatrix.length < matrix.length ? oldMatrix.length : matrix.length;
+			int colMin = oldMatrix[0].length < matrix[0].length ? oldMatrix[0].length : matrix[0].length;
+			for (int i = 0; i < rowMin; i++) {
+				for (int j = 0; j < colMin; j++) {
+					matrix[i][j] = oldMatrix[i][j];
+				}
+			}
+		}
 	}
 	
 	@Override

@@ -30,15 +30,16 @@ public class Application extends Controller {
 
     public static void step2_fromStep1(@Valid Step1Params step1) {
     	System.out.println("step2:");
-    	
-    	GenerationSession gs = updateSession(step1);
-    	renderArgs.put("gs", gs);
-    	
+    	    	
         if(validation.hasErrors()) {
         	System.out.println("step1 errors");
         	renderArgs.put("step1", step1);
             render("@step1");
         }
+        
+    	GenerationSession gs = updateSession(step1);
+    	renderArgs.put("gs", gs);
+    	
         Step2Params step2 = gs.getStep2Params();
         renderArgs.put("step2", step2);
         
