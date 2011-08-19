@@ -11,10 +11,21 @@
 		#{errors 'step2.cellValue'}
 	    	<li>${error}</li>
 	    #{/errors}
+	   
 	</ul>
 
 </div>
 #{/ifErrors}
+
+#{if message != null }
+   <div class="error">
+	<ul>
+ 		<li>${message}</li>
+ 	</ul>
+	</div>
+#{/if}
+
+
 
 #{list items:gs.cellValues, as:'cell'}
     <li>

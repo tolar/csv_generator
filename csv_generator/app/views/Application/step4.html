@@ -4,6 +4,21 @@
 <h1>Generátor CSV souborů</h1>
 <h2>Krok 4. - rekapitulace</h2>
 
+#{ifErrors}
+<div class="error">
+    <h3>Opravte, prosím, následující chyby ve formuláři</h2>
+	<ul>
+		#{errors 'step4.delimiter'}
+	    	<li>${error}</li>
+	    #{/errors}
+		#{errors 'step4.fileName'}
+	    	<li>${error}</li>
+	    #{/errors}
+	</ul>
+
+</div>
+#{/ifErrors}
+
 <table>
 #{list items:1..Integer.parseInt(gs.rows), as:'row'}
     <tr>
@@ -19,6 +34,23 @@
 <form action="@{Application.step3}">
 <input type="submit" value="Předchozí" />
 </form>
-<form action="@{Application.step5}">
+
+#{form @Application.generate(), method:'POST' }
+
+#{field 'step4.delimiter'}
+<label for="${field.id}">Oddělovač:</label>
+<input id="${field.id}" name="${field.name}" type="text" value="${field.value}"/>
+#{/field}
+
+<br/>
+
+#{field 'step4.fileName'}
+<label for="${field.id}">Jméno souboru:</label>
+<input id="${field.id}" name="${field.name}" type="text" value="${field.value}" />
+#{/field}
+<br/>
 <input type="submit" value="Generovat" />
-</form>
+
+#{/form}
+
+

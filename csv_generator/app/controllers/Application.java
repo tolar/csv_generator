@@ -6,6 +6,12 @@ import play.data.validation.Required;
 import play.data.validation.Valid;
 import play.mvc.*;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.*;
 
 import models.*;
@@ -17,19 +23,13 @@ public class Application extends Controller {
     }
 
     public static void step1() {
-    	//System.out.println("step1" + gs);
     	GenerationSession gs = getSessionValue();
-    	//System.out.println("PARAMS:" + params);
-    	//Step1Params params = gs.getStep1Params(gs);
-    	//Step1Params step1 = new Step1Params();
-    	//step1.columns = "22";
-
     	renderArgs.put("step1", gs.getStep1Params());
         render();
     }
 
     public static void step2_fromStep1(@Valid Step1Params step1) {
-    	System.out.println("step2:");
+    	
 
         if(validation.hasErrors()) {
         	System.out.println("step1 errors");
@@ -75,17 +75,22 @@ public class Application extends Controller {
 	public static void step3() {
     	GenerationSession gs = getSessionValue();
     	renderArgs.put("gs", gs);
-        render("@step3");
+    	if (gs.cellValues.size() <= 0) {
+    		renderArgs.put("message", "Není definována žádná hodnota");
+    		render("@step2");
+    	} else {
+    		render("@step3");
+    	}
     }
 
 	public static void newMatrix(String submitPrev, String submitNext, List<String> matrix) {
-		System.out.println("submitPrev:" + submitPrev);
-		System.out.println("submitNext:" + submitNext);
 		if (submitPrev != null) {
 			processMatrix(matrix);
 			render("@step2");
 		} else {
 			processMatrix(matrix);
+			GenerationSession gs = getSessionValue();
+			renderArgs.put("step4", gs.getStep4Params());
 			render("@step4");
 		}
 	}
@@ -108,15 +113,45 @@ public class Application extends Controller {
 	}
 
     public static void step4() {
-        render();
+    	
+    	GenerationSession gs = getSessionValue();
+    	renderArgs.put("gs", gs);
+    	renderArgs.put("step4", gs.getStep4Params());
+        render("@step4");
     }
 
-    public static void step5() {
-        render();
-    }
 
-    public static void generate() {
-
+    public static void generate(@Valid Step4Params step4) {
+    	
+    	GenerationSession gs = getSessionValue();
+    	renderArgs.put("gs", gs);
+    	
+        if(validation.hasErrors()) {
+        	renderArgs.put("step4", step4);
+            render("@step4");
+            return;
+        }    	
+    	
+    	final String delimiter = step4.delimiter;
+    	final String fileName = step4.fileName;
+    	
+    	
+    	StringBuilder sb = new StringBuilder();
+    	for (int i = 0; i < gs.matrix.length; i++) {
+    		for (int j = 0; j < gs.matrix[i].length; j++) {
+				sb.append(gs.matrix[i][j]).append(delimiter);
+    		}
+    		sb.append("\r\n");
+    	}
+    	
+        ByteArrayInputStream bais;
+		try {
+			bais = new ByteArrayInputStream(sb.toString().getBytes("UTF-8"));
+			renderBinary(bais, fileName, "text/csv", true);
+		} catch (UnsupportedEncodingException e) {
+			error("Unexpected error");
+		}
+        
     }
 
 	private static String getCacheId() {
@@ -132,15 +167,14 @@ public class Application extends Controller {
 			Cache.add(getCacheId(), gs);
 
 
-			System.out.println("GSV: gs added to cache");
-			//cachedGs = gs;
+	
 		}
-		System.out.println("GSV:cache value:" + gs);
+		
 		return gs;
 	}
 
 	private static void updateSessionValue(GenerationSession gs) {
-		System.out.println("USV:cache value:" + gs);
+		
 		Cache.replace(getCacheId(), gs);
 	}
 
