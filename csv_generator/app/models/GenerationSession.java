@@ -18,7 +18,7 @@ public class GenerationSession implements Serializable  {
 	public String columns;
 
 	public Set<String> cellValues = new TreeSet<String>();
-	
+
 	public String[][] matrix;
 
 	public GenerationSession() {
@@ -31,28 +31,30 @@ public class GenerationSession implements Serializable  {
 		params.rows = rows;
 		return params;
 	}
-	
+
 	public Step2Params getStep2Params() {
 		Step2Params params = new Step2Params();
 		return params;
-	}	
-	
+	}
+
 	public void reallocateMatrix() {
-		
-		final String[][] oldMatrix = matrix;
-		matrix = new String[Integer.parseInt(rows)][Integer.parseInt(columns)];
-		
+
+		String[][] newMatrix = new String[Integer.parseInt(rows)][Integer.parseInt(columns)];
+
 		if (matrix != null) {
-			int rowMin = oldMatrix.length < matrix.length ? oldMatrix.length : matrix.length;
-			int colMin = oldMatrix[0].length < matrix[0].length ? oldMatrix[0].length : matrix[0].length;
+			int rowMin = matrix.length < newMatrix.length ? matrix.length : newMatrix.length;
+			int colMin = matrix[0].length < newMatrix[0].length ? matrix[0].length : newMatrix[0].length;
 			for (int i = 0; i < rowMin; i++) {
 				for (int j = 0; j < colMin; j++) {
-					matrix[i][j] = oldMatrix[i][j];
+					newMatrix[i][j] = matrix[i][j];
 				}
 			}
 		}
+
+		matrix = newMatrix;
+
 	}
-	
+
 	@Override
 	public String toString() {
 		return "GenerationSession [rows=" + rows + ", columns=" + columns

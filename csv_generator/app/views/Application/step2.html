@@ -17,7 +17,13 @@
 #{/ifErrors}
 
 #{list items:gs.cellValues, as:'cell'}
-    <li>${cell}</li>
+    <li>
+    	${cell}
+		<form action="@{Application.step2_removeCellValue}">
+			<input hidden="true" name="cellValue" value="${cell}">
+			<input type="submit" value="Odstranit" />
+		</form>
+	</li>
 #{/list}
 
 #{form @Application.step2_addCellValue(), method:'POST' }
