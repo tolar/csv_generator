@@ -20,9 +20,9 @@ public class GenerationSession implements Serializable  {
 	public Set<String> cellValues = new TreeSet<String>();
 
 	public String[][] matrix;
-	
-	public String delimiter = ",";
-	
+
+	public String delimiter = ";";
+
 	public String fileName = "file.csv";
 
 	public GenerationSession() {
@@ -40,13 +40,13 @@ public class GenerationSession implements Serializable  {
 		Step2Params params = new Step2Params();
 		return params;
 	}
-	
+
 	public Step4Params getStep4Params() {
 		Step4Params params = new Step4Params();
 		params.delimiter = delimiter;
 		params.fileName = fileName;
 		return params;
-	}	
+	}
 
 	public void reallocateMatrix() {
 

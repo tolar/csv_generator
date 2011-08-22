@@ -29,7 +29,7 @@ public class Application extends Controller {
     }
 
     public static void step2_fromStep1(@Valid Step1Params step1) {
-    	
+
 
         if(validation.hasErrors()) {
         	System.out.println("step1 errors");
@@ -113,29 +113,43 @@ public class Application extends Controller {
 	}
 
     public static void step4() {
-    	
+
     	GenerationSession gs = getSessionValue();
     	renderArgs.put("gs", gs);
     	renderArgs.put("step4", gs.getStep4Params());
         render("@step4");
     }
 
+    public static void generationParams(String prevSubmit, String generationSubmit, @Valid Step4Params step4) {
 
-    public static void generate(@Valid Step4Params step4) {
-    	
-    	GenerationSession gs = getSessionValue();
+       	GenerationSession gs = getSessionValue();
+       	updateSession(step4);
     	renderArgs.put("gs", gs);
-    	
+
         if(validation.hasErrors()) {
         	renderArgs.put("step4", step4);
             render("@step4");
             return;
-        }    	
-    	
+        }
+
+		if (prevSubmit != null) {
+			render("@step3");
+		} else {
+			generate(step4);
+    	}
+    }
+
+
+    public static void generate(Step4Params step4) {
+
+       	GenerationSession gs = getSessionValue();
+    	renderArgs.put("gs", gs);
+
+
     	final String delimiter = step4.delimiter;
     	final String fileName = step4.fileName;
-    	
-    	
+
+
     	StringBuilder sb = new StringBuilder();
     	for (int i = 0; i < gs.matrix.length; i++) {
     		for (int j = 0; j < gs.matrix[i].length; j++) {
@@ -143,7 +157,7 @@ public class Application extends Controller {
     		}
     		sb.append("\r\n");
     	}
-    	
+
         ByteArrayInputStream bais;
 		try {
 			bais = new ByteArrayInputStream(sb.toString().getBytes("UTF-8"));
@@ -151,7 +165,7 @@ public class Application extends Controller {
 		} catch (UnsupportedEncodingException e) {
 			error("Unexpected error");
 		}
-        
+
     }
 
 	private static String getCacheId() {
@@ -167,14 +181,14 @@ public class Application extends Controller {
 			Cache.add(getCacheId(), gs);
 
 
-	
+
 		}
-		
+
 		return gs;
 	}
 
 	private static void updateSessionValue(GenerationSession gs) {
-		
+
 		Cache.replace(getCacheId(), gs);
 	}
 
@@ -197,6 +211,14 @@ public class Application extends Controller {
 	private static GenerationSession updateSession(String[][] gsMatrix) {
     	GenerationSession gs = getSessionValue();
     	gs.matrix = gsMatrix;
+    	updateSessionValue(gs);
+    	return gs;
+	}
+
+    private static GenerationSession updateSession(Step4Params step4) {
+    	GenerationSession gs = getSessionValue();
+    	gs.delimiter = step4.delimiter;
+    	gs.fileName = step4.fileName;
     	updateSessionValue(gs);
     	return gs;
 	}

@@ -31,16 +31,12 @@
 #{/list}
 </table>
 
-<form action="@{Application.step3}">
-<input type="submit" value="Předchozí" />
-</form>
 
-#{form @Application.generate(), method:'POST' }
+#{form @Application.generationParams(), method:'POST' }
 
-#{field 'step4.delimiter'}
-<label for="${field.id}">Oddělovač:</label>
-<input id="${field.id}" name="${field.name}" type="text" value="${field.value}"/>
-#{/field}
+
+<label for="step4.delimiter">Oddělovač:</label>
+#{select 'step4.delimiter', items:step4.delimiters, valueProperty:'value', labelProperty:'description', value:step4.delimiter, id:'delimiter' /}
 
 <br/>
 
@@ -49,7 +45,8 @@
 <input id="${field.id}" name="${field.name}" type="text" value="${field.value}" />
 #{/field}
 <br/>
-<input type="submit" value="Generovat" />
+<input type="submit" name="prevSubmit" value="Předchozí" />
+<input type="submit" name="generateSubmit" value="Generovat" />
 
 #{/form}
 
