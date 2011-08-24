@@ -1,0 +1,38 @@
+#{extends 'main.html' /}
+#{set title:'Generátor CSV souborů - registrace uživatele' /}
+
+<h1>Generátor CSV souborů</h1>
+<h2>Registrace uživatele</h2>
+
+#{ifErrors}
+<div class="error">
+    <h3>Opravte, prosím, následující chyby ve formuláři</h2>
+    <ul>
+        #{errors}
+            <li>${error}</li>
+        #{/errors}
+	</ul>
+
+</div>
+#{/ifErrors}
+
+#{form @Application.register(), method:'POST' }
+
+<label for="password">Uživatelské jméno : </label>                   
+<input id="username" type="text" name="username" value="${params.username}" /> 
+              
+ <br/>
+    
+<label for="password">Heslo : </label>                   
+<input id="password" type="password" name="password" value="${params.password}" /> 
+              
+ <br/>
+     
+<label for="passwordConfirm">Heslo ještě jednou : </label>                    
+<input id="passwordConfirm" type="password" name="passwordConfirm" value="${params.passwordConfirm}" /> 
+
+<br/>
+
+<input type="submit" value="Registrovat" />
+
+#{/form}

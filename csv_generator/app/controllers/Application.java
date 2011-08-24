@@ -21,6 +21,28 @@ public class Application extends Controller {
     public static void index() {
         render();
     }
+    
+    public static void registration() {
+        render();
+    } 
+    
+    public static void register(String username, String password, String passwordConfirm) {
+    	
+        // Validation rules
+        validation.required(username);
+        validation.minSize(username, 6);
+        validation.required(password);
+        validation.minSize(password, 6);
+        validation.required(passwordConfirm);
+        validation.equals(passwordConfirm, password);
+
+        // Handle errors
+        if(validation.hasErrors()) {
+            render("@registration");
+        }
+        
+        index();
+    }     
 
     public static void step1() {
     	GenerationSession gs = getSessionValue();
