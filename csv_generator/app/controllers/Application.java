@@ -28,20 +28,16 @@ public class Application extends Controller {
     
     public static void register(String username, String password, String passwordConfirm) {
     	
-        // Validation rules
-        validation.required(username);
-        validation.minSize(username, 6);
-        validation.required(password);
-        validation.minSize(password, 6);
-        validation.required(passwordConfirm);
-        validation.equals(passwordConfirm, password);
-
-        // Handle errors
+    	User user = new User(username, password, passwordConfirm);
+    	
+    	validation.valid(user);
+    	
         if(validation.hasErrors()) {
             render("@registration");
+        } else {
+        	user.save();
+        	index();
         }
-        
-        index();
     }     
 
     public static void step1() {

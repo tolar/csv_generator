@@ -8,9 +8,15 @@
 <div class="error">
     <h3>Opravte, prosím, následující chyby ve formuláři</h2>
     <ul>
-        #{errors}
-            <li>${error}</li>
-        #{/errors}
+		#{errors 'user.username'}
+	    	<li>${error}</li>
+	    #{/errors}
+		#{errors 'user.password'}
+	    	<li>${error}</li>
+	    #{/errors}
+		#{errors 'user.confirmPassword'}
+	    	<li>${error}</li>
+	    #{/errors}	    
 	</ul>
 
 </div>
