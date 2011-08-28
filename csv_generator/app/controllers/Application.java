@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 import models.*;
@@ -30,11 +31,23 @@ public class Application extends Controller {
     	
     	User user = new User(username, password, passwordConfirm);
     	
+    	User storedUser = User.find("byUsername", username).first();
+    	if (storedUser != null) {
+    		validation.addError(username, "Zadané uživatelské jméno je již v systému použito");
+    		render("@registration");
+    		return;
+    	}
+    	
     	validation.valid(user);
     	
         if(validation.hasErrors()) {
             render("@registration");
         } else {
+        	try {
+				user.generatePassHash();
+			} catch (Exception e) {
+				error("Unexpected error");
+			}
         	user.save();
         	index();
         }
