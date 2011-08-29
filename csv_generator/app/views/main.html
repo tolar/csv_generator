@@ -12,7 +12,15 @@
     </head>
     <body>
     	<a href="@{Application.index}">Domů</a>
-    	<a href="@{Application.registration}">Registrovat</a>
+    	#{if connected} 
+    		Uživatel: ${connected.username}
+			<a href="@{Application.logout}">Odhlásit</a>
+		#{/if} 
+		#{else} 
+    		<a href="@{Application.registration}">Registrovat</a>
+    		<a href="@{Application.login}">Přihlásit</a>
+    	#{/else} 
+
         #{doLayout /}
     </body>
 </html>

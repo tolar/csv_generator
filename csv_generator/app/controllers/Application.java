@@ -4,6 +4,7 @@ import play.*;
 import play.cache.Cache;
 import play.data.validation.Required;
 import play.data.validation.Valid;
+import play.libs.Codec;
 import play.mvc.*;
 
 import java.io.ByteArrayInputStream;
@@ -18,6 +19,11 @@ import java.util.*;
 import models.*;
 
 public class Application extends Controller {
+	
+    @Before
+    static void globals() {
+        renderArgs.put("connected", connectedUser());
+    }
 
     public static void index() {
         render();
@@ -25,7 +31,11 @@ public class Application extends Controller {
     
     public static void registration() {
         render();
-    } 
+    }
+    
+    public static void login() {
+        render();
+    }     
     
     public static void register(String username, String password, String passwordConfirm) {
     	
@@ -33,9 +43,7 @@ public class Application extends Controller {
     	
     	User storedUser = User.find("byUsername", username).first();
     	if (storedUser != null) {
-    		validation.addError(username, "Zadané uživatelské jméno je již v systému použito");
-    		render("@registration");
-    		return;
+    		validation.addError("user.username", "Zadané uživatelské jméno je již v systému použito");
     	}
     	
     	validation.valid(user);
@@ -43,15 +51,38 @@ public class Application extends Controller {
         if(validation.hasErrors()) {
             render("@registration");
         } else {
-        	try {
-				user.generatePassHash();
-			} catch (Exception e) {
-				error("Unexpected error");
-			}
+        	user.generatePassHash();
         	user.save();
         	index();
         }
+    }
+    
+    public static void processLogin(String username, String password) {
+    	
+    	UserLogin userLogin = new UserLogin(username, password);
+    	validation.valid(userLogin);
+    	
+        if(validation.hasErrors()) {
+            render("@login");
+        }     	
+    	
+    	User storedUser = User.find("byUsername", username).first();
+    	if (storedUser == null) {
+    		validation.addError("login.message", "Zadané uživatelské jméno v systému neexistuje");
+    	} else {
+    		if (Codec.hexMD5(password).equals(storedUser.passwordHash)) {
+    			connect(storedUser);
+    			index();
+    		} else {
+    			validation.addError("login.message", "Zadané heslo není platné pro daného uživatele");
+    		}
+    	}
+
+        if(validation.hasErrors()) {
+            render("@login");
+        } 
     }     
+    
 
     public static void step1() {
     	GenerationSession gs = getSessionValue();
@@ -253,28 +284,22 @@ public class Application extends Controller {
     	updateSessionValue(gs);
     	return gs;
 	}
+    
+    public static void logout() {
+    	session.remove("logged");
+    	index();
+    }
 
-//	private static GenerationSession synchronizeWithSession() {
-//
-//		GenerationSession gs = Cache.get(getCacheId(), GenerationSession.class);
-//		if (gs == null) {
-//			System.out.println("SYNC:in:null");
-//			gs = Cache.get(getCacheId(), GenerationSession.class);
-//			if (gs == null) {
-//				System.out.println("SYNC: gs is not in cache");
-//				gs = new GenerationSession();
-//				Cache.add(getCacheId(), gs);
-//				System.out.println("SYNC: gs added cache");
-//			}
-//			System.out.println("SYNC: gs was in cache");
-//			//cachedGs = gs;
-//		} else {
-//			System.out.println("SYNC: replace gs on session");
-//
-//		}
-//		System.out.println("SYNC:result" + gs);
-//		return gs;
-//	}
+    static void connect(User user) {
+        session.put("logged", user.id);
+    }
+
+    static User connectedUser() {
+    	System.out.println("connectedUser invoked");
+        String userId = session.get("logged");
+        System.out.println("connectedUser userId:" + userId);
+        return userId == null ? null : (User) User.findById(Long.parseLong(userId));
+    }
 
 
 }

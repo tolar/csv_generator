@@ -1,5 +1,6 @@
-#Thu Aug 25 22:16:54 CEST 2011
+#Mon Aug 29 23:53:14 CEST 2011
 eclipse.preferences.version=1
 encoding//app/views/Application/index.html=UTF-8
+encoding//app/views/Application/login.html=UTF-8
 encoding//app/views/Application/registration.html=UTF-8
 encoding/<project>=UTF-8

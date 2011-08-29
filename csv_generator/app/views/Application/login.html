@@ -1,0 +1,39 @@
+#{extends 'main.html' /}
+#{set title:'Generátor CSV souborů - přihlášení uživatele' /}
+
+<h1>Generátor CSV souborů</h1>
+<h2>Přihlášení uživatele</h2>
+
+#{ifErrors}
+<div class="error">
+    <h3>Nepodařilo se přihlásit</h3>
+    <ul>
+		#{errors 'login.message'}
+	    	<li>${error}</li>
+	    #{/errors}  
+		#{errors 'userLogin.username'}
+	    	<li>${error}</li>
+	    #{/errors}
+		#{errors 'userLogin.password'}
+	    	<li>${error}</li>
+	    #{/errors}
+	</ul>	
+</div>
+#{/ifErrors}
+
+#{form @Application.processLogin(), method:'POST' }
+
+<label for="password">Uživatelské jméno : </label>
+<input id="username" type="text" name="username" value="${params.username}" />
+
+ <br/>
+
+<label for="password">Heslo : </label>
+<input id="password" type="password" name="password" value="${params.password}" />
+
+ <br/>
+
+
+<input type="submit" value="Přihlásit" />
+
+#{/form}

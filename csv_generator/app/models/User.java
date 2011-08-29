@@ -14,6 +14,7 @@ import java.util.*;
 import play.data.binding.*;
 
 import play.db.jpa.*;
+import play.libs.Codec;
 
 @Entity(name="T_USER")
 @Table(name="T_USER")
@@ -45,9 +46,8 @@ public class User extends Model {
 	}
 
 
-	public void generatePassHash() throws NoSuchAlgorithmException, UnsupportedEncodingException {
-		MessageDigest md = MessageDigest.getInstance("MD5");
-		this.passwordHash = new String(md.digest(this.password.getBytes("UTF-8")));
+	public void generatePassHash() {
+		this.passwordHash = Codec.hexMD5(this.password);
 	}
 
 	
