@@ -16,8 +16,7 @@ import play.data.binding.*;
 import play.db.jpa.*;
 import play.libs.Codec;
 
-@Entity(name="T_USER")
-@Table(name="T_USER")
+@Entity(name="T_CSV_USER")
 public class User extends Model {
 
 	@Required(message="Uživatelské jméno je povinné")
@@ -36,6 +35,9 @@ public class User extends Model {
 	
 	@Column(name="PASSWORD_HASH")
 	public String passwordHash;
+	
+	@Column(name="GENERATION_SESSION")
+	public String generationSession;
 
 
 	public User(String username, String password, String confirmPassword) {

@@ -7,10 +7,16 @@ import play.data.validation.Valid;
 import play.libs.Codec;
 import play.mvc.*;
 
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.StringReader;
+import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.security.NoSuchAlgorithmException;
@@ -235,14 +241,22 @@ public class Application extends Controller {
 	}
 
 	private static GenerationSession getSessionValue() {
+		
+		User user = connectedUser();
+		
+		if (user != null) {
+			if (user.generationSession == null) {
+				user.generationSession = getXml(new GenerationSession());
+				user.save();
+			} 
+			return getGs(user.generationSession);
+		}
 
 		GenerationSession gs = Cache.get(getCacheId(), GenerationSession.class);
 		if (gs == null) {
 
 			gs = new GenerationSession();
 			Cache.add(getCacheId(), gs);
-
-
 
 		}
 
@@ -252,7 +266,31 @@ public class Application extends Controller {
 	private static void updateSessionValue(GenerationSession gs) {
 
 		Cache.replace(getCacheId(), gs);
+		
+		User user = connectedUser();
+		if (user != null) {
+			user.generationSession = getXml(gs);
+			user.save();
+		}
 	}
+
+	private static String getXml(GenerationSession gs) {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		XMLEncoder xmlEncoder = new XMLEncoder(baos);
+		xmlEncoder.writeObject(gs);
+		xmlEncoder.close();
+
+		return baos.toString();
+	}
+	
+	private static GenerationSession getGs(String xml) {
+		ByteArrayInputStream bais = new ByteArrayInputStream(xml.getBytes());
+		XMLDecoder xmlDecoder = new XMLDecoder(bais);
+		GenerationSession gs = (GenerationSession) xmlDecoder.readObject();
+		xmlDecoder.close();
+
+		return gs;
+	}	
 
     private static GenerationSession updateSession(Step1Params step1) {
     	GenerationSession gs = getSessionValue();
