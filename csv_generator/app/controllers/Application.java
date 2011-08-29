@@ -265,12 +265,14 @@ public class Application extends Controller {
 
 	private static void updateSessionValue(GenerationSession gs) {
 
-		Cache.replace(getCacheId(), gs);
+		
 		
 		User user = connectedUser();
 		if (user != null) {
 			user.generationSession = getXml(gs);
 			user.save();
+		} else {
+			Cache.replace(getCacheId(), gs);
 		}
 	}
 
