@@ -5,7 +5,7 @@
 <h2>Krok 1. - definování dimenzí</h2>
 
 #{ifErrors}
-<div class="error">
+<div class="errorPanel">
     <h3>Opravte, prosím, následující chyby ve formuláři</h2>
 	<ul>
 		#{errors 'step1.rows'}
@@ -15,24 +15,28 @@
 	    	<li>${error}</li>
 	    #{/errors}
 	</ul>
-
 </div>
 #{/ifErrors}
 
 #{form @Application.step2_fromStep1(), method:'POST' }
 
+<table class="center">
+<tr>
 #{field 'step1.rows'}
-<label for="${field.id}">Počet řádků:</label>
-<input id="${field.id}" name="${field.name}" type="text" value="${field.value}"/>
+<td><label for="${field.id}">Počet řádků:</label></td>
+<td><input id="${field.id}" name="${field.name}" type="text" value="${field.value}"/></td>
 #{/field}
+</tr>
 
-<br/>
-
+<tr>
 #{field 'step1.columns'}
-<label for="${field.id}">Počet sloupců:</label>
-<input id="${field.id}" name="${field.name}" type="text" value="${field.value}" />
+<td><label for="${field.id}">Počet sloupců:</label></td>
+<td><input id="${field.id}" name="${field.name}" type="text" value="${field.value}" /></td>
 #{/field}
-<br/>
+</tr>
+</table>
+<div class="buttonPanel">
 <input type="submit" value="Další" />
+</div>
 
 #{/form}

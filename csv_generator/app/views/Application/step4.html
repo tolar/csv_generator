@@ -2,7 +2,7 @@
 #{set title:'Generátor CSV souborů - krok 4' /}
 
 <h1>Generátor CSV souborů</h1>
-<h2>Krok 4. - rekapitulace</h2>
+<h2>Krok 4. - dokončení</h2>
 
 #{ifErrors}
 <div class="error">
@@ -19,7 +19,7 @@
 </div>
 #{/ifErrors}
 
-<table>
+<table class="center" id="recapTable">
 #{list items:1..Integer.parseInt(gs.rows), as:'row'}
     <tr>
     #{list items:1..Integer.parseInt(gs.columns), as:'column'}
@@ -45,8 +45,11 @@
 <input id="${field.id}" name="${field.name}" type="text" value="${field.value}" />
 #{/field}
 <br/>
-<input type="submit" name="prevSubmit" value="Předchozí" />
-<input type="submit" name="generateSubmit" value="Generovat" />
+
+<div class="buttonPanel">
+<input class="left" type="submit" name="prevSubmit" value="Předchozí" />
+<input class="right" type="submit" name="generateSubmit" value="Generovat" />
+</div>
 
 #{/form}
 

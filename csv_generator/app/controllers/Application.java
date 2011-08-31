@@ -127,6 +127,7 @@ public class Application extends Controller {
         }
 
         gs = updateSession(step2);
+        renderArgs.put("gs", gs);
         step2.cellValue = "";
         renderArgs.put("step2", step2);
         render("@step2");

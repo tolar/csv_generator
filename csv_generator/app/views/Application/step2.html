@@ -26,16 +26,17 @@
 #{/if}
 
 
-
+<table class="center">
 #{list items:gs.cellValues, as:'cell'}
-    <li>
-    	${cell}
+    <tr>
+    	<td>${cell}</td>
 		<form action="@{Application.step2_removeCellValue}">
-			<input hidden="true" name="cellValue" value="${cell}">
-			<input type="submit" value="Odstranit" />
+			<input hidden="true" name="cellValue" value="${cell}" />
+			<td><input type="submit" value="Odstranit" /> </td>
 		</form>
-	</li>
+	</tr>
 #{/list}
+</table>
 
 #{form @Application.step2_addCellValue(), method:'POST' }
 
@@ -47,10 +48,11 @@
 
 #{/form}
 
-
+<div class="buttonPanel">
 <form action="@{Application.step1}">
-<input type="submit" value="Předchozí" />
+<input class="left" type="submit" value="Předchozí" />
 </form>
 <form action="@{Application.step3}">
-<input type="submit" value="Další" />
+<input class="right" type="submit" value="Další" />
 </form>
+</div>

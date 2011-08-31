@@ -5,7 +5,7 @@
 <h2>Krok 3. - sestavení souboru</h2>
 
 #{form @Application.newMatrix(), method:'POST' }
-<table>
+<table class="center">
 #{list items:1..Integer.parseInt(gs.rows), as:'row'}
     <tr>
     #{list items:1..Integer.parseInt(gs.columns), as:'column'}
@@ -18,6 +18,8 @@
     </tr>
 #{/list}
 </table>
-<input type="submit" name="submitPrev" value="Předchozí" />
-<input type="submit" name="submitNext" value="Další"  />
+<div class="buttonPanel">
+<input class="left" type="submit" name="submitPrev" value="Předchozí" />
+<input class="right" type="submit" name="submitNext" value="Další"  />
+</div>
 #{/form}

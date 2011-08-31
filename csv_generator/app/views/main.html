@@ -11,14 +11,31 @@
         #{get 'moreScripts' /}
     </head>
     <body>
+    	<span class="headerItem">
     	<a href="@{Application.index}">Domů</a>
+    	</span>
+    	
     	#{if connected} 
+    	
+    		<span class="headerItem">
     		Uživatel: ${connected.username}
+			</span>
+		
+			<span class="headerItem">
 			<a href="@{Application.logout}">Odhlásit</a>
+			</span>
+		
 		#{/if} 
-		#{else} 
+		#{else}
+		
+			<span class="headerItem"> 
     		<a href="@{Application.registration}">Registrovat</a>
+    		</span>
+    	
+    		<span class="headerItem">
     		<a href="@{Application.login}">Přihlásit</a>
+    		</span>
+    		
     	#{/else} 
 
         #{doLayout /}
