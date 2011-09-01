@@ -5,7 +5,7 @@
 <h2>Registrace uživatele</h2>
 
 #{ifErrors}
-<div class="error">
+<div class="errorPanel">
     <h3>Opravte, prosím, následující chyby ve formuláři</h2>
     <ul>
 		#{errors 'user.username'}
@@ -22,23 +22,28 @@
 </div>
 #{/ifErrors}
 
+<table class="center">
 #{form @Application.register(), method:'POST' }
 
-<label for="password">Uživatelské jméno : </label>
-<input id="username" type="text" name="username" value="${params.username}" />
+<tr>
+<td><label for="password">Uživatelské jméno : </label></td>
+<td><input id="username" type="text" name="username" value="${params.username}" /></td>
+</tr>
 
- <br/>
+<tr>
+<td><label for="password">Heslo : </label></td>
+<td><input id="password" type="password" name="password" value="${params.password}" /></td>
+</tr>
 
-<label for="password">Heslo : </label>
-<input id="password" type="password" name="password" value="${params.password}" />
+<tr>
+<td><label for="passwordConfirm">Heslo ještě jednou : </label></td>
+<td><input id="passwordConfirm" type="password" name="passwordConfirm" value="${params.passwordConfirm}" /></td>
+</tr>
 
- <br/>
+</table>
 
-<label for="passwordConfirm">Heslo ještě jednou : </label>
-<input id="passwordConfirm" type="password" name="passwordConfirm" value="${params.passwordConfirm}" />
-
-<br/>
-
+<div class="buttonPanel">
 <input type="submit" value="Registrovat" />
+</div>
 
 #{/form}

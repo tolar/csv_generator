@@ -5,7 +5,7 @@
 <h2>Přihlášení uživatele</h2>
 
 #{ifErrors}
-<div class="error">
+<div class="errorPanel">
     <h3>Nepodařilo se přihlásit</h3>
     <ul>
 		#{errors 'login.message'}
@@ -21,19 +21,21 @@
 </div>
 #{/ifErrors}
 
+<table class="center">
 #{form @Application.processLogin(), method:'POST' }
 
-<label for="password">Uživatelské jméno : </label>
-<input id="username" type="text" name="username" value="${params.username}" />
+<tr>
+<td><label for="password">Uživatelské jméno : </label></td>
+<td><input id="username" type="text" name="username" value="${params.username}" /></td>
+</tr>
 
- <br/>
+<tr>
+<td><label for="password">Heslo : </label></td>
+<td><input id="password" type="password" name="password" value="${params.password}" /></td>
+</tr>
 
-<label for="password">Heslo : </label>
-<input id="password" type="password" name="password" value="${params.password}" />
-
- <br/>
-
-
+</table>
+<div class="buttonPanel">
 <input type="submit" value="Přihlásit" />
-
+</div>
 #{/form}
