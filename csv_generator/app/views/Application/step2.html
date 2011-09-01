@@ -5,7 +5,7 @@
 <h2>Krok 2. - definování hodnot</h2>
 
 #{ifErrors}
-<div class="error">
+<div class="errorPanel">
     <h3>Opravte, prosím, následující chyby ve formuláři</h2>
 	<ul>
 		#{errors 'step2.cellValue'}
@@ -18,7 +18,7 @@
 #{/ifErrors}
 
 #{if message != null }
-   <div class="error">
+   <div class="errorPanel">
 	<ul>
  		<li>${message}</li>
  	</ul>
