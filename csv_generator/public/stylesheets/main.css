@@ -16,6 +16,12 @@ table.center {
 	margin-top: 5px;
 }
 
+.footer {
+	margin-left: 5px;
+	padding-top: 20px;
+	font-size: 80%
+}
+
 h2 {
 	padding-bottom: 10px;
 }

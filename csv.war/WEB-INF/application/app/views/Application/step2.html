@@ -1,0 +1,58 @@
+#{extends 'main.html' /}
+#{set title:'Generátor CSV souborů - krok 2' /}
+
+<h1>Generátor CSV souborů</h1>
+<h2>Krok 2. - definování hodnot</h2>
+
+#{ifErrors}
+<div class="errorPanel">
+    <h3>Opravte, prosím, následující chyby ve formuláři</h2>
+	<ul>
+		#{errors 'step2.cellValue'}
+	    	<li>${error}</li>
+	    #{/errors}
+	   
+	</ul>
+
+</div>
+#{/ifErrors}
+
+#{if message != null }
+   <div class="errorPanel">
+	<ul>
+ 		<li>${message}</li>
+ 	</ul>
+	</div>
+#{/if}
+
+
+<table class="center">
+#{list items:gs.cellValues, as:'cell'}
+    <tr>
+    	<td>${cell}</td>
+		<form action="@{Application.step2_removeCellValue}">
+			<input hidden="true" name="cellValue" value="${cell}" />
+			<td><input type="submit" value="Odstranit" /> </td>
+		</form>
+	</tr>
+#{/list}
+</table>
+
+#{form @Application.step2_addCellValue(), method:'POST' }
+
+#{field 'step2.cellValue'}
+<label for="cellValue">Nová hodnota pro buňky:</label>
+<input id="${field.id}" name="${field.name}" type="text" value="${field.value}" />
+<input type="submit" value="Přidat" />
+#{/field}
+
+#{/form}
+
+<div class="buttonPanel">
+<form action="@{Application.step1}">
+<input class="left" type="submit" value="Předchozí" />
+</form>
+<form action="@{Application.step3}">
+<input class="right" type="submit" value="Další" />
+</form>
+</div>
