@@ -4,15 +4,30 @@
     <head>
         <title>#{get 'title' /}</title>
         <meta charset="utf-8">
+        <meta name="description" content="Online generátor CSV souborů. Efektivní práce pomocí průvodce. Při přihlášení automatické ukládání stavu generátoru.">
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
         #{get 'moreStyles' /}
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
         <script src="@{'/public/javascripts/jquery-1.5.2.min.js'}" type="text/javascript" charset="utf-8"></script>
-        #{get 'moreScripts' /}
+        #{get 'moreScripts' /}<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-26144328-1']);
+		  _gaq.push(['_trackPageview']);
+		
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+        
+        
     </head>
     <body>
     	<span class="headerItem">
-    	<a href="@{Application.index}">Domů</a>
+    	<a href="@{Application.index}">&{'home'}</a>
     	</span>
     	
     	#{if connected} 
@@ -22,24 +37,24 @@
 			</span>
 		
 			<span class="headerItem">
-			<a href="@{Application.logout}">Odhlásit</a>
+			<a href="@{Application.logout}">&{'logout'}</a>
 			</span>
 		
 		#{/if} 
 		#{else}
 		
 			<span class="headerItem"> 
-    		<a href="@{Application.registration}">Registrovat</a>
+    		<a href="@{Application.registration}">&{'register'}</a>
     		</span>
     	
     		<span class="headerItem">
-    		<a href="@{Application.login}">Přihlásit</a>
+    		<a href="@{Application.login}">&{'login'}</a>
     		</span>
     		
     	#{/else} 
     	
     	<span class="headerItem"> 
-		<a href="@{Application.feedback}">Navrhněte vylepšení!</a>
+		<a href="@{Application.feedback}">&{'feedback'}</a>
 		</span>
 
         #{doLayout /}
