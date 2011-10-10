@@ -3,4 +3,11 @@ logout=Odhlásit
 register=Registrovat
 login=Přihlásit
 feedback=Navrhněte vylepšení!
-
+start=Start
+next=Další
+headline=Generátor CSV souborů
+form_error_message=Opravte, prosím, následující chyby ve formuláři
+step1_title=Generátor CSV souborů - krok 1
+step1_headline=Krok 1. - definování dimenzí
+step1_row_count=Počet řádků
+step1_column_count=Počet sloupců
