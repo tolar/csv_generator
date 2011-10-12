@@ -5,9 +5,26 @@ login=Login
 feedback=Propose improvement!
 start=Start
 next=Next
+previous=Previous
+add=Add
+remove=Remove
 headline=CSV File Generator
 form_error_message=Correct mistakes in the form please
+delimiter=Delimiter
+file_name=File name
+generate=Generate
+
 step1_title=CSV File Generator - step 1
 step1_headline=Step #1 - dimensions
 step1_row_count=Rows count
 step1_column_count=Columns count
+
+step2_title=CSV File Generator - step 2
+step2_headline=Step #2 - cell values definition
+step2_new_value=New cell value
+
+step3_title=CSV File Generator - step 3
+step3_headline=Step #3 - file building
+
+step4_title=CSV File Generator - step 4
+step4_headline=Step #4 - file generation

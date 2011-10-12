@@ -1,8 +1,8 @@
 #{extends 'main.html' /}
-#{set title:'Generátor CSV souborů - krok 3' /}
+#{set title: messages.get("step3_title") /}
 
-<h1>Generátor CSV souborů</h1>
-<h2>Krok 3. - sestavení souboru</h2>
+<h1>&{'headline'}</h1>
+<h2>&{'step3_headline'}</h2>
 
 #{form @Application.newMatrix(), method:'POST' }
 <table class="center">
@@ -19,7 +19,7 @@
 #{/list}
 </table>
 <div class="buttonPanel">
-<input class="left" type="submit" name="submitPrev" value="Předchozí" />
-<input class="right" type="submit" name="submitNext" value="Další"  />
+<input class="left" type="submit" name="submitPrev" value="&{'previous'}" />
+<input class="right" type="submit" name="submitNext" value="&{'next'}"  />
 </div>
 #{/form}
