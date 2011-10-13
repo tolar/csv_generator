@@ -18,14 +18,28 @@ step1_title=Generátor CSV souborů - krok 1
 step1_headline=Krok 1. - definování dimenzí
 step1_row_count=Počet řádků
 step1_column_count=Počet sloupců
+row_count_required=Počet řádků je povinný
+row_count_greater_than_zero=Počet řádků musí být větší než 0
+row_count_less_than_fifty=Počet řádků nesmí být větší než 50
+column_count_required=Počet sloupců je povinný
+column_count_greater_than_zero=Počet sloupců musí být větší než 0
+column_count_less_than_fifty=Počet sloupců nesmí být větší než 50
 
 step2_title=Generátor CSV souborů - krok 2
 step2_headline=Krok 2. - definování hodnot
 step2_new_value=Nová hodnota pro buňky
+cell_value_must_not_be_empty=Hodnota buňky nesmí být prázdná
+cell_value_must_not_be_longer_than_twenty=Hodnota buňky nesmí být delší než 20 znaků
+no_value_defined=Není definována žádná hodnota
 
 step3_title=Generátor CSV souborů - krok 3
 step3_headline=Krok 3. - sestavení souboru 
 
 step4_title=Generátor CSV souborů - krok 4
 step4_headline=Krok 4. - dokončení
+delimiter_required=Oddělovač je povinný
+file_name_required=Jméno souboru je povinné
+semicolon=středník
+commna=čárka
  
+feedback_description=Popis zlepšení je povinný

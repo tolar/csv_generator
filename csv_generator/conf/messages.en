@@ -18,13 +18,28 @@ step1_title=CSV File Generator - step 1
 step1_headline=Step #1 - dimensions
 step1_row_count=Rows count
 step1_column_count=Columns count
+row_count_required=Row count required
+row_count_greater_than_zero=Row count must be greater than 0
+row_count_less_than_fifty=Row count must be less than 50
+column_count_required=Column count required
+column_count_greater_than_zero=Column count must be greater than 0
+column_count_less_than_fifty=Column count must be less than 50
 
 step2_title=CSV File Generator - step 2
 step2_headline=Step #2 - cell values definition
 step2_new_value=New cell value
+cell_value_must_not_be_empty=Cell value must not be empty
+cell_value_must_not_be_longer_than_twenty=Cell value must not be longer than 20 characters
+no_value_defined=No value defined
 
 step3_title=CSV File Generator - step 3
 step3_headline=Step #3 - file building
 
 step4_title=CSV File Generator - step 4
 step4_headline=Step #4 - file generation
+delimiter_required=Delimiter required
+file_name_required=File name required
+semicolon=semicolon
+commna=comma
+
+feedback_description=Feedback description required

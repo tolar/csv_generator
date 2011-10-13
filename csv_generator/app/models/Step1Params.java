@@ -6,14 +6,14 @@ import play.data.validation.Required;
 
 public class Step1Params {
 	
-	@Required(message="Počet řádků je povinný")
-	@Min(value=1, message="Počet řádků musí být větší než 0")
-	@Max(value=50, message="Počet řádků nesmí být větší než 50")
+	@Required(message="row_count_required")
+	@Min(value=1, message="row_count_greater_than_zero")
+	@Max(value=50, message="row_count_less_than_fifty")
 	public String rows;
 
-	@Required(message="Počet sloupců je povinný")
-	@Min(value=1, message="Počet sloupců musí být větší než 0")
-	@Max(value=50, message="Počet sloupců nesmí být větší než 50")
+	@Required(message="column_count_required")
+	@Min(value=1, message="column_count_greater_than_zero")
+	@Max(value=50, message="column_count_less_than_fifty")
 	public String columns;
 
 	@Override

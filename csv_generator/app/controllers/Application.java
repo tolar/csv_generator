@@ -4,6 +4,7 @@ import play.*;
 import play.cache.Cache;
 import play.data.validation.Required;
 import play.data.validation.Valid;
+import play.i18n.Messages;
 import play.libs.Codec;
 import play.mvc.*;
 
@@ -141,7 +142,7 @@ public class Application extends Controller {
     	GenerationSession gs = getSessionValue();
     	renderArgs.put("gs", gs);
     	if (gs.cellValues.size() <= 0) {
-    		renderArgs.put("message", "Není definována žádná hodnota");
+    		renderArgs.put("message", Messages.get("no_value_defined"));
     		render("@step2");
     	} else {
     		render("@step3");

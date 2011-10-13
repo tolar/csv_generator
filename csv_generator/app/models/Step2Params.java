@@ -7,8 +7,8 @@ import play.data.validation.Required;
 
 public class Step2Params {
 	
-	@Required(message="Hodnota buňky nesmí být prázdná")
-	@Length(max=20, message="Hodnota buňky nesmí být delší než 20 znaků")
+	@Required(message="cell_value_must_not_be_empty")
+	@Length(max=20, message="cell_value_must_not_be_longer_than_twenty")
 	public String cellValue;
 
 	@Override

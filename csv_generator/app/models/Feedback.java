@@ -19,7 +19,7 @@ import play.libs.Codec;
 @Entity(name="T_CSV_FEEDBACK")
 public class Feedback extends Model {
 
-	@Required(message="Popis zlepšení je povinný")
+	@Required(message="feedback_description")
 	public String description;
 	
 	public Date submitted;
