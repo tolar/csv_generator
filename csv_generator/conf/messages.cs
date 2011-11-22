@@ -41,5 +41,20 @@ delimiter_required=Oddělovač je povinný
 file_name_required=Jméno souboru je povinné
 semicolon=středník
 commna=čárka
- 
+
 feedback_description=Popis zlepšení je povinný
+feedback_title=Generátor CSV souborů - Návrh na zlepšení
+feedback_headline=Návrh na zlepšení
+improvement_description=Popis zlepšení
+submit=Odeslat
+
+registration_title=Generátor CSV souborů - registrace uživatele
+registration_headline=Registrace uživatele
+username=Uživatelské jméno
+password=Heslo
+password_again=Heslo ještě jednou
+register=Registrovat
+
+login_title=Generátor CSV souborů - přihlášení uživatele
+login_headline=Přihlášení uživatele
+login=Přihlásit

@@ -1,12 +1,12 @@
 #{extends 'main.html' /}
-#{set title:'Generátor CSV souborů - registrace uživatele' /}
+#{set title: messages.get("registration_title") /}
 
-<h1>Generátor CSV souborů</h1>
-<h2>Registrace uživatele</h2>
+<h1>&{'headline'}</h1>
+<h2>&{'registration_headline'}</h2>
 
 #{ifErrors}
 <div class="errorPanel">
-    <h3>Opravte, prosím, následující chyby ve formuláři</h2>
+    <h3>&{'form_error_message'}</h2>
     <ul>
 		#{errors 'user.username'}
 	    	<li>${error}</li>
@@ -26,24 +26,29 @@
 #{form @Application.register(), method:'POST' }
 
 <tr>
-<td><label for="password">Uživatelské jméno : </label></td>
-<td><input id="username" type="text" name="username" value="${params.username}" /></td>
+#{field 'username'}
+<td><label for="${field.id}">&{'username'}:</label></td>
+<td><input id="${field.id}" name="${field.name}" type="text" value="${field.value}"/></td>
+#{/field}
 </tr>
 
 <tr>
-<td><label for="password">Heslo : </label></td>
-<td><input id="password" type="password" name="password" value="${params.password}" /></td>
+#{field 'password'}
+<td><label for="${field.id}">&{'password'}:</label></td>
+<td><input id="${field.id}" name="${field.name}" type="password" value="${field.value}"/></td>
+#{/field}
 </tr>
 
-<tr>
-<td><label for="passwordConfirm">Heslo ještě jednou : </label></td>
-<td><input id="passwordConfirm" type="password" name="passwordConfirm" value="${params.passwordConfirm}" /></td>
-</tr>
+#{field 'passwordConfirm'}
+<td><label for="${field.id}">&{'password_again'}:</label></td>
+<td><input id="${field.id}" name="${field.name}" type="password" value="${field.value}"/></td>
+#{/field}
+
 
 </table>
 
 <div class="buttonPanel">
-<input type="submit" value="Registrovat" />
+<input type="submit" value="&{'register'}" />
 </div>
 
 #{/form}

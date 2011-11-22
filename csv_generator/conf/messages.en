@@ -43,3 +43,18 @@ semicolon=semicolon
 commna=comma
 
 feedback_description=Feedback description required
+feedback_title=CSV File Generato - Improvement proposal
+feedback_headline=Improvement proposal
+improvement_description=Improvement description
+submit=Submit
+
+registration_title=CSV File Generator - user registration
+registration_headline=User registration
+username=Username
+password=Password
+password_again=Password again
+register=Register
+
+login_title=CSV File Generator - user login
+login_headline=User login
+login=Login
