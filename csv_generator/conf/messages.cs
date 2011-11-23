@@ -1,3 +1,5 @@
+intro_text=Online nástroj pro snadné vytváření CSV souborů. Soubor se vytváří během 4 kroků. Mezi jednotlivými kroky se lze pohybovat jak dopředu, tak i dozadu. Pokud je uživatel přihlášen, je stav aplikace automaticky ukládán a uživatel se kdykoliv v budoucnosti může vrátit k rozpracovanému souboru. 
+
 home=Domů
 logout=Odhlásit
 register=Registrovat
@@ -58,3 +60,10 @@ register=Registrovat
 login_title=Generátor CSV souborů - přihlášení uživatele
 login_headline=Přihlášení uživatele
 login=Přihlásit
+username_required=Uživatelské jméno je povinné
+username_must_have_six_characters=Uživatelské jméno musí mít alespoň 6 znaků
+password_required=Heslo je povinné
+password_must_have_six_characters=Heslo musí mít alespoň 6 znaků
+password_confirmation_required=Druhé zadání hesla je povinné
+password_not_same=Zadaná hesla nejsou stejná
+

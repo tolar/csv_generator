@@ -1,3 +1,5 @@
+intro_text=Online tool for CSV file generation. You can create file in 4 steps. You can move both forward and back between steps. If you are logged in, current application status is being stored continuously so you can return to your work any time in future.
+
 home=Home
 logout=Logout
 register=Register
@@ -58,3 +60,9 @@ register=Register
 login_title=CSV File Generator - user login
 login_headline=User login
 login=Login
+username_required=Username required
+username_must_have_six_characters=Username must have at least 6 characters
+password_required=Password required
+password_must_have_six_characters=Username must have at least 6 characters
+password_confirmation_required=Password confirmation required
+password_not_same=Inserted passwords are not the same
