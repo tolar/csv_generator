@@ -1,5 +1,6 @@
-#Thu Sep 01 00:49:14 CEST 2011
+#Wed Oct 12 21:40:39 CEST 2011
 eclipse.preferences.version=1
+encoding//app/views/Application/feedback.html=UTF-8
 encoding//app/views/Application/index.html=UTF-8
 encoding//app/views/Application/login.html=UTF-8
 encoding//app/views/Application/registration.html=UTF-8

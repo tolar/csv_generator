@@ -4,6 +4,7 @@ import play.*;
 import play.cache.Cache;
 import play.data.validation.Required;
 import play.data.validation.Valid;
+import play.i18n.Messages;
 import play.libs.Codec;
 import play.mvc.*;
 
@@ -98,9 +99,7 @@ public class Application extends Controller {
 
     public static void step2_fromStep1(@Valid Step1Params step1) {
 
-
         if(validation.hasErrors()) {
-        	System.out.println("step1 errors");
         	renderArgs.put("step1", step1);
             render("@step1");
         }
@@ -115,13 +114,11 @@ public class Application extends Controller {
     }
 
 	public static void step2_addCellValue(@Valid Step2Params step2) {
-    	System.out.println("step2:" + step2);
 
 		GenerationSession gs = getSessionValue();
     	renderArgs.put("gs", gs);
 
         if(validation.hasErrors()) {
-        	System.out.println("step2 errors");
         	renderArgs.put("step2", step2);
             render("@step2");
         }
@@ -145,7 +142,7 @@ public class Application extends Controller {
     	GenerationSession gs = getSessionValue();
     	renderArgs.put("gs", gs);
     	if (gs.cellValues.size() <= 0) {
-    		renderArgs.put("message", "Není definována žádná hodnota");
+    		renderArgs.put("message", Messages.get("no_value_defined"));
     		render("@step2");
     	} else {
     		render("@step3");
@@ -166,7 +163,7 @@ public class Application extends Controller {
 
 
 	private static void processMatrix(List<String> matrix) {
-		System.out.println("matrix:" + matrix);
+		
     	GenerationSession gs = getSessionValue();
     	int rows = Integer.parseInt(gs.rows);
     	int columns = Integer.parseInt(gs.columns);
@@ -236,6 +233,27 @@ public class Application extends Controller {
 		}
 
     }
+    
+    public static void feedback() {
+    	render();
+    }    
+    
+    public static void processFeedback(String description) {
+    	Logger.info(description);
+    	
+    	Feedback feedback = new Feedback(description, connectedUser() != null ? connectedUser().username : null);
+    	validation.valid(feedback);
+    	
+        if(validation.hasErrors()) {
+            render("@feedback");
+        } else {
+        	feedback.save();
+        	index();
+        }
+    	
+    }
+    
+    
 
 	private static String getCacheId() {
 		return session.getId() + "generation";
@@ -332,13 +350,12 @@ public class Application extends Controller {
     }
 
     static void connect(User user) {
+    	Logger.info("user logged in - userId:" + user.id);
         session.put("logged", user.id);
     }
 
     static User connectedUser() {
-    	System.out.println("connectedUser invoked");
         String userId = session.get("logged");
-        System.out.println("connectedUser userId:" + userId);
         return userId == null ? null : (User) User.findById(Long.parseLong(userId));
     }
 

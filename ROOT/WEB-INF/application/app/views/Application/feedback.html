@@ -1,0 +1,36 @@
+#{extends 'main.html' /}
+#{set title:'Generátor CSV souborů - návrh na zlepšení' /}
+
+<h1>Generátor CSV souborů</h1>
+<h2>Návrh na zlepšení</h2>
+
+#{ifErrors}
+<div class="errorPanel">
+    <h3>Opravte, prosím, následující chyby ve formuláři</h2>
+    <ul>
+		#{errors 'feedback.description'}
+	    	<li>${error}</li>
+	    #{/errors}
+	
+	</ul>
+
+</div>
+#{/ifErrors}
+
+<table class="center">
+#{form @Application.processFeedback(), method:'POST' }
+
+<tr>
+<td valign="top" ><label for="description">Popis zlepšení: </label></td>
+<td>
+<textarea id="description" type="text" name="description" rows="10" cols="40" value="${params.description}"/></textarea>
+</td>
+</tr>
+
+</table>
+
+<div class="buttonPanel">
+<input type="submit" value="Odeslat" />
+</div>
+
+#{/form}

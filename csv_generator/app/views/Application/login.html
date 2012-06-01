@@ -1,11 +1,11 @@
 #{extends 'main.html' /}
-#{set title:'Generátor CSV souborů - přihlášení uživatele' /}
+#{set title: messages.get("login_title") /}
 
-<h1>Generátor CSV souborů</h1>
-<h2>Přihlášení uživatele</h2>
+<h1>&{'headline'}</h1>
+<h2>&{'login_headline'}</h2>
 
 #{ifErrors}
-<div class="error">
+<div class="errorPanel">
     <h3>Nepodařilo se přihlásit</h3>
     <ul>
 		#{errors 'login.message'}
@@ -21,19 +21,25 @@
 </div>
 #{/ifErrors}
 
+<table class="center">
 #{form @Application.processLogin(), method:'POST' }
 
-<label for="password">Uživatelské jméno : </label>
-<input id="username" type="text" name="username" value="${params.username}" />
+<tr>
+#{field 'username'}
+<td><label for="${field.id}">&{'username'}:</label></td>
+<td><input id="${field.id}" name="${field.name}" type="text" value="${field.value}"/></td>
+#{/field}
+</tr>
 
- <br/>
+<tr>
+#{field 'password'}
+<td><label for="${field.id}">&{'password'}:</label></td>
+<td><input id="${field.id}" name="${field.name}" type="password" value="${field.value}"/></td>
+#{/field}
+</tr>
 
-<label for="password">Heslo : </label>
-<input id="password" type="password" name="password" value="${params.password}" />
-
- <br/>
-
-
-<input type="submit" value="Přihlásit" />
-
+</table>
+<div class="buttonPanel">
+<input type="submit" value="&{'login'}" />
+</div>
 #{/form}

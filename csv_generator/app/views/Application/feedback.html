@@ -1,0 +1,36 @@
+#{extends 'main.html' /}
+#{set title: messages.get("feedback_title") /}
+
+<h1>&{'headline'}</h1>
+<h2>&{'feedback_headline'}</h2>
+
+#{ifErrors}
+<div class="errorPanel">
+    <h3>&{'form_error_message'}</h3>
+    <ul>
+		#{errors 'feedback.description'}
+	    	<li>${error}</li>
+	    #{/errors}
+	
+	</ul>
+
+</div>
+#{/ifErrors}
+
+<table class="center">
+#{form @Application.processFeedback(), method:'POST' }
+
+<tr>
+<td valign="top" ><label for="description">&{'improvement_description'}: </label></td>
+<td>
+<textarea id="description" type="text" name="description" rows="10" cols="40" value="${params.description}"/></textarea>
+</td>
+</tr>
+
+</table>
+
+<div class="buttonPanel">
+<input type="submit" value="&{'submit'}" />
+</div>
+
+#{/form}

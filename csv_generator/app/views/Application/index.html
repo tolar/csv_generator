@@ -1,8 +1,11 @@
 #{extends 'main.html' /}
-#{set title:'Generátor CSV souborů' /}
+#{set title: messages.get("headline") /}
 
-<h1>Generátor CSV souborů</h1>
+<h1>&{'headline'}</h1>
 <form action="@{Application.step1}">
-<input type="submit" value="Start" />
+<div id="intro" class="center">
+&{'intro_text'}
+</div>
+<input type="submit" value="&{'start'}" />
 </form>
 

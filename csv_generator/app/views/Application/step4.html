@@ -1,12 +1,12 @@
 #{extends 'main.html' /}
-#{set title:'Generátor CSV souborů - krok 4' /}
+#{set title: messages.get("step4_title") /}
 
-<h1>Generátor CSV souborů</h1>
-<h2>Krok 4. - dokončení</h2>
+<h1>&{'headline'}</h1>
+<h2>&{'step4_headline'}</h2>
 
 #{ifErrors}
 <div class="error">
-    <h3>Opravte, prosím, následující chyby ve formuláři</h2>
+    <h3>&{'form_error_message'}</h3>
 	<ul>
 		#{errors 'step4.delimiter'}
 	    	<li>${error}</li>
@@ -24,7 +24,7 @@
     <tr>
     #{list items:1..Integer.parseInt(gs.columns), as:'column'}
     	<td>
-    		${gs.matrix[row-1][column-1]}
+    		${gs.matrix[row-1][column-1]}&nbsp;
     	</td>
     #{/list}
     </tr>
@@ -34,21 +34,24 @@
 
 #{form @Application.generationParams(), method:'POST' }
 
+<table class="center">
+<tr>
+<td><label for="step4.delimiter">&{'delimiter'}:</label></td>
+<td style="text-align:left" >#{select 'step4.delimiter', items:step4.delimiters, valueProperty:'value', labelProperty:'description', value:step4.delimiter, id:'delimiter' /}</td>
+</tr>
 
-<label for="step4.delimiter">Oddělovač:</label>
-#{select 'step4.delimiter', items:step4.delimiters, valueProperty:'value', labelProperty:'description', value:step4.delimiter, id:'delimiter' /}
-
-<br/>
-
+<tr>
 #{field 'step4.fileName'}
-<label for="${field.id}">Jméno souboru:</label>
-<input id="${field.id}" name="${field.name}" type="text" value="${field.value}" />
+<td><label for="${field.id}">&{'file_name'}:</label></td>
+<td><input id="${field.id}" name="${field.name}" type="text" value="${field.value}" /></td>
 #{/field}
-<br/>
+</tr>
+
+</table>
 
 <div class="buttonPanel">
-<input class="left" type="submit" name="prevSubmit" value="Předchozí" />
-<input class="right" type="submit" name="generateSubmit" value="Generovat" />
+<input class="left" type="submit" name="prevSubmit" value="&{'previous'}" />
+<input class="right" type="submit" name="generateSubmit" value="&{'generate'}" />
 </div>
 
 #{/form}

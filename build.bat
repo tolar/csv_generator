@@ -1,0 +1,1 @@
+play war ./csv_generator -o ./ROOT --zip

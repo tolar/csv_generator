@@ -1,12 +1,13 @@
 #{extends 'main.html' /}
-#{set title:'Generátor CSV souborů - krok 1' /}
+#{set title: messages.get("step1_title") /}
 
-<h1>Generátor CSV souborů</h1>
-<h2>Krok 1. - definování dimenzí</h2>
+
+<h1>&{'headline'}</h1>
+<h2>&{'step1_headline'}</h2>
 
 #{ifErrors}
 <div class="errorPanel">
-    <h3>Opravte, prosím, následující chyby ve formuláři</h2>
+    <h3>&{'form_error_message'}</h3>
 	<ul>
 		#{errors 'step1.rows'}
 	    	<li>${error}</li>
@@ -23,20 +24,20 @@
 <table class="center">
 <tr>
 #{field 'step1.rows'}
-<td><label for="${field.id}">Počet řádků:</label></td>
+<td><label for="${field.id}">&{'step1_row_count'}:</label></td>
 <td><input id="${field.id}" name="${field.name}" type="text" value="${field.value}"/></td>
 #{/field}
 </tr>
 
 <tr>
 #{field 'step1.columns'}
-<td><label for="${field.id}">Počet sloupců:</label></td>
+<td><label for="${field.id}">&{'step1_column_count'}:</label></td>
 <td><input id="${field.id}" name="${field.name}" type="text" value="${field.value}" /></td>
 #{/field}
 </tr>
 </table>
 <div class="buttonPanel">
-<input type="submit" value="Další" />
+<input type="submit" value="&{'next'}" />
 </div>
 
 #{/form}

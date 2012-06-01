@@ -19,17 +19,17 @@ import play.libs.Codec;
 @Entity(name="T_CSV_USER")
 public class User extends Model {
 
-	@Required(message="Uživatelské jméno je povinné")
-	@MinSize(value=6, message="Uživatelské jméno musí mít alespoň 6 znaků")
+	@Required(message="username_required")
+	@MinSize(value=6, message="username_must_have_six_characters")
 	public String username;
 
-	@Required(message="Heslo je povinné")
-	@MinSize(value=6, message="Heslo musí mít alespoň 6 znaků")
+	@Required(message="password_required")
+	@MinSize(value=6, message="password_must_have_six_characters")
 	@Transient
 	public String password;
 
-	@Required(message="Druhé zadání hesla je povinné")
-	@Equals(value="password", message="Zadaná hesla nejsou stejná")
+	@Required(message="password_confirmation_required")
+	@Equals(value="password", message="password_not_same")
 	@Transient
 	public String confirmPassword;
 	
