@@ -1,4 +1,4 @@
-intro_text=Online nástroj pro snadné vytváření CSV souborů. Soubor se vytváří během 4 kroků. Mezi jednotlivými kroky se lze pohybovat jak dopředu, tak i dozadu. Pokud je uživatel přihlášen, je stav aplikace automaticky ukládán a uživatel se kdykoliv v budoucnosti může vrátit k rozpracovanému souboru. 
+intro_text=Online nástroj pro snadné vytváření CSV souborů. Soubor se vytváří během 4 kroků. Mezi jednotlivými kroky se lze pohybovat jak dopředu, tak i dozadu. Pokud je uživatel přihlášen, je stav aplikace automaticky ukládán a uživatel se kdykoliv v budoucnosti může vrátit k rozpracovanému souboru.
 
 home=Domů
 logout=Odhlásit
@@ -7,7 +7,7 @@ login=Přihlásit
 feedback=Navrhněte vylepšení!
 start=Start
 next=Další
-previous=Previous
+previous=Předchozí
 add=Přidat
 remove=Odstranit
 headline=Generátor CSV souborů
@@ -15,6 +15,7 @@ form_error_message=Opravte, prosím, následující chyby ve formuláři
 delimiter=Oddělovač
 file_name=Jméno souboru
 generate=Generovat
+login_failed=Nepodařilo se přihlásit
 
 step1_title=Generátor CSV souborů - krok 1
 step1_headline=Krok 1. - definování dimenzí
@@ -35,7 +36,7 @@ cell_value_must_not_be_longer_than_twenty=Hodnota buňky nesmí být delší ne�
 no_value_defined=Není definována žádná hodnota
 
 step3_title=Generátor CSV souborů - krok 3
-step3_headline=Krok 3. - sestavení souboru 
+step3_headline=Krok 3. - sestavení souboru
 
 step4_title=Generátor CSV souborů - krok 4
 step4_headline=Krok 4. - dokončení

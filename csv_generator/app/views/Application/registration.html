@@ -6,7 +6,7 @@
 
 #{ifErrors}
 <div class="errorPanel">
-    <h3>&{'form_error_message'}</h2>
+    <h3>&{'form_error_message'}</h3>
     <ul>
 		#{errors 'user.username'}
 	    	<li>${error}</li>
@@ -16,7 +16,7 @@
 	    #{/errors}
 		#{errors 'user.confirmPassword'}
 	    	<li>${error}</li>
-	    #{/errors}	    
+	    #{/errors}
 	</ul>
 
 </div>

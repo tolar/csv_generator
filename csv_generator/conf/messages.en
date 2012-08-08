@@ -15,6 +15,7 @@ form_error_message=Correct mistakes in the form please
 delimiter=Delimiter
 file_name=File name
 generate=Generate
+login_failed=Login failed
 
 step1_title=CSV File Generator - step 1
 step1_headline=Step #1 - dimensions

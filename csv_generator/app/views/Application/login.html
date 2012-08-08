@@ -6,18 +6,18 @@
 
 #{ifErrors}
 <div class="errorPanel">
-    <h3>Nepodařilo se přihlásit</h3>
+	<h3>&{'login_failed'}</h3>
     <ul>
 		#{errors 'login.message'}
 	    	<li>${error}</li>
-	    #{/errors}  
+	    #{/errors}
 		#{errors 'userLogin.username'}
 	    	<li>${error}</li>
 	    #{/errors}
 		#{errors 'userLogin.password'}
 	    	<li>${error}</li>
 	    #{/errors}
-	</ul>	
+	</ul>
 </div>
 #{/ifErrors}
 
