@@ -4,10 +4,10 @@ import play.data.validation.Required;
 
 public class UserLogin {
 
-	@Required(message="Uživatelské jméno je povinné")
+	@Required(message="username_required")
 	public String username;
 
-	@Required(message="Heslo je povinné")
+	@Required(message="password_required")
 	public String password;
 
 	public UserLogin(String username, String password) {

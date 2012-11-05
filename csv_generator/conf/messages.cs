@@ -68,3 +68,8 @@ password_must_have_six_characters=Heslo musí mít alespoň 6 znaků
 password_confirmation_required=Druhé zadání hesla je povinné
 password_not_same=Zadaná hesla nejsou stejná
 
+username_does_not_exist=Zadané uživatelské jméno v systému neexistuje
+password_not_valid_for_user=Zadané heslo není platné pro daného uživatele
+username_required=Uživatelské jméno je povinné
+password_required=Heslo je povinné
+

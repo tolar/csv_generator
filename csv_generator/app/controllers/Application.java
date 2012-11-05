@@ -23,6 +23,8 @@ import java.nio.charset.Charset;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
+import org.postgresql.translation.messages_bg;
+
 import models.*;
 
 public class Application extends Controller {
@@ -56,6 +58,9 @@ public class Application extends Controller {
     	validation.valid(user);
     	
         if(validation.hasErrors()) {
+        	renderArgs.put("username", username);
+        	renderArgs.put("password", password);
+        	renderArgs.put("passwordConfirm", passwordConfirm);
             render("@registration");
         } else {
         	user.generatePassHash();
@@ -70,22 +75,26 @@ public class Application extends Controller {
     	validation.valid(userLogin);
     	
         if(validation.hasErrors()) {
+        	renderArgs.put("username", username);
+        	renderArgs.put("password", password);
             render("@login");
         }     	
     	
     	User storedUser = User.find("byUsername", username).first();
     	if (storedUser == null) {
-    		validation.addError("login.message", "Zadané uživatelské jméno v systému neexistuje");
+    		validation.addError("login.message", Messages.get("username_does_not_exist"));
     	} else {
     		if (Codec.hexMD5(password).equals(storedUser.passwordHash)) {
     			connect(storedUser);
     			index();
     		} else {
-    			validation.addError("login.message", "Zadané heslo není platné pro daného uživatele");
+    			validation.addError("login.message", Messages.get("password_not_valid_for_user"));
     		}
     	}
-
+    	
         if(validation.hasErrors()) {
+        	renderArgs.put("username", username);
+        	renderArgs.put("password", password);
             render("@login");
         } 
     }     
