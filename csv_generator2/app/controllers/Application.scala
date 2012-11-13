@@ -4,11 +4,6 @@ import play.api._
 import play.api.mvc._
 import play.api.i18n.Messages
 import play.api.i18n.Lang
-import play.api.data.Form
-import models.User
-
-import play.api.data._
-import play.api.data.Forms._ 
 
 object Application extends Controller {
   
@@ -28,21 +23,10 @@ object Application extends Controller {
       Ok(views.html.index());
     }
     
-	  val loginForm = Form(    
-	    tuple(
-	      "username" -> nonEmptyText,
-	      "password" -> nonEmptyText
-	    ) 
-	  )        
-    
     
     def login = Action {
-      Ok(views.html.login(loginForm));
-    }
-    
-
-
-	      
+      Ok(views.html.login());
+    }     
     
     /*
     def register(username: String, password: String, passwordConfirm: String) {
