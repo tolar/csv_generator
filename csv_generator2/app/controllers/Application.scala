@@ -15,17 +15,17 @@ object Application extends Controller {
     */
 
     def index = Action {
-      Ok(views.html.index(Messages("headline")));
+      Ok(views.html.index());
     }
     
     
     def registration = Action {
-      Ok(views.html.index("B"));
+      Ok(views.html.index());
     }
     
     
-    def login() {
-        Ok(views.html.index("C"));
+    def login = Action {
+      Ok(views.html.login());
     }     
     
     /*
@@ -228,7 +228,7 @@ object Application extends Controller {
     */
     
     def feedback = Action {
-    	Ok(views.html.index("D"));
+    	Ok(views.html.index());
     } 
     
     
