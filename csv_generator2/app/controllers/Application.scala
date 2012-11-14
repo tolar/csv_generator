@@ -4,6 +4,8 @@ import play.api._
 import play.api.mvc._
 import play.api.i18n.Messages
 import play.api.i18n.Lang
+import play.api.data._
+import play.api.data.Forms._
 
 object Application extends Controller {
   
@@ -14,19 +16,30 @@ object Application extends Controller {
     }
     */
 
+  
     def index = Action {
       Ok(views.html.index());
     }
     
+    val registrationForm = Form (
+        tuple (
+            "username" -> text,
+            "password" -> text
+        )
+    )
     
     def registration = Action {
-      Ok(views.html.index());
+      Ok(views.html.registration());
     }
     
     
     def login = Action {
       Ok(views.html.login());
-    }     
+    }
+    
+    def register = Action {
+      Ok
+    }
     
     /*
     def register(username: String, password: String, passwordConfirm: String) {
