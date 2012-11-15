@@ -29,7 +29,7 @@ object Application extends Controller {
     )
     
     def registration = Action {
-      Ok(views.html.registration());
+      Ok(views.html.registration(registrationForm));
     }
     
     
