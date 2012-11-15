@@ -21,11 +21,17 @@ object Application extends Controller {
       Ok(views.html.index());
     }
     
-    val registrationForm = Form (
-        tuple (
+    case class User(
+        username: String, 
+        password: String, 
+        passwordConfirm: String)
+    
+    val registrationForm = Form[User] (
+        mapping (
             "username" -> text,
-            "password" -> text
-        )
+            "password" -> text,
+            "password_again" -> text
+        ) (User.apply) (User.unapply)
     )
     
     def registration = Action {
