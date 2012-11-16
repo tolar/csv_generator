@@ -6,6 +6,7 @@ import play.api.i18n.Messages
 import play.api.i18n.Lang
 import play.api.data._
 import play.api.data.Forms._
+import views.html.defaultpages.badRequest
 
 object Application extends Controller {
   
@@ -29,9 +30,18 @@ object Application extends Controller {
     val registrationForm = Form[User] (
         mapping (
             "username" -> text,
-            "password" -> text,
-            "password_again" -> text
-        ) (User.apply) (User.unapply)
+            "password" -> tuple (
+                "main" -> text,
+                "confirm" -> text
+            ).verifying (Messages("password_not_same"), passwords => passwords._1 == passwords._2)
+            
+        ) 
+        {
+          (username, passwords) => User(username, passwords._1, "")
+        }
+        {
+          user => Some(user.username, (user.password, ""))
+        }
     )
     
     def registration = Action {
@@ -43,8 +53,11 @@ object Application extends Controller {
       Ok(views.html.login());
     }
     
-    def register = Action {
-      Ok
+    def register = Action { implicit request => 
+      	registrationForm.bindFromRequest.fold(
+      			errors => BadRequest(views.html.registration(errors)),
+      			user => Ok(views.html.index())
+    	)
     }
     
     /*

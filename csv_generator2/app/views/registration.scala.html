@@ -9,8 +9,8 @@
 	
 	@helper.form(action = routes.Application.register) {
 	    @helper.inputText(registrationForm("username"))
-	    @helper.inputPassword(registrationForm("password"))	
-	    @helper.inputPassword(registrationForm("password_again"))
+	    @helper.inputPassword(registrationForm("password.main"))	
+	    @helper.inputPassword(registrationForm("password.confirm"))
 	    <input type="submit" value="Registrovat"/>	    
 	}
 }
