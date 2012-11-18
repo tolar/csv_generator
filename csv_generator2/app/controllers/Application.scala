@@ -7,6 +7,7 @@ import play.api.i18n.Lang
 import play.api.data._
 import play.api.data.Forms._
 import views.html.defaultpages.badRequest
+import models._
 
 object Application extends Controller {
   
@@ -56,7 +57,10 @@ object Application extends Controller {
     def register = Action { implicit request => 
       	registrationForm.bindFromRequest.fold(
       			errors => BadRequest(views.html.registration(errors)),
-      			user => Ok(views.html.index())
+      			user => {
+      				Users.insert(user.username, user.password)
+      				Ok(views.html.index()) 
+      			}
     	)
     }
     
