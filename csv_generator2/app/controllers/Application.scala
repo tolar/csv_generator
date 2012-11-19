@@ -58,8 +58,14 @@ object Application extends Controller {
       	registrationForm.bindFromRequest.fold(
       			errors => BadRequest(views.html.registration(errors)),
       			user => {
-      				DAO.insertUser(user.username, user.password)
-      				Ok(views.html.index()) 
+      				if (DAO.findUserByUsername(user.username) != null) {
+      					DAO.insertUser(user.username, user.password)
+      					Ok(views.html.index("Registrace probehla uspesne")) 	
+      				} else {
+      					Ok(views.html.index("Uzivatel jiz existuje")) 	
+      				}
+      				
+      				
       			}
     	)
     }
