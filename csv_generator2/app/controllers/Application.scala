@@ -58,7 +58,7 @@ object Application extends Controller {
       	registrationForm.bindFromRequest.fold(
       			errors => BadRequest(views.html.registration(errors)),
       			user => {
-      				Users.insert(user.username, user.password)
+      				DAO.insertUser(user.username, user.password)
       				Ok(views.html.index()) 
       			}
     	)

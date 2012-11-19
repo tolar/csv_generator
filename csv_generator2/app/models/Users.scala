@@ -6,6 +6,7 @@ import play.api.Play.current
 import org.scalaquery.ql._
 import org.scalaquery.ql.TypeMapper._
 import org.scalaquery.ql.basic.{ BasicTable => Table }
+import org.scalaquery.ql.extended.ExtendedColumnOption._
 
 import org.scalaquery.ql.extended.MySQLDriver.Implicit._
 
@@ -23,7 +24,8 @@ object Users extends Table[(Long, String, String, String)]("t_csv_user") {
 
   def insert(username: String, passwordHash: String) = database.withSession { implicit db: Session =>
     println(Users.insertStatement)
-  	username ~ passwordHash insert(username, passwordHash)
+  	//username ~ passwordHash insert(username, passwordHash)
+    id ~ username ~ passwordHash insert(0L, username, passwordHash)
   }
  
   
