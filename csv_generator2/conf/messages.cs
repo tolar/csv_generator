@@ -73,3 +73,4 @@ password_not_valid_for_user=Zadané heslo není platné pro daného uživatele
 username_required=Uživatelské jméno je povinné
 password_required=Heslo je povinné
 
+registration_successfull=Registrace proběhla úspěšně

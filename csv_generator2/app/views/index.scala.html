@@ -1,9 +1,7 @@
- @main(Messages("headline")) {
+@(messageToUser: String)
+@main(Messages("headline")) {
 <h1>@Messages("headline")</h1>
-	@flash.get("messageToUser").map { messageToUser =>
-	    <div class="alert-message warning">
-	        <strong>Done!</strong> @messageToUser
-	    </div>
-	}
+<h2>@messageToUser</h2>
+	
 }
     

@@ -72,3 +72,6 @@ username_does_not_exist=Entered username does not exist
 password_not_valid_for_user=Entered password is not valid for given user
 username_required=Username required
 password_required=Password required
+
+registration_successfull=Registraton was successfull
+username_already_exists=Inserted username already exists

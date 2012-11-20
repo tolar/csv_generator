@@ -11,7 +11,7 @@ import models._
 
 object Application extends Controller {
   
-	val Home = Redirect(routes.Application.index);
+	//val Home = Redirect(routes.Application.index);
   
 	/*
     @Before
@@ -20,7 +20,9 @@ object Application extends Controller {
     }
     */
 
-	def index = Action { Home } 
+	def index(messageToUser: String = "") = Action {
+	  Ok(views.html.index(messageToUser))
+	} 
     
     case class User(
         username: String, 
@@ -41,7 +43,11 @@ object Application extends Controller {
         }
         {
           user => Some(user.username, (user.password, ""))
-        }
+        }.verifying(
+            Messages("username_already_exists"), 
+            user => DAO.findUserByUsername(user.username) == None
+        )
+       
     )
     
     def registration = Action {
@@ -56,15 +62,7 @@ object Application extends Controller {
     def register = Action { implicit request => 
       	registrationForm.bindFromRequest.fold(
       			errors => BadRequest(views.html.registration(errors)),
-      			user => {
-      				DAO.findUserByUsername(user.username) match {
-      				  case Some(dbUser) => Home.flashing("messageToUser" -> "Zadané uživatelské jméno již v systému existuje")
-      				  case None => {
-      				    DAO.insertUser(user.username, user.password)
-      				    Home.flashing("messageToUser" -> "Registrace proběhla úspěšně")       				    
-      				  }
-      				}      			      				      				
-      			}
+      			user => Redirect(routes.Application.index(Messages("registration_successfull")))
     	)
     }
     
@@ -267,7 +265,7 @@ object Application extends Controller {
     }
     */
     
-    def feedback = Action { Home } 
+    def feedback = Action { index() } 
     
     def processFeedback() {
     	/*
@@ -380,7 +378,7 @@ object Application extends Controller {
     
     def logout = Action {
     	//Session. .remove("logged");
-    	index();
+    	index()
     }
     
     /*
