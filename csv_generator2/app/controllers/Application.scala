@@ -11,6 +11,8 @@ import models._
 
 object Application extends Controller {
   
+	val Home = Redirect(routes.Application.index);
+  
 	/*
     @Before
     def globals() {
@@ -18,10 +20,7 @@ object Application extends Controller {
     }
     */
 
-  
-    def index = Action {
-      Ok(views.html.index());
-    }
+	def index = Action { Home } 
     
     case class User(
         username: String, 
@@ -58,14 +57,13 @@ object Application extends Controller {
       	registrationForm.bindFromRequest.fold(
       			errors => BadRequest(views.html.registration(errors)),
       			user => {
-      				if (DAO.findUserByUsername(user.username) != null) {
-      					DAO.insertUser(user.username, user.password)
-      					Ok(views.html.index("Registrace probehla uspesne")) 	
-      				} else {
-      					Ok(views.html.index("Uzivatel jiz existuje")) 	
-      				}
-      				
-      				
+      				DAO.findUserByUsername(user.username) match {
+      				  case Some(dbUser) => Home.flashing("messageToUser" -> "Zadané uživatelské jméno již v systému existuje")
+      				  case None => {
+      				    DAO.insertUser(user.username, user.password)
+      				    Home.flashing("messageToUser" -> "Registrace proběhla úspěšně")       				    
+      				  }
+      				}      			      				      				
       			}
     	)
     }
@@ -269,11 +267,7 @@ object Application extends Controller {
     }
     */
     
-    def feedback = Action {
-    	Ok(views.html.index());
-    } 
-    
-    
+    def feedback = Action { Home } 
     
     def processFeedback() {
     	/*
