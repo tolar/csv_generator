@@ -31,10 +31,10 @@ object Application extends Controller {
     
     val registrationForm = Form[User] (
         mapping (
-            "username" -> text,
+            "username" -> text(minLength = 6),
             "password" -> tuple (
-                "main" -> text,
-                "confirm" -> text
+                "main" -> text(minLength = 6),
+                "again" -> text
             ).verifying (Messages("password_not_same"), passwords => passwords._1 == passwords._2)
             
         ) 
@@ -45,7 +45,7 @@ object Application extends Controller {
           user => Some(user.username, (user.password, ""))
         }.verifying(
             Messages("username_already_exists"), 
-            user => DAO.findUserByUsername(user.username) == None
+            user => DAO.findUserByUsername(user.username).isEmpty
         )
        
     )
@@ -62,7 +62,10 @@ object Application extends Controller {
     def register = Action { implicit request => 
       	registrationForm.bindFromRequest.fold(
       			errors => BadRequest(views.html.registration(errors)),
-      			user => Redirect(routes.Application.index(Messages("registration_successfull")))
+      			user => {
+      			  DAO.insertUser(user.username, user.password)
+      			  Redirect(routes.Application.index(Messages("registration_successfull")))
+      			}
     	)
     }
     

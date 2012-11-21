@@ -5,6 +5,7 @@
 # Home page
 GET     /				            controllers.Application.index(messageToUser = "")
 
+GET     /index:messageToUser        controllers.Application.index(messageToUser)
 GET     /login		                controllers.Application.login
 GET     /registration		        controllers.Application.registration
 POST    /register		        	controllers.Application.register
