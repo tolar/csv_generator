@@ -11,17 +11,18 @@
 	@helper.form(action = routes.Application.register) {
 	    @helper.inputText(
 	    	registrationForm("username"),
-	    	'_help -> "Please choose a valid username.",
+	    	'_label -> Messages("username"),
 	    	'_error -> registrationForm.globalError
 	    )	          
 	    @helper.inputPassword(
 	    	registrationForm("password.main"),
-	    	'_label -> Messages("password")
+	    	'_label -> Messages("password"),
+	    	'_error -> registrationForm.error("password")
 	    )	
 	    @helper.inputPassword(
-	    	registrationForm("password.confirm"),
-	    	'_label -> Messages("password_again"),
-	    	'_error -> registrationForm.error("password"))
+	    	registrationForm("password.again"),
+	    	'_label -> Messages("password_again")
+	    )
 	    <input type="submit" value="Registrovat"/>	    
 	}
 }
