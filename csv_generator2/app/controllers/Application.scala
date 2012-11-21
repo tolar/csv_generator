@@ -8,6 +8,7 @@ import play.api.data._
 import play.api.data.Forms._
 import views.html.defaultpages.badRequest
 import models._
+import org.apache.commons.codec.digest.DigestUtils
 
 object Application extends Controller {
   
@@ -54,44 +55,24 @@ object Application extends Controller {
       Ok(views.html.registration(registrationForm));
     }
     
+    def register = Action { implicit request => 
+      	registrationForm.bindFromRequest.fold(
+      			errors => BadRequest(views.html.registration(errors)),
+      			user => {
+      			  DAO.insertUser(user.username, DigestUtils.md5Hex(user.password))
+      			  Redirect(routes.Application.index(Messages("registration_successfull")))
+      			}
+    	)
+    }    
+    
     
     def login = Action {
       Ok(views.html.login());
     }
     
-    def register = Action { implicit request => 
-      	registrationForm.bindFromRequest.fold(
-      			errors => BadRequest(views.html.registration(errors)),
-      			user => {
-      			  DAO.insertUser(user.username, user.password)
-      			  Redirect(routes.Application.index(Messages("registration_successfull")))
-      			}
-    	)
-    }
+
     
     /*
-    def register(username: String, password: String, passwordConfirm: String) {
-    	
-    	User user = new User(username, password, passwordConfirm);
-    	
-    	User storedUser = User.find("byUsername", username).first();
-    	if (storedUser != null) {
-    		validation.addError("user.username", "Zadan� u�ivatelsk� jm�no je ji� v syst�mu pou�ito");
-    	}
-    	
-    	validation.valid(user);
-    	
-        if(validation.hasErrors()) {
-        	renderArgs.put("username", username);
-        	renderArgs.put("password", password);
-        	renderArgs.put("passwordConfirm", passwordConfirm);
-            render("@registration");
-        } else {
-        	user.generatePassHash();
-        	user.save();
-        	index();
-        }
-    }
     
     def processLogin(String username, String password) {
     	
@@ -397,4 +378,7 @@ object Application extends Controller {
     }
 
   */
+    
+    
+
 }
