@@ -1,27 +1,48 @@
 @(registrationForm: Form[Application.User])
 
 @import helper._
-@import helper.twitterBootstrap._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
 
 @main(Messages("registration_title")) {
-	<h1>@Messages("headline")</h1>
 
-	<h2>@Messages("registration_headline")</h2>
+	<div class="row">
+	<div class="span9">
 	
-	@helper.form(action = routes.Application.register) {
+	
+	
+	@helper.form(action = routes.Application.register, 'class -> "form-horizontal") {
+	
+		<fieldset>
+    	<legend>@Messages("registration_headline")</legend>
+								
 	    @helper.inputText(
 	    	registrationForm("username"),
 	    	'_help -> "Please choose a valid username.",
 	    	'_error -> registrationForm.globalError
 	    )	          
+	    
 	    @helper.inputPassword(
 	    	registrationForm("password.main"),
 	    	'_label -> Messages("password")
 	    )	
+	    	    
 	    @helper.inputPassword(
 	    	registrationForm("password.confirm"),
 	    	'_label -> Messages("password_again"),
-	    	'_error -> registrationForm.error("password"))
-	    <input type="submit" value="Registrovat"/>	    
+	    	'_error -> registrationForm.error("password")
+	    )
+	    <br/>
+	    
+	    <input type="submit" value="@Messages("register")" class="btn btn-primary"/>
+	    
+	    </fieldset>
+	    		    	
+	    
+	    	    	   
+		
 	}
+	
+	</div>
+	</div>					
 }

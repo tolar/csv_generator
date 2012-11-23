@@ -61,7 +61,10 @@ object Application extends Controller {
     
     def register = Action { implicit request => 
       	registrationForm.bindFromRequest.fold(
-      			errors => BadRequest(views.html.registration(errors)),
+      			errors => {
+      				println("Errors", errors)
+      				BadRequest(views.html.registration(errors)) 
+      			},
       			user => {
       			  DAO.insertUser(user.username, user.password)
       			  Redirect(routes.Application.index(Messages("registration_successfull")))

@@ -8,50 +8,18 @@
 	"buffers":
 	[
 		{
-			"file": "app/Global.scala",
-			"settings":
-			{
-				"buffer_size": 75,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/models/User.scala",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "conf/application.conf",
-			"settings":
-			{
-				"buffer_size": 1311,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "project/Build.scala",
-			"settings":
-			{
-				"buffer_size": 470,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "conf/routes",
-			"settings":
-			{
-				"buffer_size": 509,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "app/views/registration.scala.html",
 			"settings":
 			{
-				"buffer_size": 568,
+				"buffer_size": 788,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/views/main.scala.html",
+			"settings":
+			{
+				"buffer_size": 1588,
 				"line_ending": "Windows"
 			}
 		},
@@ -59,28 +27,12 @@
 			"file": "app/controllers/Application.scala",
 			"settings":
 			{
-				"buffer_size": 10001,
+				"buffer_size": 10271,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "conf/messages.cs",
-			"settings":
-			{
-				"buffer_size": 2825,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/work/play/samples/scala/forms/app/views/signup/form.scala.html",
-			"settings":
-			{
-				"buffer_size": 2578,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/C/work/play/samples/scala/forms/app/controllers/SignUp.scala",
+			"file": "/D/work/dcs/play/samples/scala/forms/app/controllers/SignUp.scala",
 			"settings":
 			{
 				"buffer_size": 2808,
@@ -88,10 +40,34 @@
 			}
 		},
 		{
-			"file": "/C/work/play/samples/scala/forms/app/models/User.scala",
+			"file": "/D/work/dcs/play/samples/scala/forms/app/views/signup/form.scala.html",
 			"settings":
 			{
-				"buffer_size": 207,
+				"buffer_size": 2578,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "conf/messages",
+			"settings":
+			{
+				"buffer_size": 2742,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "conf/messages.cs",
+			"settings":
+			{
+				"buffer_size": 2878,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/vtolar/AppData/Roaming/Sublime Text 2/Packages/Default/Default (Windows).sublime-keymap",
+			"settings":
+			{
+				"buffer_size": 30564,
 				"line_ending": "Unix"
 			}
 		}
@@ -120,6 +96,17 @@
 	},
 	"file_history":
 	[
+		"/D/work/dcs/play_projects/csv_generator/csv_generator2/app/Global.scala",
+		"/D/work/dcs/play_projects/csv_generator/csv_generator2/app/models/User.scala",
+		"/D/work/dcs/play_projects/csv_generator/csv_generator2/conf/application.conf",
+		"/D/work/dcs/play_projects/csv_generator/csv_generator2/project/Build.scala",
+		"/D/work/dcs/play_projects/csv_generator/csv_generator2/conf/routes",
+		"/D/work/dcs/play_projects/csv_generator/csv_generator2/app/controllers/Application.scala",
+		"/D/work/dcs/play_projects/csv_generator/csv_generator2/conf/messages.cs",
+		"/C/work/play/samples/scala/forms/app/views/signup/form.scala.html",
+		"/C/work/play/samples/scala/forms/app/controllers/SignUp.scala",
+		"/C/work/play/samples/scala/forms/app/models/User.scala",
+		"/D/work/dcs/play_projects/csv_generator/csv_generator2/app/views/index.scala.html",
 		"/C/work/csv_generator/csv_generator2/app/controllers/Application.scala",
 		"/C/work/play/samples/scala/computer-database/app/models/Models.scala"
 	],
@@ -160,153 +147,23 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "app/Global.scala",
-					"settings":
-					{
-						"buffer_size": 75,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								75,
-								75
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Scala/Scala.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "app/models/User.scala",
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Scala/Scala.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "conf/application.conf",
-					"settings":
-					{
-						"buffer_size": 1311,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								932,
-								940
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "project/Build.scala",
-					"settings":
-					{
-						"buffer_size": 470,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								299,
-								299
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Scala/Scala.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "conf/routes",
-					"settings":
-					{
-						"buffer_size": 509,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								318,
-								318
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
 					"file": "app/views/registration.scala.html",
 					"settings":
 					{
-						"buffer_size": 568,
+						"buffer_size": 788,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								646,
+								646
 							]
 						],
 						"settings":
@@ -321,19 +178,45 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "app/controllers/Application.scala",
+					"buffer": 1,
+					"file": "app/views/main.scala.html",
 					"settings":
 					{
-						"buffer_size": 10001,
+						"buffer_size": 1588,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								600,
+								600
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/controllers/Application.scala",
+					"settings":
+					{
+						"buffer_size": 10271,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								847,
+								847
 							]
 						],
 						"settings":
@@ -343,40 +226,42 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 315.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "conf/messages.cs",
+					"buffer": 3,
+					"file": "/D/work/dcs/play/samples/scala/forms/app/controllers/SignUp.scala",
 					"settings":
 					{
-						"buffer_size": 2825,
+						"buffer_size": 2808,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2391,
-								2391
+								325,
+								325
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C#/C#.tmLanguage"
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 431.0,
+						"translation.y": 90.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 8,
-					"file": "/C/work/play/samples/scala/forms/app/views/signup/form.scala.html",
+					"buffer": 4,
+					"file": "/D/work/dcs/play/samples/scala/forms/app/views/signup/form.scala.html",
 					"settings":
 					{
 						"buffer_size": 2578,
@@ -386,8 +271,8 @@
 						"selection":
 						[
 							[
-								1182,
-								1221
+								424,
+								424
 							]
 						],
 						"settings":
@@ -403,52 +288,77 @@
 					"type": "text"
 				},
 				{
-					"buffer": 9,
-					"file": "/C/work/play/samples/scala/forms/app/controllers/SignUp.scala",
+					"buffer": 5,
+					"file": "conf/messages",
 					"settings":
 					{
-						"buffer_size": 2808,
+						"buffer_size": 2742,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2123,
-								2123
+								2719,
+								2719
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Scala/Scala.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 126.0,
+						"translation.y": 495.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 10,
-					"file": "/C/work/play/samples/scala/forms/app/models/User.scala",
+					"buffer": 6,
+					"file": "conf/messages.cs",
 					"settings":
 					{
-						"buffer_size": 207,
+						"buffer_size": 2878,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								2102,
+								2116
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Scala/Scala.tmLanguage"
+							"syntax": "Packages/C#/C#.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/C/Users/vtolar/AppData/Roaming/Sublime Text 2/Packages/Default/Default (Windows).sublime-keymap",
+					"settings":
+					{
+						"buffer_size": 30564,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3457,
+								3463
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -501,6 +411,10 @@
 		"selected_items":
 		[
 			[
+				"me",
+				"conf/messages.cs"
+			],
+			[
 				"a",
 				"conf/application.conf"
 			],
@@ -525,10 +439,6 @@
 				"app/controllers/Application.scala"
 			],
 			[
-				"me",
-				"conf/messages.cs"
-			],
-			[
 				"co",
 				"conf/application.conf"
 			],
@@ -551,6 +461,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 150.0,
+	"side_bar_width": 283.0,
 	"status_bar_visible": true
 }
