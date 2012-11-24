@@ -2,6 +2,9 @@ package controllers
 
 import play.api._
 import play.api.mvc._
+
+import play.api._
+import play.api.mvc._
 import play.api.i18n.Messages
 import play.api.i18n.Lang
 import play.api.data._
@@ -10,21 +13,18 @@ import views.html.defaultpages.badRequest
 import models._
 import org.apache.commons.codec.digest.DigestUtils
 
+
 object Application extends Controller {
   
-	//val Home = Redirect(routes.Application.index);
-  
-	/*
-    @Before
-    def globals() {
-        renderArgs.put("connected", connectedUser());
-    }
-    */
-
-	def index(messageToUser: String = "") = Action {
-	  Ok(views.html.index(messageToUser))
+	def index(messageToUserKey: String = "") = Action {
+	  Ok(views.html.index(messageToUserKey))
 	} 
+        
+    def login = Action {
+      Ok(views.html.login());
+    }
     
+
     case class User(
         username: String, 
         email: String,
@@ -65,18 +65,13 @@ object Application extends Controller {
       			},
       			user => {
       			  DAO.insertUser(user.username, user.email, DigestUtils.md5Hex(user.password))
-      			  Redirect(routes.Application.index(Messages("registration_successfull")))
+      			  Redirect(routes.Application.index("registration_successfull"))
       			}
     	)
-    }    
+    }      
     
     
-    def login = Action {
-      Ok(views.html.login());
-    }
-    
-
-    
+        
     /*
     
     def processLogin(String username, String password) {

@@ -1,7 +1,9 @@
-@(messageToUser: String)
+@(messageToUserKey: String = "")
 @main(Messages("headline")) {
+@if(!messageToUserKey.isEmpty) {
 <div class="alert alert-success">
-	@messageToUser
+	@Messages(messageToUserKey)
 </div>	
+}
 }
     

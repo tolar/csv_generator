@@ -9,7 +9,7 @@ import anorm.SqlParser._
 case class User(
     id: Pk[Long] = NotAssigned, 
     username: String,
-    email: String,
+    email: Option[String],
     passwordHash: String,
     generationSession: Option[String]
     )
@@ -37,7 +37,7 @@ object User {
   val simple = {
     get[Pk[Long]]("T_CSV_USER.ID") ~
     get[String]("T_CSV_USER.USERNAME") ~
-    get[String]("T_CSV_USER.EMAIL") ~
+    get[Option[String]]("T_CSV_USER.EMAIL") ~
     get[String]("T_CSV_USER.PASSWORD_HASH") ~
     get[Option[String]]("T_CSV_USER.GENERATION_SESSION") map {
       case id ~ username ~ email ~ password_hash ~ generation_session => User(id, username, email, password_hash, generation_session)
