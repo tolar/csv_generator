@@ -54,6 +54,7 @@ submit=Submit
 registration_title=CSV File Generator - user registration
 registration_headline=User registration
 username=Username
+email=Email
 password=Password
 password_again=Password again
 register=Register

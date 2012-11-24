@@ -27,23 +27,26 @@ object Application extends Controller {
     
     case class User(
         username: String, 
+        email: String,
         password: String, 
         passwordConfirm: String)
     
     val registrationForm = Form[User] (
         mapping (
             "username" -> text(minLength = 6),
+            "email" -> email,
             "password" -> tuple (
                 "main" -> text(minLength = 6),
-                "again" -> text
-            ).verifying (Messages("password_not_same"), passwords => passwords._1 == passwords._2)
-            
+                "again" -> text(minLength = 6)
+            ).verifying (
+                Messages("password_not_same"), passwords => passwords._1 == passwords._2)            
         ) 
+        
         {
-          (username, passwords) => User(username, passwords._1, "")
+          (username, email, passwords) => User(username, email, passwords._1, "")
         }
         {
-          user => Some(user.username, (user.password, ""))
+          user => Some(user.username, user.email, (user.password, ""))
         }.verifying(
             Messages("username_already_exists"), 
             user => DAO.findUserByUsername(user.username).isEmpty
@@ -57,12 +60,11 @@ object Application extends Controller {
     
     def register = Action { implicit request => 
       	registrationForm.bindFromRequest.fold(
-      			errors => {
-      				println("Errors", errors)
+      			errors => {      				
       				BadRequest(views.html.registration(errors)) 
       			},
       			user => {
-      			  DAO.insertUser(user.username, DigestUtils.md5Hex(user.password))
+      			  DAO.insertUser(user.username, user.email, DigestUtils.md5Hex(user.password))
       			  Redirect(routes.Application.index(Messages("registration_successfull")))
       			}
     	)

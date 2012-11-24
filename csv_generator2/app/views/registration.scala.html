@@ -20,7 +20,13 @@
 	    	registrationForm("username"),
 	    	'_help -> "Please choose a valid username.",
 	    	'_error -> registrationForm.globalError
-	    )	          
+	    )
+	    
+	    @helper.inputText(
+	    	registrationForm("email"),
+	    	'_help -> "Please choose a valid username.",
+	    	'_error -> registrationForm.error("email")
+	    )	          	    	          
 	    
 	    @helper.inputPassword(
 	    	registrationForm("password.main"),
@@ -29,9 +35,8 @@
 	    )	
 	    	    
 	    @helper.inputPassword(
-	    	registrationForm("password.confirm"),
-	    	'_label -> Messages("password_again"),
-	    	'_error -> registrationForm.error("password")
+	    	registrationForm("password.again"),
+	    	'_label -> Messages("password_again")
 	    )
 	    <br/>
 	    

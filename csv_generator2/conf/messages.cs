@@ -54,6 +54,7 @@ submit=Odeslat
 registration_title=Generátor CSV souborů - registrace uživatele
 registration_headline=Registrace uživatele
 username=Uživatelské jméno
+email=Email
 password=Heslo
 password_again=Heslo ještě jednou
 register=Registrovat
