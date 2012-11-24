@@ -1,4 +1,4 @@
-@(registrationForm: Form[Application.User])
+@(registrationForm: Form[Registration.User])
 
 @import helper._
 
@@ -11,7 +11,7 @@
 	
 	
 	
-	@helper.form(action = routes.Application.register, 'class -> "form-horizontal") {
+	@helper.form(action = routes.Registration.register, 'class -> "form-horizontal") {
 	
 		<fieldset>
     	<legend>@Messages("registration_headline")</legend>
