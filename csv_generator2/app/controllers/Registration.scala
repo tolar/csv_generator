@@ -16,7 +16,8 @@ object Registration extends Controller {
         username: String, 
         email: String,
         password: String, 
-        passwordConfirm: String)
+        passwordConfirm: String
+    )
     
     val registrationForm = Form[User] (
         mapping (
@@ -41,11 +42,11 @@ object Registration extends Controller {
        
     )
     
-    def registration = Action {
+    def registrationForm = Action {
       Ok(views.html.registration(registrationForm));
     }
     
-    def register = Action { implicit request => 
+    def registration = Action { implicit request => 
       	registrationForm.bindFromRequest.fold(
       			errors => {      				
       				BadRequest(views.html.registration(errors)) 

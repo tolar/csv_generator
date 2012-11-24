@@ -6,9 +6,10 @@
 GET     /				            controllers.Application.index(messageToUserKey = "")
 
 GET     /index:messageToUserKey     controllers.Application.index(messageToUserKey)
-GET     /login		                controllers.Application.login
-GET     /registration		        controllers.Registration.registration
-POST    /register		        	controllers.Registration.register
+GET     /loginForm	                controllers.Login.loginForm
+GET     /login                		controllers.Login.login
+GET     /registrationForm		    controllers.Registration.registrationForm
+POST    /registration		        controllers.Registration.registration
 
 
 # Map static resources from the /public folder to the /assets URL path

@@ -1,17 +1,7 @@
 package controllers
 
-import play.api._
-import play.api.mvc._
-
-import play.api._
-import play.api.mvc._
-import play.api.i18n.Messages
-import play.api.i18n.Lang
-import play.api.data._
-import play.api.data.Forms._
-import views.html.defaultpages.badRequest
-import models._
-import org.apache.commons.codec.digest.DigestUtils
+import play.api.mvc.Action
+import play.api.mvc.Controller
 
 
 object Application extends Controller {
@@ -20,9 +10,7 @@ object Application extends Controller {
 	  Ok(views.html.index(messageToUserKey))
 	} 
         
-    def login = Action {
-      Ok(views.html.login());
-    }
+
     
 
     
