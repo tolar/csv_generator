@@ -24,7 +24,8 @@
 	    
 	    @helper.inputPassword(
 	    	registrationForm("password.main"),
-	    	'_label -> Messages("password")
+	    	'_label -> Messages("password"),
+	    	'_error -> registrationForm.error("password")
 	    )	
 	    	    
 	    @helper.inputPassword(
