@@ -1,7 +1,39 @@
-@main(Messages("login_title")) {
-<h1>@Messages("headline")</h1>
-<h2>@Messages("login_headline")</h2> 
-}	
-    
+@(loginForm: Form[Login.User])
+@import helper._
 
-   
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@main(Messages("login_title")) {
+
+	<div class="row">
+	<div class="span9">
+			
+	@helper.form(action = routes.Login.login, 'class -> "form-horizontal") {
+	
+		<fieldset>
+    	<legend>@Messages("login_headline")</legend>
+								
+	    @helper.inputText(
+	    	loginForm("username"),
+	    	'_error -> loginForm.globalError
+	    )
+	    	    	    	          	    
+	    @helper.inputPassword(
+	    	loginForm("password"),
+	    	'_label -> Messages("password")
+	    )	
+	    	    
+	    <br/>
+	    
+	    <input type="submit" value="@Messages("login")" class="btn btn-primary"/>
+	    
+	    </fieldset>
+	    		    	
+	    
+	    	    	   
+		
+	}
+	
+	</div>
+	</div>					
+}

@@ -1,77 +1,21 @@
 package controllers
 
-import play.api._
-import play.api.mvc._
-import play.api.i18n.Messages
-import play.api.i18n.Lang
-import play.api.data._
-import play.api.data.Forms._
-import views.html.defaultpages.badRequest
-import models._
-import org.apache.commons.codec.digest.DigestUtils
+import play.api.mvc.Action
+import play.api.mvc.Controller
+
 
 object Application extends Controller {
   
-	//val Home = Redirect(routes.Application.index);
-  
-	/*
-    @Before
-    def globals() {
-        renderArgs.put("connected", connectedUser());
-    }
-    */
-
-	def index(messageToUser: String = "") = Action {
-	  Ok(views.html.index(messageToUser))
+	def index(messageToUserKey: String = "") = Action {
+	  Ok(views.html.index(messageToUserKey))
 	} 
-    
-    case class User(
-        username: String, 
-        password: String, 
-        passwordConfirm: String)
-    
-    val registrationForm = Form[User] (
-        mapping (
-            "username" -> text(minLength = 6),
-            "password" -> tuple (
-                "main" -> text(minLength = 6),
-                "again" -> text
-            ).verifying (Messages("password_not_same"), passwords => passwords._1 == passwords._2)
-            
-        ) 
-        {
-          (username, passwords) => User(username, passwords._1, "")
-        }
-        {
-          user => Some(user.username, (user.password, ""))
-        }.verifying(
-            Messages("username_already_exists"), 
-            user => DAO.findUserByUsername(user.username).isEmpty
-        )
-       
-    )
-    
-    def registration = Action {
-      Ok(views.html.registration(registrationForm));
-    }
-    
-    def register = Action { implicit request => 
-      	registrationForm.bindFromRequest.fold(
-      			errors => BadRequest(views.html.registration(errors)),
-      			user => {
-      			  DAO.insertUser(user.username, DigestUtils.md5Hex(user.password))
-      			  Redirect(routes.Application.index(Messages("registration_successfull")))
-      			}
-    	)
-    }    
-    
-    
-    def login = Action {
-      Ok(views.html.login());
-    }
+        
+
     
 
     
+    
+        
     /*
     
     def processLogin(String username, String password) {
