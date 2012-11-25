@@ -71,8 +71,11 @@ password_not_same=Inserted passwords are not the same
 
 username_does_not_exist=Entered username does not exist
 password_not_valid_for_user=Entered password is not valid for given user
+invalid_username_password=Invalid username or password
 username_required=Username required
 password_required=Password required
 
 registration_successfull=Registraton was successfull
 username_already_exists=Inserted username already exists
+user_was_logout=User was logget out
+user_was_logged_in=User was logged in

@@ -1,4 +1,4 @@
-@(registrationForm: Form[Registration.User])
+@(registrationForm: Form[Registration.User])(implicit request: play.api.mvc.RequestHeader)
 
 @import helper._
 
@@ -18,13 +18,11 @@
 								
 	    @helper.inputText(
 	    	registrationForm("username"),
-	    	'_help -> "Please choose a valid username.",
 	    	'_error -> registrationForm.globalError
 	    )
 	    
 	    @helper.inputText(
 	    	registrationForm("email"),
-	    	'_help -> "Please choose a valid username.",
 	    	'_error -> registrationForm.error("email")
 	    )	          	    	          
 	    

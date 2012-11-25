@@ -1,4 +1,4 @@
-@(loginForm: Form[Login.User])
+@(loginForm: Form[Login.User])(implicit request: play.api.mvc.RequestHeader)
 @import helper._
 
 @implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
@@ -20,7 +20,7 @@
 	    	    	    	          	    
 	    @helper.inputPassword(
 	    	loginForm("password"),
-	    	'_label -> Messages("password")
+	    	'_error -> loginForm.globalError
 	    )	
 	    	    
 	    <br/>
@@ -28,10 +28,7 @@
 	    <input type="submit" value="@Messages("login")" class="btn btn-primary"/>
 	    
 	    </fieldset>
-	    		    	
-	    
-	    	    	   
-		
+	   
 	}
 	
 	</div>

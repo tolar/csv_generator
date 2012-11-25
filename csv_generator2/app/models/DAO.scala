@@ -31,6 +31,16 @@ object DAO {
       .as(User.simple.singleOpt)
     }
   }
+  
+  def findUserByUsernameAndPasswordhash (username: String, passwordHash: String) : Option[User] = {
+    DB.withConnection { implicit conn =>
+      SQL("select * from T_CSV_USER where USERNAME = {username} and PASSWORD_HASH = {passwordHash}")
+      .on('username -> username, 'passwordHash -> passwordHash)
+      .as(User.simple.singleOpt)
+    }
+  }  
+  
+  
 }
 
 object User {

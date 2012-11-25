@@ -42,7 +42,7 @@ object Registration extends Controller {
        
     )
     
-    def registrationForm = Action {
+    def showRegistrationForm = Action { implicit request =>
       Ok(views.html.registration(registrationForm));
     }
     
@@ -53,7 +53,7 @@ object Registration extends Controller {
       			},
       			user => {
       			  DAO.insertUser(user.username, user.email, DigestUtils.md5Hex(user.password))
-      			  Redirect(routes.Application.index("registration_successfull"))
+      			  Redirect(routes.Application.index).flashing("successKey" -> "registration_successfull")
       			}
     	)
     }      

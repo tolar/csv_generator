@@ -1,4 +1,4 @@
-@(title: String)(content: Html)
+@(title: String)(content: Html)(implicit request: play.api.mvc.RequestHeader)
 
 <!DOCTYPE html>
 
@@ -40,14 +40,23 @@
 		  	<div>	  
 		  		<a class="brand" href="/">@Messages("headline")</a>
 			    <ul class="nav">	
-			      <li><a href="/registration">@Messages("register")</a></li>
-			      <li><a href="/login">@Messages("login")</a></li>
+			      <li><a href="/registrationForm">@Messages("register")</a></li>
+			      <li><a href="/loginForm">@Messages("login")</a></li>
 			      <li><a href="/feedback">@Messages("feedback")</a></li>
 			      <li><a href="/logout">@Messages("logout")</a></li>			      		      
 			    </ul>
+			    <p class="navbar-text pull-right">@request.session.get("username")</p>
 			  </div>	    
 		  </div>
 		</div>
+	
+		@if(!request.flash.get("successKey").isEmpty) {
+		<div class="alert alert-success">
+			@println((request.flash.get("successKey").get))
+			@Messages((request.flash.get("successKey").get))
+		</div>	
+		}
+		
 		@content	
 	</div>	
 

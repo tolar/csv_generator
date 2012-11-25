@@ -1,9 +1,5 @@
-@(messageToUserKey: String = "")
+@()(implicit request: play.api.mvc.RequestHeader)
 @main(Messages("headline")) {
-@if(!messageToUserKey.isEmpty) {
-<div class="alert alert-success">
-	@Messages(messageToUserKey)
-</div>	
-}
+
 }
     

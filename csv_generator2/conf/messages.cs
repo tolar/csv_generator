@@ -71,7 +71,10 @@ password_not_same=Zadaná hesla nejsou stejná
 
 username_does_not_exist=Zadané uživatelské jméno v systému neexistuje
 password_not_valid_for_user=Zadané heslo není platné pro daného uživatele
+invalid_username_password=Neplatné uživatelské jméno nebo heslo
 username_required=Uživatelské jméno je povinné
 password_required=Heslo je povinné
 
 registration_successfull=Registrace proběhla úspěšně
+user_was_logout=Uživatel byl odhlášen
+user_was_logged_in=Uživatel byl přihlášen

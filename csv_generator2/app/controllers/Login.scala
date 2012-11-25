@@ -6,6 +6,7 @@ import play.api.data._
 import play.api.data.Forms._
 import play.api.i18n.Messages
 import models._
+import org.apache.commons.codec.digest.DigestUtils
 
 object Login extends Controller {
   
@@ -26,14 +27,31 @@ object Login extends Controller {
         {
           user => Some(user.username, user.password)
         }.verifying(
-            Messages("username_does_not_exist"), 
-            user => DAO.findUserByUsername(user.username).isEmpty
+            Messages("invalid_username_password"), 
+            user => checkCredentials(user) 
         )
        
     )
     
-    def login = Action {
+    def showLoginForm = Action { implicit request =>
       Ok(views.html.login(loginForm));
+    }
+    
+    def login = Action { implicit request =>
+		loginForm.bindFromRequest.fold(
+			errors => {      				
+				BadRequest(views.html.login(errors)) 
+			},
+			user => {
+				Redirect(routes.Application.index)
+					.withSession(Security.username -> user.username)
+					.flashing("successKey" -> "user_was_logged_in")
+			}
+		) 
+    }
+    
+    def checkCredentials(user: User) : Boolean = {
+      !DAO.findUserByUsernameAndPasswordhash(user.username, DigestUtils.md5Hex(user.password)).isEmpty
     }
         
 

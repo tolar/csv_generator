@@ -3,18 +3,17 @@ package controllers
 import play.api.mvc.Action
 import play.api.mvc.Controller
 
-
 object Application extends Controller {
-  
-	def index(messageToUserKey: String = "") = Action {
-	  Ok(views.html.index(messageToUserKey))
-	} 
+
+  def index = Action { implicit request =>
+    Ok(views.html.index())
+  }
+
+  def logout = Action { implicit request =>
+    Ok(views.html.index()).flashing("successKey" -> "user_was_logout").withNewSession
+  }
         
 
-    
-
-    
-    
         
     /*
     
@@ -304,10 +303,7 @@ object Application extends Controller {
 	}
 	*/
     
-    def logout = Action {
-    	//Session. .remove("logged");
-    	index()
-    }
+
     
     /*
 
