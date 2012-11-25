@@ -1,5 +1,15 @@
 @()(implicit request: play.api.mvc.RequestHeader)
 @main(Messages("headline")) {
 
+<div class="hero-unit">
+  <h2>@Messages("headline")</h2>
+  <p>@Messages("intro_text")</p>
+  <p>
+    <a href="/step1" class="btn btn-primary btn-large">
+      @Messages("start")
+    </a>
+  </p>
+</div>
+
 }
     

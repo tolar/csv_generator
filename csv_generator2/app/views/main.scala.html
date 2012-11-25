@@ -38,8 +38,8 @@
 		<div class="navbar navbar-inverse">
 		  <div class="navbar-inner">
 		  	<div>	  
-		  		<a class="brand" href="/">@Messages("headline")</a>
 			    <ul class="nav">	
+			      <li><a href="/index">@Messages("home")</a></li>
 			      <li><a href="/registrationForm">@Messages("register")</a></li>
 			      <li><a href="/loginForm">@Messages("login")</a></li>
 			      <li><a href="/feedback">@Messages("feedback")</a></li>
@@ -52,7 +52,6 @@
 	
 		@if(!request.flash.get("successKey").isEmpty) {
 		<div class="alert alert-success">
-			@println((request.flash.get("successKey").get))
 			@Messages((request.flash.get("successKey").get))
 		</div>	
 		}

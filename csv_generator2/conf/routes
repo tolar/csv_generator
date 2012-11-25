@@ -10,6 +10,8 @@ POST    /login                		controllers.Login.login
 GET		/logout						controllers.Application.logout
 GET     /registrationForm		    controllers.Registration.showRegistrationForm
 POST    /registration		        controllers.Registration.registration
+GET		/step1						controllers.Steps.step1
+POST	/processStep1				controllers.Steps.processStep1
 
 
 # Map static resources from the /public folder to the /assets URL path

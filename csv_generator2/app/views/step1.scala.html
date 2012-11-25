@@ -1,0 +1,39 @@
+@(step1Form: Form[Steps.Step1])(implicit request: play.api.mvc.RequestHeader)
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@main(Messages("step1_title")) {
+
+	<div class="row">
+	<div class="span9">
+	
+	@helper.form(action = routes.Steps.processStep1, 'class -> "form-horizontal") {
+	
+		<fieldset>
+    	<legend>@Messages("step1_headline")</legend>
+								
+	    @helper.inputText(
+	    	step1Form("rows"),
+	    	'_label -> Messages("step1_row_count"),
+	    	'_error -> step1Form.error("rows")
+	    )
+	    	    	    	          	    
+	    @helper.inputText(
+	    	step1Form("columns"),
+	    	'_label -> Messages("step1_column_count"),
+	    	'_error -> step1Form.error("columns")
+	    )	
+	    	    
+	    <br/>
+	    
+	    <input type="submit" value="@Messages("next")" class="btn btn-primary"/>
+	    
+	    </fieldset>
+	   
+	}
+	
+	</div>
+	</div>	
+}

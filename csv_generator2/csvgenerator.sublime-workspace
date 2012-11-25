@@ -75,8 +75,16 @@
 			"file": "app/views/registration.scala.html",
 			"settings":
 			{
-				"buffer_size": 792,
+				"buffer_size": 1147,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/work/play/samples/scala/zentasks/app/views/tasks/index.scala.html",
+			"settings":
+			{
+				"buffer_size": 1337,
+				"line_ending": "Unix"
 			}
 		},
 		{
@@ -99,7 +107,7 @@
 			"file": "app/controllers/Application.scala",
 			"settings":
 			{
-				"buffer_size": 10271,
+				"buffer_size": 7989,
 				"line_ending": "Windows"
 			}
 		},
@@ -142,7 +150,7 @@
 			"file": "conf/messages",
 			"settings":
 			{
-				"buffer_size": 2742,
+				"buffer_size": 2809,
 				"line_ending": "Windows"
 			}
 		},
@@ -150,7 +158,7 @@
 			"file": "conf/routes",
 			"settings":
 			{
-				"buffer_size": 686,
+				"buffer_size": 675,
 				"line_ending": "Windows"
 			}
 		}
@@ -221,7 +229,7 @@
 	"groups":
 	[
 		{
-			"selected": 8,
+			"selected": 9,
 			"sheets":
 			[
 				{
@@ -445,15 +453,15 @@
 					"file": "app/views/registration.scala.html",
 					"settings":
 					{
-						"buffer_size": 792,
+						"buffer_size": 1147,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								779,
-								779
+								0,
+								0
 							]
 						],
 						"settings":
@@ -469,6 +477,34 @@
 				},
 				{
 					"buffer": 9,
+					"file": "/C/work/play/samples/scala/zentasks/app/views/tasks/index.scala.html",
+					"settings":
+					{
+						"buffer_size": 1337,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
 					"file": "/C/work/csv_generator/csv_generator/app/controllers/Application.java",
 					"settings":
 					{
@@ -496,7 +532,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 11,
 					"file": "/C/work/csv_generator/csv_generator/app/models/User.java",
 					"settings":
 					{
@@ -523,19 +559,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 11,
+					"buffer": 12,
 					"file": "app/controllers/Application.scala",
 					"settings":
 					{
-						"buffer_size": 10271,
+						"buffer_size": 7989,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1428,
-								1428
+								0,
+								0
 							]
 						],
 						"settings":
@@ -551,7 +587,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 12,
+					"buffer": 13,
 					"file": "conf/messages.cs",
 					"settings":
 					{
@@ -577,7 +613,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 13,
+					"buffer": 14,
 					"file": "/C/work/play/samples/scala/forms/app/views/signup/form.scala.html",
 					"settings":
 					{
@@ -605,7 +641,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 14,
+					"buffer": 15,
 					"file": "/C/work/play/samples/scala/forms/app/controllers/SignUp.scala",
 					"settings":
 					{
@@ -633,7 +669,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 15,
+					"buffer": 16,
 					"file": "/C/work/play/samples/scala/forms/app/models/User.scala",
 					"settings":
 					{
@@ -659,19 +695,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 16,
+					"buffer": 17,
 					"file": "conf/messages",
 					"settings":
 					{
-						"buffer_size": 2742,
+						"buffer_size": 2809,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1990,
-								1998
+								0,
+								0
 							]
 						],
 						"settings":
@@ -685,19 +721,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 17,
+					"buffer": 18,
 					"file": "conf/routes",
 					"settings":
 					{
-						"buffer_size": 686,
+						"buffer_size": 675,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								452,
-								452
+								0,
+								0
 							]
 						],
 						"settings":
