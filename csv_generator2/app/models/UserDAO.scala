@@ -6,13 +6,26 @@ import play.api.Play.current
 import anorm._
 import anorm.SqlParser._
 
-case class User(
-    id: Pk[Long] = NotAssigned, 
+class User (
+    val id: Pk[Long] = NotAssigned, 
     username: String,
     email: Option[String],
     passwordHash: String,
-    generationSession: Option[String]
-    )
+    var generationSession: Option[String]
+)
+
+object User {
+  val simple = {
+    get[Pk[Long]]("T_CSV_USER.ID") ~
+    get[String]("T_CSV_USER.USERNAME") ~
+    get[Option[String]]("T_CSV_USER.EMAIL") ~
+    get[String]("T_CSV_USER.PASSWORD_HASH") ~
+    get[Option[String]]("T_CSV_USER.GENERATION_SESSION") map {
+      case id ~ username ~ email ~ password_hash ~ generation_session => new User(id, username, email, password_hash, generation_session)
+    }
+  }
+}
+
 
 object DAO {
 
@@ -23,6 +36,14 @@ object DAO {
       .executeInsert()      
     }
   }
+  
+  def findUserById (id: Long) : Option[User] = {
+    DB.withConnection { implicit conn =>
+      SQL("select * from T_CSV_USER where ID = {id}")
+      .on('id -> id)
+      .as(User.simple.singleOpt)
+    }
+  }  
   
   def findUserByUsername (username: String) : Option[User] = {
     DB.withConnection { implicit conn =>
@@ -38,19 +59,15 @@ object DAO {
       .on('username -> username, 'passwordHash -> passwordHash)
       .as(User.simple.singleOpt)
     }
-  }  
+  } 
   
+  def updateUserSession(id: Long, session: String) {
+    DB.withConnection { implicit conn =>
+      SQL("update T_CSV_USER set GENERATION_SESSION = {session} where ID = {id}")
+      .on('session -> session)
+      .executeUpdate()
+    }
+  }
   
 }
 
-object User {
-  val simple = {
-    get[Pk[Long]]("T_CSV_USER.ID") ~
-    get[String]("T_CSV_USER.USERNAME") ~
-    get[Option[String]]("T_CSV_USER.EMAIL") ~
-    get[String]("T_CSV_USER.PASSWORD_HASH") ~
-    get[Option[String]]("T_CSV_USER.GENERATION_SESSION") map {
-      case id ~ username ~ email ~ password_hash ~ generation_session => User(id, username, email, password_hash, generation_session)
-    }
-  }
-}

@@ -12,14 +12,14 @@ import org.apache.commons.codec.digest.DigestUtils
 
 object Registration extends Controller {
   
-    case class User(
+    case class RegUser(
         username: String, 
         email: String,
         password: String, 
         passwordConfirm: String
     )
     
-    val registrationForm = Form[User] (
+    val registrationForm = Form[Registration.RegUser] (
         mapping (
             "username" -> text(minLength = 6),
             "email" -> email,
@@ -31,7 +31,7 @@ object Registration extends Controller {
         ) 
         
         {
-          (username, email, passwords) => User(username, email, passwords._1, "")
+          (username, email, passwords) => RegUser(username, email, passwords._1, "")
         }
         {
           user => Some(user.username, user.email, (user.password, ""))

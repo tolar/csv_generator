@@ -1,0 +1,40 @@
+@(step2Form: Form[Steps.Step2], values: Seq[String])(implicit request: play.api.mvc.RequestHeader)
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@main(Messages("step2_title")) {
+
+	<div class="row">
+	<div class="span9">
+	
+	@helper.form(action = routes.Steps.processStep2, 'class -> "form-horizontal") {
+	
+		<fieldset>
+    	<legend>@Messages("step2_headline")</legend>
+    	
+    	<ul>
+			@for(v <- values) {
+  			<li>@v</li>
+			} 
+		</ul>
+								
+	    @helper.inputText(
+	    	step2Form("newValue"),
+	    	'_label -> Messages("step2_new_value"),
+	    	'_error -> step2Form.error("newValue")
+	    )
+	    	    	    	          	    
+	    	    
+	    <br/>
+	    
+	    <input type="submit" value="@Messages("next")" class="btn btn-primary"/>
+	    
+	    </fieldset>
+	   
+	}
+	
+	</div>
+	</div>	
+}

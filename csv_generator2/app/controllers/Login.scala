@@ -10,19 +10,19 @@ import org.apache.commons.codec.digest.DigestUtils
 
 object Login extends Controller {
   
-    case class User(
+    case class LogUser(
         username: String, 
         password: String 
     )
     
-    val loginForm = Form[User] (
+    val loginForm = Form[Login.LogUser] (
         
         mapping (
             "username" -> text,
             "password" -> text
         )         
         {
-          (username, password) => User(username, password)
+          (username, password) => LogUser(username, password)
         }
         {
           user => Some(user.username, user.password)
@@ -50,7 +50,7 @@ object Login extends Controller {
 		) 
     }
     
-    def checkCredentials(user: User) : Boolean = {
+    def checkCredentials(user: LogUser) : Boolean = {
       !DAO.findUserByUsernameAndPasswordhash(user.username, DigestUtils.md5Hex(user.password)).isEmpty
     }
         

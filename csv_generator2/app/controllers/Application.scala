@@ -1,16 +1,109 @@
 package controllers
 
+import play.api.mvc._
 import play.api.mvc.Action
 import play.api.mvc.Controller
+import models.DAO
+import models.User
+import java.io.ByteArrayOutputStream
+import java.io.ByteArrayInputStream
+import java.beans.XMLDecoder
+import java.beans.XMLEncoder
+import play.api.cache.Cache
+import play.api.Play.current
 
 object Application extends Controller {
-
+  
+  var LOGGED: String = "logged"
+  
   def index = Action { implicit request =>
     Ok(views.html.index())
   }
 
   def logout = Action { implicit request =>
     Ok(views.html.index()).flashing("successKey" -> "user_was_logout").withNewSession
+  }
+  
+  case class GenerationSession (
+      rows: String = "",
+      columns: String = "",
+      cellValues: Set[String] = Set(),
+      matrix: Array[Array[String]] = Array(Array()),
+      delimiter: String = ";",
+      filename: String = "file.csv"              
+  )
+  
+  def getCacheId(session: Session) : String = {    
+    var uuid = session("uuid");
+    if (uuid == null) {
+    	uuid = java.util.UUID.randomUUID.toString()
+    	session.+("uuid", uuid);
+    }
+    uuid
+  }    
+  
+  def connect(session: Session, user: User) {
+    session.+(LOGGED, user.id.toString())
+  }
+
+  def connectedUser(session: Session) : Option[User] = {
+    val id = session.get(LOGGED)
+    id match {
+    	case Some(id) => DAO.findUserById(id.toLong)       	
+     	case None => None
+    }          	     
+  } 
+  
+  def getXml(gs: GenerationSession) : String = {
+    val baos = new ByteArrayOutputStream()
+
+	val xmlEncoder = new XMLEncoder(baos);
+	xmlEncoder.writeObject(gs);
+	xmlEncoder.close();			
+		
+	baos.toString();
+ }  
+  
+  def getGs(xml: String) : GenerationSession = {
+	val bais = new ByteArrayInputStream(xml.getBytes());
+	val xmlDecoder = new XMLDecoder(bais);
+	var gs = xmlDecoder.readObject().asInstanceOf[GenerationSession]
+	xmlDecoder.close();
+
+	gs
+}  
+  	
+  
+  def getSessionValue(session: Session): GenerationSession = {
+    
+	val user = connectedUser(session);
+	
+	user match {
+	  case Some(user) => {
+	    user.generationSession match {
+	      case None => {
+	        user.generationSession = Option(getXml(GenerationSession()))
+	        DAO.updateUserSession(user.id.get, user.generationSession.get)
+	      }
+	      case Some(gs) => {
+	        getGs(gs)
+	      }
+	    }
+	  }
+	}
+	
+	val gs = Cache.get(getCacheId(session)).asInstanceOf[Option[GenerationSession]]
+	gs match {
+	  case None => {
+	    val gs = GenerationSession()
+	    Cache.set(getCacheId(session), gs)
+	    gs
+	  }
+	  case Some(gs) => {
+	    gs
+	  }
+	}	
+
   }
         
 
