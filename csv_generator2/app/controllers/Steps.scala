@@ -4,7 +4,6 @@ import play.api.mvc.Action
 import play.api.mvc.Controller
 import play.api.data.Forms._
 import play.api.data.Form
-
 import scala.collection._
 
 object Steps extends Controller {
@@ -49,7 +48,7 @@ object Steps extends Controller {
   
   val step2Form = Form[Step2] (
       mapping (
-          "newValue" -> text
+          "newValue" -> text(minLength = 1)
       )
       {
         (newValue) => Step2(newValue)

@@ -2,38 +2,43 @@
 
 @import helper._
 
-@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInputInline.f) }
 
 @main(Messages("step2_title")) {
 
 	<div class="row">
 	<div class="span9">
 	
-	@helper.form(action = routes.Steps.step2AddValue, 'class -> "form-horizontal") {
+	<fieldset>
+    <legend>@Messages("step2_headline")</legend>
+    
+   	<table>    	
+		@for(v <- values) {
+ 				<tr>
+ 				<td>@v</td>
+ 				<td><a class="btn btn-mini" href="#">@Messages("remove")</a></td>
+ 				</tr>
+		}
+	</table>
 	
-		<fieldset>
-    	<legend>@Messages("step2_headline")</legend>
-    	
-    	<ul>
-			@for(v <- values) {
-  				<li>@v</li>
-			} 
-		</ul>
-								
+	<br/>
+		
+	@helper.form(action = routes.Steps.step2AddValue, 'class -> "form-inline") {
+				    									
 	    @helper.inputText(
 	    	step2Form("newValue"),
-	    	'_label -> Messages("step2_new_value"),
-	    	'_error -> step2Form.error("newValue")
+	    	'_label -> Messages("step2_new_value")	    	
 	    )
-	    	    	    	          	    
-	    	    
-	    <br/>
 	    
-	    <input type="submit" value="@Messages("next")" class="btn btn-primary"/>
-	    
-	    </fieldset>
+	
+	    <input type="submit" value="@Messages("add")" class="btn"/>	    	    	    	          	    	    	    	  	    	    	   	    	   	    
 	   
 	}
+	
+	<input type="button" value="@Messages("previous")" class="btn btn-primary"/>
+	<input type="button" value="@Messages("next")" class="btn btn-primary"/>
+	
+	</fieldset>
 	
 	</div>
 	</div>	
