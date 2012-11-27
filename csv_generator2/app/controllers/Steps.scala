@@ -43,42 +43,53 @@ object Steps extends Controller {
   }
   
   case class Step2 (
-      newValue: String
+      value: String
   )
   
   val step2Form = Form[Step2] (
       mapping (
-          "newValue" -> text(minLength = 1)
+          "value" -> text(minLength = 1)
       )
       {
-        (newValue) => Step2(newValue)
+        (value) => Step2(value)
       }
       {
-        step2 => Some(step2.newValue)
+        step2 => Some(step2.value)
       }
   )
   
   
   def step2 = Action { implicit request =>
-  	Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues))
+  	Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues))  	
+  }
+
+  def step2AddValue = Action { implicit request =>
+    step2Form.bindFromRequest.fold(
+      errors => {
+        BadRequest(views.html.step2(errors, Application.getSessionValue(session).cellValues))
+      },
+      step2 => {
+        val gs = controllers.Application.getSessionValue(session)
+        gs.cellValues += step2.value
+        Application.updateSessionValue(gs, session)
+        Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues))
+      })
   }
   
-  def step2AddValue = Action { implicit request =>
-  	step2Form.bindFromRequest.fold(
-      			errors => {
-      				println("Errors")
-      				BadRequest(views.html.step2(errors, Application.getSessionValue(session).cellValues))
-      			},
-      			step2 => {
-      			  val gs = controllers.Application.getSessionValue(session)  
-      			  gs.cellValues += step2.newValue
-      			  Application.updateSessionValue(gs, session)
-      			  Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues))
-
-      			}
-    	)
-    
-    
+  
+  def step2RemoveValue = Action { implicit request =>
+    step2Form.bindFromRequest.fold(
+      errors => {
+        BadRequest(views.html.step2(errors, Application.getSessionValue(session).cellValues))
+      },
+      step2 => {
+        val gs = controllers.Application.getSessionValue(session)
+        gs.cellValues -= step2.value
+        Application.updateSessionValue(gs, session)
+        Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues))
+      })
   }
+  
+ 
 
 }

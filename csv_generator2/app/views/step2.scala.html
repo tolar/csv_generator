@@ -14,10 +14,13 @@
     
    	<table>    	
 		@for(v <- values) {
- 				<tr>
- 				<td>@v</td>
- 				<td><a class="btn btn-mini" href="#">@Messages("remove")</a></td>
- 				</tr>
+				@helper.form(action = routes.Steps.step2RemoveValue) {
+	 				<tr>
+	 				<td>@v</td>
+	 				<td><a class="btn btn-mini" href="#">@Messages("remove")</a></td>
+	 				</tr>
+	 				<input id="value" type="hidden" value="@v"></input>
+ 				}
 		}
 	</table>
 	
@@ -25,16 +28,16 @@
 		
 	@helper.form(action = routes.Steps.step2AddValue, 'class -> "form-inline") {
 	
-		@if(step2Form.error("newValue")) {
+		@if(step2Form.error("value")) {
 			<div class="alert alert-error">
 				@Messages("cell_value_must_not_be_empty")
 			</div>
 		}
 	
-		<span class=" control-group @if(step2Form.error("newValue")){error} ">
+		<span class=" control-group @if(step2Form.error("value")){error} ">
 				    									
 	    @helper.inputText(
-	    	step2Form("newValue"),
+	    	step2Form("value"),
 	    	'_label -> Messages("step2_new_value")	    	
 	    )
 	    
@@ -45,8 +48,10 @@
 	   
 	}
 	
+		
 	<input type="button" value="@Messages("previous")" class="btn btn-primary"/>
 	<input type="button" value="@Messages("next")" class="btn btn-primary"/>
+	
 	
 	</fieldset>
 	
