@@ -70,13 +70,11 @@ object Steps extends Controller {
       				BadRequest(views.html.step2(errors, Application.getSessionValue(session).cellValues))
       			},
       			step2 => {
-      			  //println("AddValue OK")
-      			  //println("Session:" + request.session)
       			  val gs = controllers.Application.getSessionValue(session)  
       			  gs.cellValues += step2.newValue
       			  Application.updateSessionValue(gs, session)
       			  Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues))
-      			  //Redirect(routes.Steps.step2).flashing("successKey" -> "step2_addValue")
+
       			}
     	)
     

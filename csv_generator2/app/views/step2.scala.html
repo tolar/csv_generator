@@ -24,11 +24,21 @@
 	<br/>
 		
 	@helper.form(action = routes.Steps.step2AddValue, 'class -> "form-inline") {
+	
+		@if(step2Form.error("newValue")) {
+			<div class="alert alert-error">
+				@Messages("cell_value_must_not_be_empty")
+			</div>
+		}
+	
+		<span class=" control-group @if(step2Form.error("newValue")){error} ">
 				    									
 	    @helper.inputText(
 	    	step2Form("newValue"),
 	    	'_label -> Messages("step2_new_value")	    	
 	    )
+	    
+	    </span>
 	    
 	
 	    <input type="submit" value="@Messages("add")" class="btn"/>	    	    	    	          	    	    	    	  	    	    	   	    	   	    
