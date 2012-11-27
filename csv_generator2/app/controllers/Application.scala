@@ -14,8 +14,9 @@ import play.api.Play.current
 
 object Application extends Controller {
   
-  var LOGGED: String = "logged"
-  
+  val LOGGED: String = "logged"
+  val UUID = "uuid"  
+       
   def index = Action { implicit request =>
     Ok(views.html.index())
   }
@@ -33,20 +34,12 @@ object Application extends Controller {
       filename: String = "file.csv"              
   )
   
-  def getCacheId(session: Session) : String = {    
-    var uuid = session.get("uuid");
-    uuid match {
-      case None => {
-        val uuid = java.util.UUID.randomUUID.toString()
-    	session.+("uuid", uuid);
-        uuid
-      }
-      case Some(uuid) => uuid
-    }
-    
+  
+  def getCacheId(session: Session) : String = {
+	  session.get(UUID).get    	  
   }    
   
-  def connect(session: Session, user: User) {
+  def connect(session: Session, user: User) : Session = {
     session.+(LOGGED, user.id.toString())
   }
 
@@ -80,41 +73,45 @@ object Application extends Controller {
   
   def getSessionValue(session: Session): GenerationSession = {
     
-	val user = connectedUser(session);
+	val user = connectedUser(session);	
 	
 	user match {
+	  // there is logged in user
 	  case Some(user) => {
 	    user.generationSession match {
 	      case None => {
-	        user.generationSession = Option(getXml(GenerationSession()))
+	        // logged user does not have generation session in DB - create it
+	        user.generationSession = Option(getXml(GenerationSession()))	        
 	        DAO.updateUserSession(user.id.get, user.generationSession.get)
-	      }
+	        return getGs(user.generationSession.get)
+	      }	      
 	      case Some(gs) => {
-	        getGs(gs)
+	        // logged user has generation session in DB
+	        return getGs(gs)
 	      }
 	    }
 	  }
+	  // no logged in user
 	  case None => {
-	    
+		val gs = Cache.get(getCacheId(session)).asInstanceOf[Option[GenerationSession]]
+		gs match {
+		  // there is no generation session in HTTP session
+		  case None => {
+		    val gs = GenerationSession()
+		    Cache.set(getCacheId(session), gs)
+		    println("getSessionValue" + gs)
+		    return gs
+		  }
+		  case Some(gs) => {
+		    println("getSessionValue" + gs)
+		    return gs
+		  }
+		}		    
 	  }
 	}
-	
-	val gs = Cache.get(getCacheId(session)).asInstanceOf[Option[GenerationSession]]
-	gs match {
-	  case None => {
-	    val gs = GenerationSession()
-	    Cache.set(getCacheId(session), gs)
-	    gs
-	  }
-	  case Some(gs) => {
-	    gs
-	  }
-	}	
-
   }
   
-  
-  
+    
   def updateSessionValue(gs: GenerationSession, session: Session) {
 	val user = connectedUser(session);
 	user match {
@@ -128,7 +125,7 @@ object Application extends Controller {
 	}
 	
   }      
-
+  
         
     /*
     
