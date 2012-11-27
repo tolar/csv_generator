@@ -75,7 +75,7 @@
 			"file": "app/views/registration.scala.html",
 			"settings":
 			{
-				"buffer_size": 1147,
+				"buffer_size": 1196,
 				"line_ending": "Windows"
 			}
 		},
@@ -107,7 +107,7 @@
 			"file": "app/controllers/Application.scala",
 			"settings":
 			{
-				"buffer_size": 7989,
+				"buffer_size": 10309,
 				"line_ending": "Windows"
 			}
 		},
@@ -150,7 +150,7 @@
 			"file": "conf/messages",
 			"settings":
 			{
-				"buffer_size": 2809,
+				"buffer_size": 2883,
 				"line_ending": "Windows"
 			}
 		},
@@ -158,7 +158,7 @@
 			"file": "conf/routes",
 			"settings":
 			{
-				"buffer_size": 675,
+				"buffer_size": 872,
 				"line_ending": "Windows"
 			}
 		}
@@ -207,6 +207,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"update",
 			"registration",
 			"UserProfile",
 			"passwords",
@@ -229,7 +230,7 @@
 	"groups":
 	[
 		{
-			"selected": 9,
+			"selected": 10,
 			"sheets":
 			[
 				{
@@ -453,7 +454,7 @@
 					"file": "app/views/registration.scala.html",
 					"settings":
 					{
-						"buffer_size": 1147,
+						"buffer_size": 1196,
 						"regions":
 						{
 						},
@@ -515,8 +516,8 @@
 						"selection":
 						[
 							[
-								1683,
-								1683
+								7449,
+								7449
 							]
 						],
 						"settings":
@@ -526,7 +527,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 366.0,
+						"translation.y": 3963.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -563,7 +564,7 @@
 					"file": "app/controllers/Application.scala",
 					"settings":
 					{
-						"buffer_size": 7989,
+						"buffer_size": 10309,
 						"regions":
 						{
 						},
@@ -699,7 +700,7 @@
 					"file": "conf/messages",
 					"settings":
 					{
-						"buffer_size": 2809,
+						"buffer_size": 2883,
 						"regions":
 						{
 						},
@@ -725,7 +726,7 @@
 					"file": "conf/routes",
 					"settings":
 					{
-						"buffer_size": 675,
+						"buffer_size": 872,
 						"regions":
 						{
 						},

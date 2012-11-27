@@ -26,8 +26,8 @@ object Application extends Controller {
   }
   
   case class GenerationSession (
-      rows: String = "",
-      columns: String = "",
+      var rows: Int = 0,
+      var columns: Int = 0,
       var cellValues: Set[String] = Set(),
       matrix: Array[Array[String]] = Array(Array()),
       delimiter: String = ";",

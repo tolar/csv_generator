@@ -28,6 +28,10 @@ object Steps extends Controller {
   )
   
   def step1 = Action { implicit request =>
+    val gs = controllers.Application.getSessionValue(session)
+    println("GS:" + gs)
+    step1Form.fill(Step1(gs.rows, gs.columns))
+    println("STEP_FORM:" + step1Form)
     Ok(views.html.step1(step1Form))
   } 
   
@@ -36,7 +40,11 @@ object Steps extends Controller {
       			errors => {      				
       				BadRequest(views.html.step1(errors)) 
       			},
-      			user => {
+      			step1 => {
+      			   val gs = controllers.Application.getSessionValue(session)
+      			   gs.rows = step1.rows
+      			   gs.columns = step1.columns
+                   Application.updateSessionValue(gs, session)
       			   Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues))
       			}
     	)
@@ -78,6 +86,7 @@ object Steps extends Controller {
   
   
   def step2RemoveValue = Action { implicit request =>
+    println("step2RemoveValue")
     step2Form.bindFromRequest.fold(
       errors => {
         BadRequest(views.html.step2(errors, Application.getSessionValue(session).cellValues))
@@ -89,6 +98,16 @@ object Steps extends Controller {
         Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues))
       })
   }
+  
+  def step3 = Action { implicit request =>
+  	Ok(views.html.step3())  	
+  }
+  
+  def step4 = Action { implicit request =>
+  	Ok(views.html.step4())  	
+  }
+    
+
   
  
 
