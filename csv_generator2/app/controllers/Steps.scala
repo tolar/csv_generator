@@ -3,7 +3,7 @@ package controllers
 import play.api.mvc.Action
 import play.api.mvc.Controller
 import play.api.data.Forms._
-import play.api.data._
+import play.api.data.Form
 
 import scala.collection._
 
@@ -38,35 +38,49 @@ object Steps extends Controller {
       				BadRequest(views.html.step1(errors)) 
       			},
       			user => {
-      			  Redirect(routes.Steps.step2).flashing("successKey" -> "step2")
+      			   Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues))
       			}
     	)
   }
   
   case class Step2 (
-      values: List[String],
       newValue: String
   )
   
   val step2Form = Form[Step2] (
       mapping (
-          "values" -> list(text),
           "newValue" -> text
       )
       {
-        (values, newValue) => Step2(values, newValue)
+        (newValue) => Step2(newValue)
       }
       {
-        step2 => Some(step2.values, step2.newValue)
+        step2 => Some(step2.newValue)
       }
   )
   
+  
   def step2 = Action { implicit request =>
-    Ok(views.html.step2(step2Form, Seq[String]() ))
+  	Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues))
   }
   
-  def processStep2 = Action { implicit request =>
-    Ok(views.html.index())
+  def step2AddValue = Action { implicit request =>
+  	step2Form.bindFromRequest.fold(
+      			errors => {
+      				println("Errors")
+      				BadRequest(views.html.step2(errors, Application.getSessionValue(session).cellValues))
+      			},
+      			step2 => {
+      			  val gs = controllers.Application.getSessionValue(request.session)  
+      			  gs.cellValues += step2.newValue
+      			  Application.updateSessionValue(gs, session)
+      			  //Ok(views.html.step2(step2Form, gs.cellValues))
+      			  Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues))
+      			  //Redirect(routes.Steps.step2).flashing("successKey" -> "step2_addValue")
+      			}
+    	)
+    
+    
   }
 
 }

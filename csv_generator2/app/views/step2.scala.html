@@ -1,4 +1,4 @@
-@(step2Form: Form[Steps.Step2], values: Seq[String])(implicit request: play.api.mvc.RequestHeader)
+@(step2Form: Form[Steps.Step2], values: Set[String])(implicit request: play.api.mvc.RequestHeader)
 
 @import helper._
 
@@ -9,14 +9,14 @@
 	<div class="row">
 	<div class="span9">
 	
-	@helper.form(action = routes.Steps.processStep2, 'class -> "form-horizontal") {
+	@helper.form(action = routes.Steps.step2AddValue, 'class -> "form-horizontal") {
 	
 		<fieldset>
     	<legend>@Messages("step2_headline")</legend>
     	
     	<ul>
 			@for(v <- values) {
-  			<li>@v</li>
+  				<li>@v</li>
 			} 
 		</ul>
 								

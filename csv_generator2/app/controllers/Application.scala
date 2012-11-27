@@ -27,19 +27,23 @@ object Application extends Controller {
   case class GenerationSession (
       rows: String = "",
       columns: String = "",
-      cellValues: Set[String] = Set(),
+      var cellValues: Set[String] = Set(),
       matrix: Array[Array[String]] = Array(Array()),
       delimiter: String = ";",
       filename: String = "file.csv"              
   )
   
   def getCacheId(session: Session) : String = {    
-    var uuid = session("uuid");
-    if (uuid == null) {
-    	uuid = java.util.UUID.randomUUID.toString()
+    var uuid = session.get("uuid");
+    uuid match {
+      case None => {
+        val uuid = java.util.UUID.randomUUID.toString()
     	session.+("uuid", uuid);
+        uuid
+      }
+      case Some(uuid) => uuid
     }
-    uuid
+    
   }    
   
   def connect(session: Session, user: User) {
@@ -90,6 +94,9 @@ object Application extends Controller {
 	      }
 	    }
 	  }
+	  case None => {
+	    
+	  }
 	}
 	
 	val gs = Cache.get(getCacheId(session)).asInstanceOf[Option[GenerationSession]]
@@ -105,7 +112,22 @@ object Application extends Controller {
 	}	
 
   }
-        
+  
+  
+  
+  def updateSessionValue(gs: GenerationSession, session: Session) {
+	val user = connectedUser(session);
+	user match {
+	  case Some(user) => {
+	    user.generationSession = Option(getXml(gs))
+	    DAO.updateUserSession(user.id.get, user.generationSession.get)
+	  }
+	  case None => {
+	    Cache.set(getCacheId(session), gs)
+	  }
+	}
+	
+  }      
 
         
     /*

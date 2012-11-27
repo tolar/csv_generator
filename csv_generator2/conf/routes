@@ -13,7 +13,7 @@ POST    /registration		        controllers.Registration.registration
 GET		/step1						controllers.Steps.step1
 POST	/processStep1				controllers.Steps.processStep1
 GET		/step2						controllers.Steps.step2
-POST	/processStep2				controllers.Steps.processStep2
+POST	/step2AddValue				controllers.Steps.step2AddValue
 
 
 # Map static resources from the /public folder to the /assets URL path
