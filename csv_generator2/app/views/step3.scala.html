@@ -1,3 +1,31 @@
-@()(implicit request: play.api.mvc.RequestHeader)
+@(step3Form: Form[Steps.Step3])(implicit request: play.api.mvc.RequestHeader)
+
+@import helper._
+
 @main(Messages("step3_title")) {
+
+	<div class="row">
+	<div class="span9">
+	
+	<fieldset>
+    <legend>@Messages("step3_headline")</legend>
+    
+    @repeat(step3Form("matrix"), min = 1) { cols =>
+    
+    	@repeat(cols, min = 1) { cell =>
+    	
+    		@inputText(cell)
+    	}
+    
+	}
+    
+ 	
+	<a href="/step1"class="btn btn-primary" >@Messages("previous")</a> 
+	<a href="/step3"class="btn btn-primary" >@Messages("next")</a> 
+	
+	</fieldset>
+	
+	</div>
+	</div>
+
 }

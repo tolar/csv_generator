@@ -13,7 +13,7 @@ object Steps extends Controller {
     columns: Int
   )
   
-  val step1Form = Form[Step1] (
+  var step1Form = Form[Step1] (
         mapping (
             "rows" -> number(min=1, max=50),
             "columns" -> number(min=1, max=50)  
@@ -30,8 +30,8 @@ object Steps extends Controller {
   def step1 = Action { implicit request =>
     val gs = controllers.Application.getSessionValue(session)
     println("GS:" + gs)
-    step1Form.fill(Step1(gs.rows, gs.columns))
-    println("STEP_FORM:" + step1Form)
+    step1Form = step1Form.fill(Step1(gs.rows, gs.columns))
+    println("STEP_FORM:" + step1Form.data)
     Ok(views.html.step1(step1Form))
   } 
   
@@ -99,8 +99,25 @@ object Steps extends Controller {
       })
   }
   
+  
+  case class Step3 (
+      matrix: List[List[String]]
+  )
+  
+  val step3Form = Form[Step3] {
+    mapping (
+        "matrix" -> list(list(text))
+    )
+    {
+      (matrix) => Step3(matrix)
+    }
+    {
+      step3 => Some(step3.matrix)
+    }
+  }
+  
   def step3 = Action { implicit request =>
-  	Ok(views.html.step3())  	
+  	Ok(views.html.step3(step3Form))  	
   }
   
   def step4 = Action { implicit request =>
