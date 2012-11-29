@@ -104,7 +104,7 @@ object Steps extends Controller {
       matrix: List[List[String]]
   )
   
-  val step3Form = Form[Step3] {
+  var step3Form = Form[Step3] {
     mapping (
         "matrix" -> list(list(text))
     )
@@ -117,7 +117,21 @@ object Steps extends Controller {
   }
   
   def step3 = Action { implicit request =>
-  	Ok(views.html.step3(step3Form))  	
+    val gs = controllers.Application.getSessionValue(session)
+
+    var matrix = List[List[String]]()
+    for (rowIndex <- 0 until gs.rows) {
+      var cells = List[String]()
+      for (colIndex <- 0 until gs.columns) {
+        cells ::= ""  
+      }
+      matrix ::= cells
+    }
+    
+    step3Form = step3Form.fill(Step3(matrix))
+    println("DATA:" + step3Form.data)
+    
+  	Ok(views.html.step3(step3Form, gs.cellValues, gs.columns, gs.rows))  	
   }
   
   def step4 = Action { implicit request =>
