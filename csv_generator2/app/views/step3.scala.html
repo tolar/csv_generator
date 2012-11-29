@@ -1,4 +1,4 @@
-@(step3Form: Form[Steps.Step3], values: Set[String], columns: Int, rows: Int)(implicit request: play.api.mvc.RequestHeader)
+@(step3Form: Form[Steps.Step3], values: Seq[String], columns: Int, rows: Int)(implicit request: play.api.mvc.RequestHeader)
 
 @import helper._
 
@@ -13,19 +13,17 @@
     <table>
         
     @repeat(step3Form("matrix"), min = 1) { cols =>
-    	rowIndex += 1
-    	var colIndex = 0
     	<tr>
     	@repeat(cols, min = 1) { cell =>
     		<td>
             @select(
                 step3Form("matrix"), 
-                values.groupBy(v => v)                 
-            )    
-            colIndex += 1	
+                values map (i => (i,i))                 
+            ) { (id, name, value, args) =>
+    			<input type="date" name="@name" id="@id" @toHtmlArgs(args)>
+            }  
     		</td>
     	}
-    	rowIndex += 1
     	</tr>    
 	}    
 	</table>

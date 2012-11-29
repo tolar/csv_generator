@@ -129,9 +129,8 @@ object Steps extends Controller {
     }
     
     step3Form = step3Form.fill(Step3(matrix))
-    println("DATA:" + step3Form.data)
     
-  	Ok(views.html.step3(step3Form, gs.cellValues, gs.columns, gs.rows))  	
+  	Ok(views.html.step3(step3Form, gs.cellValues.toSeq, gs.columns, gs.rows))  	
   }
   
   def step4 = Action { implicit request =>
