@@ -2,6 +2,8 @@
 
 @import helper._
 
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInputInline.f) }
+
 @main(Messages("step3_title")) {
 
 	<div class="row">
@@ -18,10 +20,9 @@
     		<td>
             @select(
                 step3Form("matrix"), 
-                values map (i => (i,i))                 
-            ) { (id, name, value, args) =>
-    			<input type="date" name="@name" id="@id" @toHtmlArgs(args)>
-            }  
+                values map (i => (i,i)),
+                '_label -> ""           
+            ) 
     		</td>
     	}
     	</tr>    
