@@ -5,6 +5,7 @@ import play.api.mvc.Controller
 import play.api.data.Forms._
 import play.api.data.Form
 import scala.collection._
+import play.api.mvc.RequestHeader
 
 object Steps extends Controller {
   
@@ -132,6 +133,33 @@ object Steps extends Controller {
     
   	Ok(views.html.step3(step3Form, gs.cellValues.toSeq, gs.columns, gs.rows))  	
   }
+
+  def processStep3Prev = Action { implicit request =>
+    val gs = controllers.Application.getSessionValue(session)
+    step3Form.bindFromRequest.fold(
+      errors => {
+        BadRequest(views.html.step3(step3Form, gs.cellValues.toSeq, gs.columns, gs.rows))
+      },
+      step3 => {        
+        gs.matrix = step3.matrix
+        Application.updateSessionValue(gs, session)  
+        Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues))
+      })
+  }
+  
+  
+  def processStep3Next = Action { implicit request =>
+    val gs = controllers.Application.getSessionValue(session)
+    step3Form.bindFromRequest.fold(
+      errors => {
+        BadRequest(views.html.step3(step3Form, gs.cellValues.toSeq, gs.columns, gs.rows))
+      },
+      step3 => {        
+        gs.matrix = step3.matrix
+        Application.updateSessionValue(gs, session)  
+        Ok(views.html.step4())
+      })
+  }  
   
   def step4 = Action { implicit request =>
   	Ok(views.html.step4())  	

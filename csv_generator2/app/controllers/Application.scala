@@ -29,7 +29,7 @@ object Application extends Controller {
       var rows: Int = 0,
       var columns: Int = 0,
       var cellValues: Set[String] = Set(),
-      matrix: Array[Array[String]] = Array(Array()),
+      var matrix: List[List[String]] = List(List()),
       delimiter: String = ";",
       filename: String = "file.csv"              
   )

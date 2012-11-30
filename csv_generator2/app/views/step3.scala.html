@@ -13,10 +13,13 @@
     <legend>@Messages("step3_headline")</legend>
         
     <table>
-        
+    
+       
     @repeat(step3Form("matrix"), min = 1) { cols =>
+    	    
     	<tr>
     	@repeat(cols, min = 1) { cell =>
+    		@println(cell.indexes)
     		<td>
             @select(
                 step3Form("matrix"), 
@@ -29,8 +32,13 @@
 	}    
 	</table>
  	
-	<a href="/step1"class="btn btn-primary" >@Messages("previous")</a> 
-	<a href="/step3"class="btn btn-primary" >@Messages("next")</a> 
+ 	<form action="/processStep3Prev" method="post">
+		<input type="submit" class="btn btn-primary" value="@Messages("previous")"></input>
+	</form>
+	
+	<form action="/processStep3Next" method="post" > 
+		<input type="submit" class="btn btn-primary" value="@Messages("next")"></input>
+	</form> 
 	
 	</fieldset>
 	

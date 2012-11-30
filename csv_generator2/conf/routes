@@ -16,6 +16,8 @@ GET		/step2						controllers.Steps.step2
 POST	/step2AddValue				controllers.Steps.step2AddValue
 POST	/step2RemoveValue			controllers.Steps.step2RemoveValue
 GET		/step3						controllers.Steps.step3
+POST	/processStep3Prev			controllers.Steps.processStep3Prev
+POST	/processStep3Next			controllers.Steps.processStep3Next
 GET		/step4						controllers.Steps.step4
 
 # Map static resources from the /public folder to the /assets URL path
