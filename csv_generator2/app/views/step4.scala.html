@@ -1,3 +1,27 @@
-@()(implicit request: play.api.mvc.RequestHeader)
+@(gs: GenerationSession)(implicit request: play.api.mvc.RequestHeader)
 @main(Messages("step4_title")) {
+
+	<div class="row">
+	<div class="span9">
+	
+	<legend>@Messages("step4_headline")</legend>
+
+   	<table class="table table-condensed table-bordered">    	
+   		@for(i <- 0.to(gs.matrix.length-1)) {
+   			<tr>
+			@for(j <- 0.to(gs.matrix(0).length-1)) {
+	 			<td>@gs.matrix(i)(j)</td>
+ 			}
+ 			</tr>
+		}
+	</table>
+	
+	<form action="/processStep4" method="post">
+		<input name="prevSubmit" type="submit" class="btn btn-primary" value="@Messages("previous")"></input>
+		<input name="generateSubmit" type="submit" class="btn btn-primary" value="@Messages("generate")"></input>
+	</form>
+	
+	</div>
+	</div>
+	
 }

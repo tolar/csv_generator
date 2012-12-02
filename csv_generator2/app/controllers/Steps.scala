@@ -6,6 +6,10 @@ import play.api.data.Forms._
 import play.api.data.Form
 import scala.collection._
 import play.api.mvc.RequestHeader
+import models.GenerationSession
+import models.Row
+
+import play.data.DynamicForm
 
 object Steps extends Controller {
   
@@ -31,7 +35,7 @@ object Steps extends Controller {
   def step1 = Action { implicit request =>
     val gs = controllers.Application.getSessionValue(session)
     println("GS:" + gs)
-    step1Form = step1Form.fill(Step1(gs.rows, gs.columns))
+    step1Form = step1Form.fill(Step1(gs.rowsNo, gs.columnsNo))
     println("STEP_FORM:" + step1Form.data)
     Ok(views.html.step1(step1Form))
   } 
@@ -43,8 +47,9 @@ object Steps extends Controller {
       			},
       			step1 => {
       			   val gs = controllers.Application.getSessionValue(session)
-      			   gs.rows = step1.rows
-      			   gs.columns = step1.columns
+      			   gs.rowsNo = step1.rows
+      			   gs.columnsNo = step1.columns
+      			   gs.reallocateMatrix
                    Application.updateSessionValue(gs, session)
       			   Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues))
       			}
@@ -80,6 +85,7 @@ object Steps extends Controller {
       step2 => {
         val gs = controllers.Application.getSessionValue(session)
         gs.cellValues += step2.value
+        //gs.cellValues = gs.cellValues.toList.sorted.
         Application.updateSessionValue(gs, session)
         Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues))
       })
@@ -100,69 +106,62 @@ object Steps extends Controller {
       })
   }
   
+
   
   case class Step3 (
-      matrix: List[List[String]]
+      rows: List[Row]
   )
   
-  var step3Form = Form[Step3] {
+  var step3Form = Form[Step3] (
     mapping (
-        "matrix" -> list(list(text))
-    )
-    {
-      (matrix) => Step3(matrix)
-    }
-    {
-      step3 => Some(step3.matrix)
-    }
-  }
+        "rows" -> list(
+            mapping("cells" -> list(text)
+        	) { rows => Row(rows) } (Row.unapply))
+    ) { cells => Step3(cells) }(Step3.unapply)
+  )
   
   def step3 = Action { implicit request =>
     val gs = controllers.Application.getSessionValue(session)
-
-    var matrix = List[List[String]]()
-    for (rowIndex <- 0 until gs.rows) {
-      var cells = List[String]()
-      for (colIndex <- 0 until gs.columns) {
-        cells ::= ""  
-      }
-      matrix ::= cells
-    }
+   
+    val matrix = gs.getRows
     
     step3Form = step3Form.fill(Step3(matrix))
     
-  	Ok(views.html.step3(step3Form, gs.cellValues.toSeq, gs.columns, gs.rows))  	
+  	Ok(views.html.step3(step3Form, gs.cellValues.toSeq, gs.columnsNo, gs.rowsNo))  	
   }
 
-  def processStep3Prev = Action { implicit request =>
+  def processStep3() = Action { implicit request =>
+    
     val gs = controllers.Application.getSessionValue(session)
     step3Form.bindFromRequest.fold(
       errors => {
-        BadRequest(views.html.step3(step3Form, gs.cellValues.toSeq, gs.columns, gs.rows))
+        BadRequest(views.html.step3(step3Form, gs.cellValues.toSeq, gs.columnsNo, gs.rowsNo))
       },
-      step3 => {        
-        gs.matrix = step3.matrix
+      step3 => {    
+        
+        println("STEP3:" + step3)
+        gs.setRows(step3.rows)
         Application.updateSessionValue(gs, session)  
-        Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues))
+        
+        if (step3Form.bindFromRequest.data.contains("nextSubmit")) {
+          Ok(views.html.step4(gs)) 
+        } else {
+          Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues))
+        }
       })
   }
   
   
-  def processStep3Next = Action { implicit request =>
+  def processStep4() = Action { implicit request =>
+    
     val gs = controllers.Application.getSessionValue(session)
-    step3Form.bindFromRequest.fold(
-      errors => {
-        BadRequest(views.html.step3(step3Form, gs.cellValues.toSeq, gs.columns, gs.rows))
-      },
-      step3 => {        
-        gs.matrix = step3.matrix
-        Application.updateSessionValue(gs, session)  
-        Ok(views.html.step4())
-      })
-  }  
-  
-  def step4 = Action { implicit request =>
-  	Ok(views.html.step4())  	
+    
+    if (step3Form.bindFromRequest.data.contains("nextSubmit")) {
+      Ok(views.html.step4(gs)) 
+    } else {
+      Ok(views.html.step3(step3Form, gs.cellValues.toSeq, gs.columnsNo, gs.rowsNo))
+    }    
+   
   }
     
 

@@ -1,4 +1,4 @@
-@(step2Form: Form[Steps.Step2], values: Set[String])(implicit request: play.api.mvc.RequestHeader)
+@(step2Form: Form[Steps.Step2], values: scala.collection.SortedSet[String])(implicit request: play.api.mvc.RequestHeader)
 
 @import helper._
 
@@ -13,7 +13,7 @@
     <legend>@Messages("step2_headline")</legend>
     
    	<table>    	
-		@for(v <- values) {
+		@for(v <- values.iterator) {
 				@helper.form(action = routes.Steps.step2RemoveValue) {
 	 				<tr>
 	 				<td>@v</td>

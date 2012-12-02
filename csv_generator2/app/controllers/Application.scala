@@ -11,6 +11,7 @@ import java.beans.XMLDecoder
 import java.beans.XMLEncoder
 import play.api.cache.Cache
 import play.api.Play.current
+import models.GenerationSession
 
 object Application extends Controller {
   
@@ -25,16 +26,8 @@ object Application extends Controller {
     Ok(views.html.index()).flashing("successKey" -> "user_was_logout").withNewSession
   }
   
-  case class GenerationSession (
-      var rows: Int = 0,
-      var columns: Int = 0,
-      var cellValues: Set[String] = Set(),
-      var matrix: List[List[String]] = List(List()),
-      delimiter: String = ";",
-      filename: String = "file.csv"              
-  )
   
-  
+    
   def getCacheId(session: Session) : String = {
 	  session.get(UUID).get    	  
   }    
@@ -81,7 +74,7 @@ object Application extends Controller {
 	    user.generationSession match {
 	      case None => {
 	        // logged user does not have generation session in DB - create it
-	        user.generationSession = Option(getXml(GenerationSession()))	        
+	        user.generationSession = Option(getXml(new GenerationSession()))	        
 	        DAO.updateUserSession(user.id.get, user.generationSession.get)
 	        return getGs(user.generationSession.get)
 	      }	      
@@ -97,7 +90,7 @@ object Application extends Controller {
 		gs match {
 		  // there is no generation session in HTTP session
 		  case None => {
-		    val gs = GenerationSession()
+		    val gs = new GenerationSession()
 		    Cache.set(getCacheId(session), gs)
 		    println("getSessionValue" + gs)
 		    return gs

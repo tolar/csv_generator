@@ -4,43 +4,52 @@
 
 @implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInputInline.f) }
 
+@cellField(field: Field) = {
+	@select(
+	    field,
+	    values map (i => (i,i)),
+	    '_label -> "",
+	    '_default -> ""
+	)     
+}
+
+@cellsRow(field: Field) = {
+  
+	@repeat(field("cells"), min = 0) { cell =>   
+		<td>
+	    @cellField(cell)
+	    </td>
+	}
+	 
+}
+
 @main(Messages("step3_title")) {
 
 	<div class="row">
 	<div class="span9">
+	
+	<form action="/processStep3" method="post">
 	
 	<fieldset>
     <legend>@Messages("step3_headline")</legend>
         
     <table>
     
-       
-    @repeat(step3Form("matrix"), min = 1) { cols =>
-    	    
+    @repeat(step3Form("rows")) { row =>
     	<tr>
-    	@repeat(cols, min = 1) { cell =>
-    		@println(cell.indexes)
-    		<td>
-            @select(
-                step3Form("matrix"), 
-                values map (i => (i,i)),
-                '_label -> ""           
-            ) 
-    		</td>
-    	}
-    	</tr>    
-	}    
+        @cellsRow(row)
+        </tr>
+    
+    }
+      
 	</table>
  	
- 	<form action="/processStep3Prev" method="post">
-		<input type="submit" class="btn btn-primary" value="@Messages("previous")"></input>
+ 	</fieldset>
+ 	
+	<input name="prevSubmit" type="submit" class="btn btn-primary" value="@Messages("previous")"></input>
+	<input name="nextSubmit" type="submit" class="btn btn-primary" value="@Messages("next")"></input>
+	
 	</form>
-	
-	<form action="/processStep3Next" method="post" > 
-		<input type="submit" class="btn btn-primary" value="@Messages("next")"></input>
-	</form> 
-	
-	</fieldset>
 	
 	</div>
 	</div>
