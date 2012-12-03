@@ -1,10 +1,10 @@
 @(title: String, activeStep: Int = -1)(content: Html)(implicit request: play.api.mvc.RequestHeader)
 
-@breadCrumbItem(text: String, active: Boolean) = {
+@breadCrumbItem(text: String, active: Boolean, displayArrow: Boolean = true) = {
 	@if(active){
-		<li><a href="#">@text</a> <span class="divider">|</span></li>
+		<li><a href="#">@text</a> @if(displayArrow){<i class="icon-arrow-right"></i><span class="divider">|</span>}</li>
 	} else {
-		<li class="active">@text<span class="divider">|</span></li>
+		<li class="active">@text @if(displayArrow){<i class="icon-arrow-right"></i><span class="divider">|</span>}</li>
 	}     
 }
 
@@ -69,7 +69,7 @@
 			  @breadCrumbItem("Step1", (activeStep==1))
 			  @breadCrumbItem("Step2", (activeStep==2))
 			  @breadCrumbItem("Step3", (activeStep==3))
-			  @breadCrumbItem("Step4", (activeStep==4))
+			  @breadCrumbItem("Step4", (activeStep==4), false)
 			</ul>	
 		}	
 		
