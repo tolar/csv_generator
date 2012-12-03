@@ -34,9 +34,7 @@ object Steps extends Controller {
   
   def step1 = Action { implicit request =>
     val gs = controllers.Application.getSessionValue(session)
-    println("GS:" + gs)
     step1Form = step1Form.fill(Step1(gs.rowsNo, gs.columnsNo))
-    println("STEP_FORM:" + step1Form.data)
     Ok(views.html.step1(step1Form))
   } 
   
@@ -129,6 +127,18 @@ object Steps extends Controller {
     
   	Ok(views.html.step3(step3Form, gs.cellValues.toSeq, gs.columnsNo, gs.rowsNo))  	
   }
+  
+  case class Step4 (
+    delimiter: String,
+    filename: String
+  )
+  
+  var step4Form = Form[Step4] (
+      mapping(
+          "delimiter" -> text,
+          "filename" -> text
+      ) (Step4.apply)(Step4.unapply)
+  )
 
   def processStep3() = Action { implicit request =>
     
@@ -139,12 +149,14 @@ object Steps extends Controller {
       },
       step3 => {    
         
-        println("STEP3:" + step3)
+        println("STEP4 FORM:" + step4Form)
+        
         gs.setRows(step3.rows)
         Application.updateSessionValue(gs, session)  
         
         if (step3Form.bindFromRequest.data.contains("nextSubmit")) {
-          Ok(views.html.step4(gs)) 
+          step4Form = step4Form.fill(Step4(",", "file.csv"))
+          Ok(views.html.step4(step4Form, gs)) 
         } else {
           Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues))
         }
@@ -157,8 +169,10 @@ object Steps extends Controller {
     val gs = controllers.Application.getSessionValue(session)
     
     if (step3Form.bindFromRequest.data.contains("nextSubmit")) {
-      Ok(views.html.step4(gs)) 
+      Ok(views.html.step4(step4Form, gs)) 
     } else {
+      val matrix = gs.getRows
+      step3Form = step3Form.fill(Step3(matrix))
       Ok(views.html.step3(step3Form, gs.cellValues.toSeq, gs.columnsNo, gs.rowsNo))
     }    
    

@@ -1,4 +1,6 @@
-@(gs: GenerationSession)(implicit request: play.api.mvc.RequestHeader)
+@(step4Form: Form[Steps.Step4], gs: GenerationSession)(implicit request: play.api.mvc.RequestHeader)
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
 @main(Messages("step4_title")) {
 
 	<div class="row">
@@ -16,7 +18,19 @@
 		}
 	</table>
 	
-	<form action="/processStep4" method="post">
+	<form action="/processStep4" method="post" class="form-horizontal">
+
+		@select(
+		  step4Form("delimiter"),
+		  Seq("," -> (Messages("commna") + " (,)"), ";" -> (Messages("semicolon") + " (;)"))
+		)
+		
+		
+		@inputText(
+		  step4Form("filename"),
+		  '_label -> Messages("file_name")
+		)
+		
 		<input name="prevSubmit" type="submit" class="btn btn-primary" value="@Messages("previous")"></input>
 		<input name="generateSubmit" type="submit" class="btn btn-primary" value="@Messages("generate")"></input>
 	</form>
