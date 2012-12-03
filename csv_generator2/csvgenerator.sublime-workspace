@@ -8,82 +8,26 @@
 	"buffers":
 	[
 		{
-			"file": "app/Global.scala",
+			"file": "/C/work/play/samples/scala/computer-database/app/views/editForm.scala.html",
 			"settings":
 			{
-				"buffer_size": 0,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/models/User.scala",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "conf/application.conf",
-			"settings":
-			{
-				"buffer_size": 1311,
+				"buffer_size": 1162,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/C/work/play/samples/scala/computer-database/app/views/list.scala.html",
+			"file": "/C/work/play/samples/scala/computer-database/app/models/Models.scala",
 			"settings":
 			{
-				"buffer_size": 3933,
+				"buffer_size": 4708,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/C/work/play/samples/scala/zentasks/app/views/login.scala.html",
+			"file": "/C/work/play/samples/scala/computer-database/app/controllers/Application.scala",
 			"settings":
 			{
-				"buffer_size": 1474,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/C/work/play/samples/scala/websocket-chat/app/views/index.scala.html",
-			"settings":
-			{
-				"buffer_size": 521,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/C/work/play/samples/scala/computer-database/app/views/main.scala.html",
-			"settings":
-			{
-				"buffer_size": 715,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "project/Build.scala",
-			"settings":
-			{
-				"buffer_size": 470,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/views/registration.scala.html",
-			"settings":
-			{
-				"buffer_size": 1196,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/work/play/samples/scala/zentasks/app/views/tasks/index.scala.html",
-			"settings":
-			{
-				"buffer_size": 1337,
+				"buffer_size": 2706,
 				"line_ending": "Unix"
 			}
 		},
@@ -92,73 +36,6 @@
 			"settings":
 			{
 				"buffer_size": 9608,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/work/csv_generator/csv_generator/app/models/User.java",
-			"settings":
-			{
-				"buffer_size": 1257,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/controllers/Application.scala",
-			"settings":
-			{
-				"buffer_size": 10309,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "intro_text=Online nástroj pro snadné vytváření CSV souborů. Soubor se vytváří během 4 kroků. Mezi jednotlivými kroky se lze pohybovat jak dopředu, tak i dozadu. Pokud je uživatel přihlášen, je stav aplikace automaticky ukládán a uživatel se kdykoliv v budoucnosti může vrátit k rozpracovanému souboru.\n\nhome=Domů\nlogout=Odhlásit\nregister=Registrovat\nlogin=Přihlásit\nfeedback=Navrhněte vylepšení!\nstart=Start\nnext=Další\nprevious=Předchozí\nadd=Přidat\nremove=Odstranit\nheadline=Generátor CSV souborů\nform_error_message=Opravte, prosím, následující chyby ve formuláři\ndelimiter=Oddělovač\nfile_name=Jméno souboru\ngenerate=Generovat\nlogin_failed=Nepodařilo se přihlásit\n\nstep1_title=Generátor CSV souborů - krok 1\nstep1_headline=Krok 1. - definování dimenzí\nstep1_row_count=Počet řádků\nstep1_column_count=Počet sloupců\nrow_count_required=Počet řádků je povinný\nrow_count_greater_than_zero=Počet řádků musí být větší než 0\nrow_count_less_than_fifty=Počet řádků nesmí být větší než 50\ncolumn_count_required=Počet sloupců je povinný\ncolumn_count_greater_than_zero=Počet sloupců musí být větší než 0\ncolumn_count_less_than_fifty=Počet sloupců nesmí být větší než 50\n\nstep2_title=Generátor CSV souborů - krok 2\nstep2_headline=Krok 2. - definování hodnot\nstep2_new_value=Nová hodnota pro buňky\ncell_value_must_not_be_empty=Hodnota buňky nesmí být prázdná\ncell_value_must_not_be_longer_than_twenty=Hodnota buňky nesmí být delší než 20 znaků\nno_value_defined=Není definována žádná hodnota\n\nstep3_title=Generátor CSV souborů - krok 3\nstep3_headline=Krok 3. - sestavení souboru\n\nstep4_title=Generátor CSV souborů - krok 4\nstep4_headline=Krok 4. - dokončení\ndelimiter_required=Oddělovač je povinný\nfile_name_required=Jméno souboru je povinné\nsemicolon=středník\ncommna=čárka\n\nfeedback_description=Popis zlepšení je povinný\nfeedback_title=Generátor CSV souborů - Návrh na zlepšení\nfeedback_headline=Návrh na zlepšení\nimprovement_description=Popis zlepšení\nsubmit=Odeslat\n\nregistration_title=Generátor CSV souborů - registrace uživatele\nregistration_headline=Registrace uživatele\nusername=Uživatelské jméno\npassword=Heslo\npassword_again=Heslo ještě jednou\nregister=Registrovat\n\nlogin_title=Generátor CSV souborů - přihlášení uživatele\nlogin_headline=Přihlášení uživatele\nlogin=Přihlásit\nusername_required=Uživatelské jméno je povinné\nusername_must_have_six_characters=Uživatelské jméno musí mít alespoň 6 znaků\npassword_required=Heslo je povinné\npassword_must_have_six_characters=Heslo musí mít alespoň 6 znaků\npassword_confirmation_required=Druhé zadání hesla je povinné\npassword_not_same=Zadaná hesla nejsou stejná\n\nusername_does_not_exist=Zadané uživatelské jméno v systému neexistuje\npassword_not_valid_for_user=Zadané heslo není platné pro daného uživatele\nusername_required=Uživatelské jméno je povinné\npassword_required=Heslo je povinné\n\nregistration_successfull=Registrace proběhla úspěšně\nusername_already_exists=Zadané uživatelské jméno již v systému existuje\n",
-			"file": "conf/messages.cs",
-			"file_size": 3176,
-			"file_write_time": 129979197552392930,
-			"settings":
-			{
-				"buffer_size": 2950,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/work/play/samples/scala/forms/app/views/signup/form.scala.html",
-			"settings":
-			{
-				"buffer_size": 2578,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/C/work/play/samples/scala/forms/app/controllers/SignUp.scala",
-			"settings":
-			{
-				"buffer_size": 2808,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/C/work/play/samples/scala/forms/app/models/User.scala",
-			"settings":
-			{
-				"buffer_size": 207,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "conf/messages",
-			"settings":
-			{
-				"buffer_size": 2883,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "conf/routes",
-			"settings":
-			{
-				"buffer_size": 872,
 				"line_ending": "Windows"
 			}
 		}
@@ -187,8 +64,27 @@
 	},
 	"file_history":
 	[
-		"/C/work/csv_generator/csv_generator2/conf/routes",
+		"/C/work/play/samples/scala/forms/app/models/User.scala",
+		"/C/work/csv_generator/csv_generator2/app/Global.scala",
+		"/C/work/csv_generator/csv_generator2/app/models/User.scala",
+		"/C/work/csv_generator/csv_generator2/conf/application.conf",
+		"/C/work/play/samples/scala/computer-database/app/views/list.scala.html",
+		"/C/work/play/samples/scala/zentasks/app/views/login.scala.html",
+		"/C/work/play/samples/scala/websocket-chat/app/views/index.scala.html",
+		"/C/work/play/samples/scala/computer-database/app/views/main.scala.html",
+		"/C/work/csv_generator/csv_generator2/project/Build.scala",
+		"/C/work/csv_generator/csv_generator2/app/views/registration.scala.html",
+		"/C/work/play/samples/scala/zentasks/app/views/tasks/index.scala.html",
+		"/C/work/csv_generator/csv_generator/app/controllers/Application.java",
+		"/C/work/play/samples/scala/computer-database/app/controllers/Application.scala",
+		"/C/work/play/samples/scala/computer-database/app/views/editForm.scala.html",
+		"/C/work/csv_generator/csv_generator/app/models/User.java",
 		"/C/work/csv_generator/csv_generator2/app/controllers/Application.scala",
+		"/C/work/csv_generator/csv_generator2/conf/messages.cs",
+		"/C/work/play/samples/scala/forms/app/views/signup/form.scala.html",
+		"/C/work/play/samples/scala/forms/app/controllers/SignUp.scala",
+		"/C/work/csv_generator/csv_generator2/conf/routes",
+		"/C/work/csv_generator/csv_generator2/conf/messages",
 		"/C/work/play/samples/scala/computer-database/app/models/Models.scala"
 	],
 	"find":
@@ -207,6 +103,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Company",
+			"generate",
 			"update",
 			"registration",
 			"UserProfile",
@@ -230,15 +128,15 @@
 	"groups":
 	[
 		{
-			"selected": 10,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "app/Global.scala",
+					"file": "/C/work/play/samples/scala/computer-database/app/views/editForm.scala.html",
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 1162,
 						"regions":
 						{
 						},
@@ -251,7 +149,9 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/Scala/Scala.tmLanguage"
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -261,251 +161,62 @@
 				},
 				{
 					"buffer": 1,
-					"file": "app/models/User.scala",
+					"file": "/C/work/play/samples/scala/computer-database/app/models/Models.scala",
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 4708,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								4540,
+								4540
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Scala/Scala.tmLanguage"
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2178.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "conf/application.conf",
+					"file": "/C/work/play/samples/scala/computer-database/app/controllers/Application.scala",
 					"settings":
 					{
-						"buffer_size": 1311,
+						"buffer_size": 2706,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								932,
-								940
+								1468,
+								1468
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 66.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "/C/work/play/samples/scala/computer-database/app/views/list.scala.html",
-					"settings":
-					{
-						"buffer_size": 3933,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								129,
-								93
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "/C/work/play/samples/scala/zentasks/app/views/login.scala.html",
-					"settings":
-					{
-						"buffer_size": 1474,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "/C/work/play/samples/scala/websocket-chat/app/views/index.scala.html",
-					"settings":
-					{
-						"buffer_size": 521,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								26,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "/C/work/play/samples/scala/computer-database/app/views/main.scala.html",
-					"settings":
-					{
-						"buffer_size": 715,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "project/Build.scala",
-					"settings":
-					{
-						"buffer_size": 470,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								299,
-								299
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Scala/Scala.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "app/views/registration.scala.html",
-					"settings":
-					{
-						"buffer_size": 1196,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "/C/work/play/samples/scala/zentasks/app/views/tasks/index.scala.html",
-					"settings":
-					{
-						"buffer_size": 1337,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 10,
 					"file": "/C/work/csv_generator/csv_generator/app/controllers/Application.java",
 					"settings":
 					{
@@ -516,8 +227,8 @@
 						"selection":
 						[
 							[
-								7449,
-								7449
+								5676,
+								5676
 							]
 						],
 						"settings":
@@ -527,222 +238,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3963.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 11,
-					"file": "/C/work/csv_generator/csv_generator/app/models/User.java",
-					"settings":
-					{
-						"buffer_size": 1257,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								351,
-								335
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Java/Java.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 12,
-					"file": "app/controllers/Application.scala",
-					"settings":
-					{
-						"buffer_size": 10309,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Scala/Scala.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 347.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 13,
-					"file": "conf/messages.cs",
-					"settings":
-					{
-						"buffer_size": 2950,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2143,
-								2143
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C#/C#.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 127.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 14,
-					"file": "/C/work/play/samples/scala/forms/app/views/signup/form.scala.html",
-					"settings":
-					{
-						"buffer_size": 2578,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								542,
-								575
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 15,
-					"file": "/C/work/play/samples/scala/forms/app/controllers/SignUp.scala",
-					"settings":
-					{
-						"buffer_size": 2808,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1975,
-								1975
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Scala/Scala.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 527.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 16,
-					"file": "/C/work/play/samples/scala/forms/app/models/User.scala",
-					"settings":
-					{
-						"buffer_size": 207,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Scala/Scala.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 17,
-					"file": "conf/messages",
-					"settings":
-					{
-						"buffer_size": 2883,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 708.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 18,
-					"file": "conf/routes",
-					"settings":
-					{
-						"buffer_size": 872,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2748.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

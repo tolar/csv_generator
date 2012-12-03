@@ -1,6 +1,7 @@
 package controllers
 
 import play.api.mvc.Action
+import play.api.mvc._
 import play.api.mvc.Controller
 import play.api.data.Forms._
 import play.api.data.Form
@@ -8,8 +9,8 @@ import scala.collection._
 import play.api.mvc.RequestHeader
 import models.GenerationSession
 import models.Row
-
 import play.data.DynamicForm
+import play.api.libs.iteratee.Enumerator
 
 object Steps extends Controller {
   
@@ -168,14 +169,42 @@ object Steps extends Controller {
     
     val gs = controllers.Application.getSessionValue(session)
     
-    if (step3Form.bindFromRequest.data.contains("nextSubmit")) {
-      Ok(views.html.step4(step4Form, gs)) 
+    if (step4Form.bindFromRequest.data.contains("generateSubmit")) {
+      step4Form.bindFromRequest.fold(
+    		  errors => BadRequest(views.html.step4(step4Form, gs)),
+    		  step4 => generateFile(gs, step4) 
+      )
+       
     } else {
       val matrix = gs.getRows
       step3Form = step3Form.fill(Step3(matrix))
       Ok(views.html.step3(step3Form, gs.cellValues.toSeq, gs.columnsNo, gs.rowsNo))
     }    
    
+  }
+  
+  def generateFile(gs: GenerationSession, step4: Step4) : SimpleResult[String] = { 
+    
+  	var sb = new StringBuilder();
+	for (i <- 0.to(gs.matrix.length-1)) {
+		for (j <- 0.to(gs.matrix(i).length-1)) {
+			sb.append(gs.matrix(i)(j)).append(step4.delimiter);
+		}
+		sb.append("\r\n");
+	}
+	
+	val csvFile = sb.toString
+	
+	Ok(csvFile)
+	/*
+	val csvFileContent: Enumerator[Array[Byte]] = Enumerator()
+	SimpleResult(
+	    header = ResponseHeader(200, Map(CONTENT_LENGTH -> csvFileContent.length.toString )),
+	    body = csvFileContent
+	)
+	*/
+	
+	
   }
     
 
