@@ -5,7 +5,7 @@ import play.api.mvc._
 import play.api.mvc.Controller
 import play.api.data.Forms._
 import play.api.data.Form
-import scala.collection._
+import scala.collection.immutable.Map
 import play.api.mvc.RequestHeader
 import models.GenerationSession
 import models.Row
@@ -183,26 +183,27 @@ object Steps extends Controller {
    
   }
   
-  def generateFile(gs: GenerationSession, step4: Step4) : SimpleResult[String] = { 
+  def generateFile(gs: GenerationSession, step4: Step4) : SimpleResult[Array[Byte]] = { 
     
   	var sb = new StringBuilder();
-	for (i <- 0.to(gs.matrix.length-1)) {
-		for (j <- 0.to(gs.matrix(i).length-1)) {
+	for (i <- 0.until(gs.matrix.length)) {
+		for (j <- 0.until(gs.matrix(i).length)) {
 			sb.append(gs.matrix(i)(j)).append(step4.delimiter);
 		}
 		sb.append("\r\n");
 	}
 	
-	val csvFile = sb.toString
+	val csvFileBytes = sb.toString.getBytes()	
 	
-	Ok(csvFile)
-	/*
-	val csvFileContent: Enumerator[Array[Byte]] = Enumerator()
+	val csvFileContent: Enumerator[Array[Byte]] = Enumerator(csvFileBytes)
 	SimpleResult(
-	    header = ResponseHeader(200, Map(CONTENT_LENGTH -> csvFileContent.length.toString )),
+	    header = ResponseHeader(200, Map(
+	        CONTENT_LENGTH -> csvFileBytes.length.toString,
+	        CONTENT_TYPE -> "text/csv",
+	        CONTENT_DISPOSITION -> ("attachment; filename=" + step4.filename)
+	        )),
 	    body = csvFileContent
 	)
-	*/
 	
 	
   }
