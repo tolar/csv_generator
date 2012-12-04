@@ -39,8 +39,18 @@ object Import extends Controller {
     Ok(views.html.importFile(importForm))
   }  
   
-  def processImport = Action { implicit request =>
-    Ok(views.html.index())
+  def processImport = Action(parse.multipartFormData) { request =>
+    request.body.file("filePath").map { csvFile =>
+      import java.io.File
+      val filename = csvFile.filename 
+      val contentType = csvFile.contentType
+      csvFile.ref.moveTo(new File("/tmp/picture"))
+      Ok("File uploaded")
+    }.getOrElse {
+      Redirect(routes.Application.index).flashing(
+    		  "error" -> "Missing file")
+    }
   }
+
 
 }

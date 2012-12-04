@@ -4,23 +4,24 @@
 
 @implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
 
-@main(Messages("import_file_title"), 1) {
+@main(Messages("import_file_title"), -1) {
 
 	<div class="row">
 	<div class="span9">
 	
-	@helper.form(action = routes.Import.processImport, 'class -> "form-horizontal") {
+	@helper.form(action = routes.Import.processImport, 'class -> "form-horizontal", 'enctype -> "multipart/form-data") {
 	
 		<fieldset>
     	<legend>@Messages("import_file_headline")</legend>
 								
 	    @helper.inputFile(
-	    	importForm("filePath")
+	    	importForm("filePath"),
+	    	'_label -> Messages("file_path")
 	    )
 	    	    	    	          	    	    	    
 	    <br/>
 	    
-	    <input type="submit" value="@Messages("file_path")" class="btn btn-primary"/>
+	    <input type="submit" value="@Messages("import")" class="btn btn-primary"/>
 	    
 	    </fieldset>
 	   
