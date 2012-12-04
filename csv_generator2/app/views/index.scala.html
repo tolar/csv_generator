@@ -1,4 +1,5 @@
 @()(implicit request: play.api.mvc.RequestHeader)
+@request.session
 @main(Messages("headline")) {
 
 <div class="hero-unit">
@@ -6,8 +7,12 @@
   <p>@Messages("intro_text")</p>
   <p>
     <a href="/step1" class="btn btn-primary btn-large">
-      @Messages("start")
+      @Messages("start_from_scratch")
     </a>
+    <a href="/importFile" class="btn btn-primary btn-large">
+      @Messages("start_with_import")
+    </a>
+    
   </p>
 </div>
 

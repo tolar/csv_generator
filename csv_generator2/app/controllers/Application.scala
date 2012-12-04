@@ -33,6 +33,7 @@ object Application extends Controller {
   }    
   
   def connect(session: Session, user: User) : Session = {
+    println("Attempt to login user for session: " + session)
     session.+(LOGGED, user.id.toString())
   }
 
@@ -66,11 +67,14 @@ object Application extends Controller {
   
   def getSessionValue(session: Session): GenerationSession = {
     
+    println("getSessionValue: " + session)
+    
 	val user = connectedUser(session);	
 	
-	user match {
+	user match {	  
 	  // there is logged in user
 	  case Some(user) => {
+	    println("getSessionValue for LOGGED user")
 	    user.generationSession match {
 	      case None => {
 	        // logged user does not have generation session in DB - create it
@@ -86,17 +90,16 @@ object Application extends Controller {
 	  }
 	  // no logged in user
 	  case None => {
+	    println("getSessionValue for NOT LOGGED user")
 		val gs = Cache.get(getCacheId(session)).asInstanceOf[Option[GenerationSession]]
 		gs match {
 		  // there is no generation session in HTTP session
 		  case None => {
 		    val gs = new GenerationSession()
-		    Cache.set(getCacheId(session), gs)
-		    println("getSessionValue" + gs)
+		    Cache.set(getCacheId(session), gs)		    
 		    return gs
 		  }
 		  case Some(gs) => {
-		    println("getSessionValue" + gs)
 		    return gs
 		  }
 		}		    
@@ -117,7 +120,9 @@ object Application extends Controller {
 	  }
 	}
 	
-  }      
+  }     
+  
+
   
         
     /*

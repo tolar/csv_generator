@@ -1,0 +1,31 @@
+@(importForm: Form[Import.Import])(implicit request: play.api.mvc.RequestHeader)
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@main(Messages("import_file_title"), 1) {
+
+	<div class="row">
+	<div class="span9">
+	
+	@helper.form(action = routes.Import.processImport, 'class -> "form-horizontal") {
+	
+		<fieldset>
+    	<legend>@Messages("import_file_headline")</legend>
+								
+	    @helper.inputFile(
+	    	importForm("filePath")
+	    )
+	    	    	    	          	    	    	    
+	    <br/>
+	    
+	    <input type="submit" value="@Messages("file_path")" class="btn btn-primary"/>
+	    
+	    </fieldset>
+	   
+	}
+	
+	</div>
+	</div>	
+}

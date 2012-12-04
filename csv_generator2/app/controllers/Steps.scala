@@ -91,8 +91,7 @@ object Steps extends Controller {
   }
   
   
-  def step2RemoveValue = Action { implicit request =>
-    println("step2RemoveValue")
+  def step2RemoveValue = Action { implicit request =>    
     step2Form.bindFromRequest.fold(
       errors => {
         BadRequest(views.html.step2(errors, Application.getSessionValue(session).cellValues))
@@ -149,9 +148,7 @@ object Steps extends Controller {
         BadRequest(views.html.step3(step3Form, gs.cellValues.toSeq, gs.columnsNo, gs.rowsNo))
       },
       step3 => {    
-        
-        println("STEP4 FORM:" + step4Form)
-        
+                
         gs.setRows(step3.rows)
         Application.updateSessionValue(gs, session)  
         

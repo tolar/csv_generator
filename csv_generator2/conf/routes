@@ -5,6 +5,8 @@
 # Home page
 GET     /				            controllers.Application.index
 GET     /index					   	controllers.Application.index
+GET     /importFile				   	controllers.Import.importFile
+POST    /processImport				controllers.Import.processImport 
 GET     /loginForm	                controllers.Login.showLoginForm
 POST    /login                		controllers.Login.login
 GET		/logout						controllers.Application.logout

@@ -6,6 +6,8 @@ register=Register
 login=Login
 feedback=Propose improvement!
 start=Start
+start_from_scratch=Start from scratch
+start_with_import=Import CSV file
 next=Next
 previous=Previous
 add=Add
@@ -16,6 +18,11 @@ delimiter=Delimiter
 file_name=File name
 generate=Generate
 login_failed=Login failed
+
+import_file_title=CSV File Generator - Import CSV file
+import_file_headline=Import CSV file
+import=Import
+file_path=File path
 
 step1_title=CSV File Generator - step 1
 step1_headline=Dimensions
