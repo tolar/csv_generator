@@ -18,6 +18,7 @@ import play.api.data._
 import play.api.data.Forms._
 import scala.io.Source
 import scala.collection.SortedSet
+import views.html.step1
 
 object Import extends Controller {
   
@@ -51,12 +52,16 @@ object Import extends Controller {
       var values = Set[String]()
       var rowNo = 0
       var columnNo = 0
+      var rows = List[Array[String]]()
       
       for(line <- Source.fromFile("/tmp/csv.csv").getLines()) {
         println(line)
-        values ++= (line.split(";")).toSet // TODO delimiter from form 
+        val rowCells = (line.split(";")) // TODO delimiter from form
+        rows ++= rowCells
+        values ++= rowCells.toSet
         rowNo += 1
         columnNo = if (values.size > columnNo) values.size else columnNo
+    
       }
       
       val gs = controllers.Application.getSessionValue(session)
@@ -64,11 +69,13 @@ object Import extends Controller {
       gs.cellValues ++= values
       gs.rowsNo = rowNo
       gs.columnsNo = columnNo
+      gs.matrix = rows
       
       controllers.Application.updateSessionValue(gs, session)
       
-      Ok(views.html.index()).flashing("successKey" -> "import_successful")
-    	 
+      Steps.step1Form = Steps.step1Form.fill(Steps.Step1(gs.rowsNo, gs.columnsNo))
+      Ok(views.html.step1(Steps.step1Form)).flashing("successKey" -> "import_successful")
+       
       
     }.getOrElse {
       Redirect(routes.Application.index).flashing(

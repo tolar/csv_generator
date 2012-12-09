@@ -86,3 +86,5 @@ registration_successfull=Registraton was successfull
 username_already_exists=Inserted username already exists
 user_was_logout=User was logget out
 user_was_logged_in=User was logged in
+
+import_successful=File was imported successfully
