@@ -56,8 +56,8 @@ object Import extends Controller {
       
       for(line <- Source.fromFile("/tmp/csv.csv").getLines()) {
         println(line)
-        val rowCells = (line.split(";")) // TODO delimiter from form
-        rows ++= rowCells
+        val rowCells: Array[String] = ((line.split(";")).toArray[String]) // TODO delimiter from form
+        rows = (rows + rowCells)
         values ++= rowCells.toSet
         rowNo += 1
         columnNo = if (values.size > columnNo) values.size else columnNo

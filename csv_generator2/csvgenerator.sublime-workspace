@@ -24,6 +24,14 @@
 			}
 		},
 		{
+			"file": "/C/work/temp/import_example.csv",
+			"settings":
+			{
+				"buffer_size": 362,
+				"line_ending": "Windows"
+			}
+		},
+		{
 			"file": "/C/work/play/samples/scala/computer-database/app/controllers/Application.scala",
 			"settings":
 			{
@@ -128,7 +136,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -189,6 +197,32 @@
 				},
 				{
 					"buffer": 2,
+					"file": "/C/work/temp/import_example.csv",
+					"settings":
+					{
+						"buffer_size": 362,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
 					"file": "/C/work/play/samples/scala/computer-database/app/controllers/Application.scala",
 					"settings":
 					{
@@ -216,7 +250,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 4,
 					"file": "/C/work/csv_generator/csv_generator/app/controllers/Application.java",
 					"settings":
 					{
