@@ -1,24 +1,10 @@
 package controllers
 
 import play.api.mvc._
-import play.api.mvc.Action
-import play.api.mvc.Controller
-import models.DAO
-import models.User
-import java.io.ByteArrayOutputStream
-import java.io.ByteArrayInputStream
-import java.beans.XMLDecoder
-import java.beans.XMLEncoder
-import play.api.cache.Cache
-import play.api.Play.current
-import models.GenerationSession
-import play.api._
-import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
 import scala.io.Source
-import scala.collection.SortedSet
-import views.html.step1
+import collection.JavaConverters._
 
 object Import extends Controller {
   
@@ -57,20 +43,20 @@ object Import extends Controller {
       for(line <- Source.fromFile("/tmp/csv.csv").getLines()) {
         println(line)
         val rowCells: Array[String] = ((line.split(";")).toArray[String]) // TODO delimiter from form
-        rows = (rows + rowCells)
+        rows.++(rowCells)
         values ++= rowCells.toSet
         rowNo += 1
-        columnNo = if (values.size > columnNo) values.size else columnNo
+        columnNo = if (rowCells.size > columnNo) rowCells.size else columnNo
     
       }
       
       val gs = controllers.Application.getSessionValue(session)
-      
-      gs.cellValues ++= values
+
+      gs.cellValues = values.asJava
       gs.rowsNo = rowNo
       gs.columnsNo = columnNo
-      gs.matrix = rows
-      
+      gs.matrix = rows.toArray
+
       controllers.Application.updateSessionValue(gs, session)
       
       Steps.step1Form = Steps.step1Form.fill(Steps.Step1(gs.rowsNo, gs.columnsNo))

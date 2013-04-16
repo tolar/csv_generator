@@ -1,6 +1,5 @@
 package controllers
 
-import play.api._
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
@@ -43,8 +42,10 @@ object Login extends Controller {
 				BadRequest(views.html.login(errors)) 
 			},
 			user => {
-				Redirect(routes.Application.index)
-					.withSession(Security.username -> user.username)
+        val dbUser: User = DAO.findUserByUsername(user.username).get
+        //val session = Application.connect(request.session, dbUser.id.toString)
+				Redirect("/index")
+					.withSession(session + ("logged" -> dbUser.id.toString) + ("username" -> dbUser.username))
 					.flashing("successKey" -> "user_was_logged_in")
 			}
 		) 

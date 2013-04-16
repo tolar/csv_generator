@@ -8,7 +8,7 @@ import anorm.SqlParser._
 
 class User (
     val id: Pk[Long] = NotAssigned, 
-    username: String,
+    val username: String,
     email: Option[String],
     passwordHash: String,
     var generationSession: Option[String]
@@ -64,7 +64,7 @@ object DAO {
   def updateUserSession(id: Long, session: String) {
     DB.withConnection { implicit conn =>
       SQL("update T_CSV_USER set GENERATION_SESSION = {session} where ID = {id}")
-      .on('session -> session)
+      .on('session -> session, 'id -> id)
       .executeUpdate()
     }
   }

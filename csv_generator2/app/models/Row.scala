@@ -1,4 +1,4 @@
 package models
 
-case class Row(cell: List[String])  
+case class Row(cells: List[String])
 

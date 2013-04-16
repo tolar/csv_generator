@@ -1,16 +1,14 @@
 package controllers
 
-import play.api.mvc.Action
 import play.api.mvc._
 import play.api.mvc.Controller
 import play.api.data.Forms._
 import play.api.data.Form
 import scala.collection.immutable.Map
-import play.api.mvc.RequestHeader
 import models.GenerationSession
 import models.Row
-import play.data.DynamicForm
 import play.api.libs.iteratee.Enumerator
+import collection.JavaConverters._
 
 object Steps extends Controller {
   
@@ -50,7 +48,7 @@ object Steps extends Controller {
       			   gs.columnsNo = step1.columns
       			   gs.reallocateMatrix
                    Application.updateSessionValue(gs, session)
-      			   Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues))
+      			   Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues.asScala.toSet ))
       			}
     	)
   }
@@ -73,20 +71,20 @@ object Steps extends Controller {
   
   
   def step2 = Action { implicit request =>
-  	Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues))  	
+  	Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues.asScala.toSet))
   }
 
   def step2AddValue = Action { implicit request =>
     step2Form.bindFromRequest.fold(
       errors => {
-        BadRequest(views.html.step2(errors, Application.getSessionValue(session).cellValues))
+        BadRequest(views.html.step2(errors, Application.getSessionValue(session).cellValues.asScala.toSet))
       },
       step2 => {
         val gs = controllers.Application.getSessionValue(session)
-        gs.cellValues += step2.value
+        gs.cellValues.add(step2.value)
         //gs.cellValues = gs.cellValues.toList.sorted.
         Application.updateSessionValue(gs, session)
-        Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues))
+        Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues.asScala.toSet))
       })
   }
   
@@ -94,13 +92,13 @@ object Steps extends Controller {
   def step2RemoveValue = Action { implicit request =>    
     step2Form.bindFromRequest.fold(
       errors => {
-        BadRequest(views.html.step2(errors, Application.getSessionValue(session).cellValues))
+        BadRequest(views.html.step2(errors, Application.getSessionValue(session).cellValues.asScala.toSet))
       },
       step2 => {
         val gs = controllers.Application.getSessionValue(session)
-        gs.cellValues -= step2.value
+        gs.cellValues.remove(step2.value)
         Application.updateSessionValue(gs, session)
-        Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues))
+        Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues.asScala.toSet))
       })
   }
   
@@ -125,7 +123,7 @@ object Steps extends Controller {
     
     step3Form = step3Form.fill(Step3(matrix))
     
-  	Ok(views.html.step3(step3Form, gs.cellValues.toSeq, gs.columnsNo, gs.rowsNo))  	
+  	Ok(views.html.step3(step3Form, gs.cellValues.asScala.toSeq, gs.columnsNo, gs.rowsNo))
   }
   
   case class Step4 (
@@ -145,7 +143,7 @@ object Steps extends Controller {
     val gs = controllers.Application.getSessionValue(session)
     step3Form.bindFromRequest.fold(
       errors => {
-        BadRequest(views.html.step3(step3Form, gs.cellValues.toSeq, gs.columnsNo, gs.rowsNo))
+        BadRequest(views.html.step3(step3Form, gs.cellValues.asScala.toSeq, gs.columnsNo, gs.rowsNo))
       },
       step3 => {    
                 
@@ -156,7 +154,7 @@ object Steps extends Controller {
           step4Form = step4Form.fill(Step4(",", "file.csv"))
           Ok(views.html.step4(step4Form, gs)) 
         } else {
-          Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues))
+          Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues.asScala.toSet))
         }
       })
   }
@@ -175,7 +173,7 @@ object Steps extends Controller {
     } else {
       val matrix = gs.getRows
       step3Form = step3Form.fill(Step3(matrix))
-      Ok(views.html.step3(step3Form, gs.cellValues.toSeq, gs.columnsNo, gs.rowsNo))
+      Ok(views.html.step3(step3Form, gs.cellValues.asScala.toSeq, gs.columnsNo, gs.rowsNo))
     }    
    
   }
