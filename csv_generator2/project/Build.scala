@@ -10,7 +10,9 @@ object ApplicationBuild extends Build {
       jdbc,
       "mysql" % "mysql-connector-java" % "5.1.18",
       "org.scalaquery" % "scalaquery_2.9.0" % "0.9.4",
-      "org.xerial" % "sqlite-jdbc" % "3.6.20"
+      "org.xerial" % "sqlite-jdbc" % "3.6.20",
+      "com.typesafe" %% "play-plugins-mailer" % "2.1-RC2"
+      //"com.typesafe" %% "play-plugins-mailer" % "2.1.0"
 
     )
 

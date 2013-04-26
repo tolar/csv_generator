@@ -84,7 +84,24 @@ password_required=Password required
 
 registration_successfull=Registraton was successfull
 username_already_exists=Inserted username already exists
-user_was_logout=User was logget out
+user_was_logout=User was logged out
 user_was_logged_in=User was logged in
 
 import_successful=File was imported successfully
+update=Update
+forgot_password=Forgot password?
+profile_headline=User profile
+profile_title=User profile
+profile=Profile
+
+profile_update_successfull=User profile updated successfully
+
+reset_password_headline=Reset password
+reset_password_title=Reset password
+reset=Reset
+password_reset=New password has been sent to email you entered
+reset_help=Please insert email associated with your profile
+no_user_with_email=There is no user profile with email you entered
+mail_text_plain=Hello, New password for your user profile has been set: {0}, Regards, CSV Generator
+mail_text_html=<html>Hello<br/><br/>New password for your user profile has been set: <strong>{0}</strong><br/><br/>Regards,<br/>CSV Generator</html>
+

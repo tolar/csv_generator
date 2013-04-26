@@ -12,3 +12,7 @@ resolvers ++= Seq("Typesafe repository" at "http://repo.typesafe.com/typesafe/re
 addSbtPlugin("play" % "sbt-plugin" % "2.1.0")
 
 addSbtPlugin("org.scalaxb" % "sbt-scalaxb" % "1.0.2")
+
+
+
+

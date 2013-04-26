@@ -9,7 +9,7 @@ import anorm.SqlParser._
 class User (
     val id: Pk[Long] = NotAssigned, 
     val username: String,
-    email: Option[String],
+    val email: Option[String],
     passwordHash: String,
     var generationSession: Option[String]
 )
@@ -36,6 +36,14 @@ object DAO {
       .executeInsert()      
     }
   }
+
+  def updateUser(id: Long, email: String, passwordHash: String) {
+    DB.withConnection { implicit conn =>
+      SQL("update T_CSV_USER set EMAIL = {email}, PASSWORD_HASH = {passwordHash} where ID = {id}")
+        .on('email -> email, 'passwordHash -> passwordHash, 'id -> id)
+        .executeUpdate()
+    }
+  }
   
   def findUserById (id: Long) : Option[User] = {
     DB.withConnection { implicit conn =>
@@ -43,7 +51,23 @@ object DAO {
       .on('id -> id)
       .as(User.simple.singleOpt)
     }
-  }  
+  }
+
+  def findUserByEmail (email: String) : Option[User] = {
+    DB.withConnection { implicit conn =>
+      SQL("select * from T_CSV_USER where EMAIL = {email}")
+      .on('email -> email)
+      .as(User.simple.singleOpt)
+    }
+  }
+
+  def setUserPassword(id: Long, newPasswordHash: String) {
+    DB.withConnection { implicit conn =>
+      SQL("update T_CSV_USER set PASSWORD_HASH = {newPasswordHash} where ID = {id}")
+        .on('newPasswordHash -> newPasswordHash, 'id -> id)
+        .executeUpdate()
+    }
+  }
   
   def findUserByUsername (username: String) : Option[User] = {
     DB.withConnection { implicit conn =>

@@ -1,0 +1,41 @@
+@(profileForm: Form[Profile.ProfileData])(implicit request: play.api.mvc.RequestHeader)
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@main(Messages("profile_title")) {
+
+	<div class="row">
+	<div class="span9">
+	
+	@helper.form(action = routes.Profile.updateProfile, 'class -> "form-horizontal") {
+	
+		<fieldset>
+    	<legend>@Messages("profile_headline")</legend>
+
+	    @helper.inputText(
+	    	profileForm("email"),
+	    	'_error -> profileForm.error("email")
+	    )
+	    
+	    @helper.inputPassword(
+	    	profileForm("password.main"),
+	    	'_label -> Messages("password"),
+	    	'_error -> profileForm.error("password")
+	    )	
+	    	    
+	    @helper.inputPassword(
+	    	profileForm("password.again"),
+	    	'_label -> Messages("password_again")
+	    )
+	    <br/>
+	    
+	    <input type="submit" value="@Messages("update")" class="btn btn-primary"/>
+	    
+	    </fieldset>
+	}
+	
+	</div>
+	</div>					
+}

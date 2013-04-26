@@ -21,13 +21,19 @@
 	    @helper.inputPassword(
 	    	loginForm("password"),
 	    	'_error -> loginForm.globalError
-	    )	
-	    	    
-	    <br/>
-	    
-	    <input type="submit" value="@Messages("login")" class="btn btn-primary"/>
-	    
+	    )
+
+        <br/>
+
+        <input type="submit" value="@Messages("login")" class="btn btn-primary"/>
+
 	    </fieldset>
+
+        <br/>
+
+        <a href="/resetPasswordForm">@Messages("forgot_password")</a>
+
+
 	   
 	}
 	

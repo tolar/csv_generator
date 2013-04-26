@@ -16,14 +16,14 @@
 
 <meta charset="utf-8">
 <meta name="description"
-	content="Online generátor CSV souborů. Efektivní práce pomocí průvodce. Při přihlášení automatické ukládání stavu generátoru.">
+	content="Online tool for CSV file generation. You can create a file in 4 steps. Current application status is being stored continuously.">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
 
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
 
-		<script src="@routes.Assets.at("javascripts/bootstrap.min.js")" type="text/javascript"></script>
         <script src="@routes.Assets.at("javascripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/bootstrap.min.js")" type="text/javascript"></script>
 
 		<script type="text/javascript">
 
@@ -42,42 +42,53 @@
 </head>
 <body>
 
-	<div class="container">
-		<div class="navbar navbar-inverse">
-		  <div class="navbar-inner">
-		  	<div>
-                <ul class="nav">
-                    <li><a href="/index">@Messages("home")</a></li>
-                    <li><a href="/registrationForm">@Messages("register")</a></li>
-                    <li><a href="/loginForm">@Messages("login")</a></li>
-                    @if(!request.session.get("logged").isEmpty) {
-                    <li><a href="/logout">@Messages("logout")</a></li>
-                    }
-                </ul>
-			    <p class="navbar-text pull-right">@request.session.get("username")</p>
-			  </div>
-		  </div>
-		</div>
+    <div class="container">
+        <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+                <div>
+                    <ul class="nav">
+                        <li><a href="/index">@Messages("home")</a></li>
+                        <li><a href="/registrationForm">@Messages("register")</a></li>
+                        @if(request.session.get("logged").isEmpty) {
+                        <li><a href="/loginForm">@Messages("login")</a></li>
+                        }
+                        @if(!request.session.get("logged").isEmpty) {
+                        <li><a href="/profileForm">@Messages("profile")</a></li>
+                        <li><a href="/logout">@Messages("logout")</a></li>
+                        }
+                    </ul>
+                    <p class="navbar-text pull-right">@request.session.get("username")</p>
+                </div>
+            </div>
+        </div>
 
-		<!--@request.session-->
+        @if(!request.flash.get("successKey").isEmpty) {
+        <div class="alert alert-success">
+            @Messages((request.flash.get("successKey").get))
+        </div>
+        }
 
-		@if(!request.flash.get("successKey").isEmpty) {
-		<div class="alert alert-success">
-			@Messages((request.flash.get("successKey").get))
-		</div>
-		}
+        @if(!request.flash.get("errorKey").isEmpty) {
+        <div class="alert alert-error">
+            @Messages((request.flash.get("errorKey").get))
+        </div>
+        }
 
-		@if(activeStep > 0) {
-			<ul class="breadcrumb">
-			  @breadCrumbItem(Messages("step1_headline"), (activeStep==1))
-			  @breadCrumbItem(Messages("step2_headline"), (activeStep==2))
-			  @breadCrumbItem(Messages("step3_headline"), (activeStep==3))
-			  @breadCrumbItem(Messages("step4_headline"), (activeStep==4), false)
-			</ul>
-		}
+        @if(activeStep > 0) {
+        <ul class="breadcrumb">
+            @breadCrumbItem(Messages("step1_headline"), (activeStep==1))
+            @breadCrumbItem(Messages("step2_headline"), (activeStep==2))
+            @breadCrumbItem(Messages("step3_headline"), (activeStep==3))
+            @breadCrumbItem(Messages("step4_headline"), (activeStep==4), false)
+        </ul>
+        }
 
-		@content
-	</div>
+        @content
+    </div>
+
+
+
+
 
 </body>
 </html>

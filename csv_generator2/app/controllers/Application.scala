@@ -67,7 +67,7 @@ object Application extends Controller {
 
     println("getSessionValue: " + session)
 
-    val user = connectedUser(session);
+    val user = connectedUser(session)
 
     user match {
       // there is logged in user

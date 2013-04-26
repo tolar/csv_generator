@@ -16,7 +16,7 @@ object Registration extends Controller {
         passwordConfirm: String
     )
     
-    val registrationForm = Form[Registration.RegUser] (
+    val registrationForm : Form[RegUser] = Form (
         mapping (
             "username" -> text(minLength = 5),
             "email" -> email,
@@ -40,7 +40,7 @@ object Registration extends Controller {
     )
     
     def showRegistrationForm = Action { implicit request =>
-      Ok(views.html.registration(registrationForm));
+      Ok(views.html.registration(registrationForm.fill(RegUser("","","",""))))
     }
     
     def registration = Action { implicit request => 
