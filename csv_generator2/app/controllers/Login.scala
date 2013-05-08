@@ -33,7 +33,8 @@ object Login extends Controller {
     )
     
     def showLoginForm = Action { implicit request =>
-      Ok(views.html.login(loginForm));
+      val formData = LogUser("", "")
+      Ok(views.html.login(loginForm.fill(formData)))
     }
     
     def login = Action { implicit request =>

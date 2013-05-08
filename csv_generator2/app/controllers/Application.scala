@@ -6,8 +6,10 @@ import play.api.Play.current
 
 import play.api.mvc._
 
-import java.beans.{XMLDecoder, XMLEncoder}
-import java.io.{ByteArrayInputStream, ByteArrayOutputStream}
+
+import play.api.libs.json._
+
+import Formats.GenerationSessionFormat
 
 
 object Application extends Controller {
@@ -42,7 +44,26 @@ object Application extends Controller {
     }
   }
 
-  def getXml(gs: GenerationSession): String = {
+/*  def getXml(gs: GenerationSession): String = {
+    XML
+  }
+
+  def getGs(xml: String): GenerationSession = {
+    scala.xml.XML.loadString(xml).toObj
+  }*/
+
+  def getXml(gs: GenerationSession) : String = {
+    val jsValue: JsValue = Json.toJson[GenerationSession](gs)
+    Json.stringify(jsValue)
+  }
+
+  def getGs(jsonStr: String): GenerationSession = {
+    val jsValue: JsValue = Json.parse(jsonStr)
+    Json.fromJson[GenerationSession](jsValue).asOpt.get
+  }
+
+
+/*  def getXml(gs: GenerationSession): String = {
 
     val baos = new ByteArrayOutputStream()
 
@@ -60,7 +81,7 @@ object Application extends Controller {
     xmlDecoder.close()
 
     gs
-  }
+  }*/
 
 
   def getSessionValue(session: Session): GenerationSession = {
@@ -423,6 +444,9 @@ private static GenerationSession updateSession(String[][] gsMatrix) {
   }
 
 */
+
+
+
 
 
 }

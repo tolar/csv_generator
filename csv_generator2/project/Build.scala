@@ -12,6 +12,7 @@ object ApplicationBuild extends Build {
       "org.scalaquery" % "scalaquery_2.9.0" % "0.9.4",
       "org.xerial" % "sqlite-jdbc" % "3.6.20",
       "com.typesafe" %% "play-plugins-mailer" % "2.1-RC2"
+      //"org.scalastuff" % "scalabeans" % "0.3"
       //"com.typesafe" %% "play-plugins-mailer" % "2.1.0"
 
     )

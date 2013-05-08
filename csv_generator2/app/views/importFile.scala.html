@@ -7,18 +7,28 @@
 @main(Messages("import_file_title"), -1) {
 
 	<div class="row">
-	<div class="span9">
+	<div class="span12">
 	
 	@helper.form(action = routes.Import.processImport, 'class -> "form-horizontal", 'enctype -> "multipart/form-data") {
 	
 		<fieldset>
     	<legend>@Messages("import_file_headline")</legend>
-								
-	    @helper.inputFile(
-	    	importForm("filePath"),
-	    	'_label -> Messages("file_path")
-	    )
-	    	    	    	          	    	    	    
+
+            @select(
+            importForm("delimiter"),
+                Seq("," -> (Messages("commna") + " (,)"), ";" -> (Messages("semicolon") + " (;)"))
+            )
+
+            @helper.inputText(
+                importForm("ignoreString"),
+                '_label -> Messages("ignore_string")
+            )
+
+            @helper.inputFile(
+                importForm("filePath"),
+                '_label -> Messages("file_path")
+	        )
+
 	    <br/>
 	    
 	    <input type="submit" value="@Messages("import")" class="btn btn-primary"/>

@@ -38,7 +38,7 @@ object Profile extends Controller {
     def showProfileForm = Action { implicit request =>
       val dbUser = Application.connectedUser(session).get
       val formData = ProfileData(dbUser.email.get, "", "")
-      Ok(views.html.profile(profileForm.fill(formData)));
+      Ok(views.html.profile(profileForm.fill(formData)))
     }
 
     def updateProfile = Action {

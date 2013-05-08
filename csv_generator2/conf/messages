@@ -23,6 +23,9 @@ import_file_title=CSV File Generator - Import CSV file
 import_file_headline=Import CSV file
 import=Import
 file_path=File path
+ignore_string=Ignore line starting with
+import_too_many_rows=Import failed - more than 50 lines in file
+import_too_many_columns=Import failed - more than 50 values in one row
 
 step1_title=CSV File Generator - step 1
 step1_headline=Dimensions

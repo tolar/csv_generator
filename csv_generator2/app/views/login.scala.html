@@ -6,21 +6,25 @@
 @main(Messages("login_title")) {
 
 	<div class="row">
-	<div class="span9">
+	<div class="span12">
 			
 	@helper.form(action = routes.Login.login, 'class -> "form-horizontal") {
 	
 		<fieldset>
     	<legend>@Messages("login_headline")</legend>
+
+        @if(loginForm.hasGlobalErrors) {
+        <div class="alert alert-error">
+            @loginForm.globalError.get.message
+        </div>
+        }
 								
 	    @helper.inputText(
-	    	loginForm("username"),
-	    	'_error -> loginForm.globalError
+	    	loginForm("username")
 	    )
 	    	    	    	          	    
 	    @helper.inputPassword(
-	    	loginForm("password"),
-	    	'_error -> loginForm.globalError
+	    	loginForm("password")
 	    )
 
         <br/>
@@ -33,8 +37,6 @@
 
         <a href="/resetPasswordForm">@Messages("forgot_password")</a>
 
-
-	   
 	}
 	
 	</div>

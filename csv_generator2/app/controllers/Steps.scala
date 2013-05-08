@@ -8,7 +8,6 @@ import scala.collection.immutable.Map
 import models.GenerationSession
 import models.Row
 import play.api.libs.iteratee.Enumerator
-import collection.JavaConverters._
 
 object Steps extends Controller {
   
@@ -48,7 +47,7 @@ object Steps extends Controller {
       			   gs.columnsNo = step1.columns
       			   gs.reallocateMatrix
                    Application.updateSessionValue(gs, session)
-      			   Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues.asScala.toSet ))
+      			   Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues ))
       			}
     	)
   }
@@ -71,20 +70,19 @@ object Steps extends Controller {
   
   
   def step2 = Action { implicit request =>
-  	Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues.asScala.toSet))
+  	Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues))
   }
 
   def step2AddValue = Action { implicit request =>
     step2Form.bindFromRequest.fold(
       errors => {
-        BadRequest(views.html.step2(errors, Application.getSessionValue(session).cellValues.asScala.toSet))
+        BadRequest(views.html.step2(errors, Application.getSessionValue(session).cellValues))
       },
       step2 => {
         val gs = controllers.Application.getSessionValue(session)
-        gs.cellValues.add(step2.value)
-        //gs.cellValues = gs.cellValues.toList.sorted.
+        gs.cellValues += step2.value
         Application.updateSessionValue(gs, session)
-        Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues.asScala.toSet))
+        Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues))
       })
   }
   
@@ -92,13 +90,13 @@ object Steps extends Controller {
   def step2RemoveValue = Action { implicit request =>    
     step2Form.bindFromRequest.fold(
       errors => {
-        BadRequest(views.html.step2(errors, Application.getSessionValue(session).cellValues.asScala.toSet))
+        BadRequest(views.html.step2(errors, Application.getSessionValue(session).cellValues))
       },
       step2 => {
         val gs = controllers.Application.getSessionValue(session)
-        gs.cellValues.remove(step2.value)
+        gs.cellValues -= step2.value
         Application.updateSessionValue(gs, session)
-        Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues.asScala.toSet))
+        Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues))
       })
   }
   
@@ -123,7 +121,7 @@ object Steps extends Controller {
     
     step3Form = step3Form.fill(Step3(matrix))
     
-  	Ok(views.html.step3(step3Form, gs.cellValues.asScala.toSeq, gs.columnsNo, gs.rowsNo))
+  	Ok(views.html.step3(step3Form, gs.cellValues.toSeq, gs.columnsNo, gs.rowsNo))
   }
   
   case class Step4 (
@@ -143,7 +141,7 @@ object Steps extends Controller {
     val gs = controllers.Application.getSessionValue(session)
     step3Form.bindFromRequest.fold(
       errors => {
-        BadRequest(views.html.step3(step3Form, gs.cellValues.asScala.toSeq, gs.columnsNo, gs.rowsNo))
+        BadRequest(views.html.step3(step3Form, gs.cellValues.toSeq, gs.columnsNo, gs.rowsNo))
       },
       step3 => {    
                 
@@ -151,56 +149,69 @@ object Steps extends Controller {
         Application.updateSessionValue(gs, session)  
         
         if (step3Form.bindFromRequest.data.contains("nextSubmit")) {
-          step4Form = step4Form.fill(Step4(",", "file.csv"))
+          step4Form = step4Form.fill(Step4(gs.delimiter, gs.filename))
           Ok(views.html.step4(step4Form, gs)) 
         } else {
-          Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues.asScala.toSet))
+          Ok(views.html.step2(step2Form, Application.getSessionValue(session).cellValues))
         }
       })
   }
-  
-  
-  def processStep4() = Action { implicit request =>
-    
-    val gs = controllers.Application.getSessionValue(session)
-    
-    if (step4Form.bindFromRequest.data.contains("generateSubmit")) {
-      step4Form.bindFromRequest.fold(
-    		  errors => BadRequest(views.html.step4(step4Form, gs)),
-    		  step4 => generateFile(gs, step4) 
-      )
-       
-    } else {
-      val matrix = gs.getRows
-      step3Form = step3Form.fill(Step3(matrix))
-      Ok(views.html.step3(step3Form, gs.cellValues.asScala.toSeq, gs.columnsNo, gs.rowsNo))
-    }    
-   
+
+
+  def processStep4() = Action {
+    implicit request =>
+
+      val gs = controllers.Application.getSessionValue(session)
+
+      if (step4Form.bindFromRequest.data.contains("generateSubmit")) {
+        step4Form.bindFromRequest.fold(
+          errors => BadRequest(views.html.step4(step4Form, gs)),
+          step4 => generateFile(gs, step4)
+        )
+
+      } else {
+
+        step4Form.bindFromRequest.fold(
+          errors => BadRequest(views.html.step4(step4Form, gs)),
+          step4 => {
+            gs.delimiter = step4.delimiter
+            gs.filename = step4.filename
+            Application.updateSessionValue(gs, session)
+            val matrix = gs.getRows
+            step3Form = step3Form.fill(Step3(matrix))
+            Ok(views.html.step3(step3Form, gs.cellValues.toSeq, gs.columnsNo, gs.rowsNo))
+
+          }
+        )
+
+
+      }
+
   }
-  
-  def generateFile(gs: GenerationSession, step4: Step4) : SimpleResult[Array[Byte]] = { 
-    
-  	var sb = new StringBuilder();
-	for (i <- 0.until(gs.matrix.length)) {
-		for (j <- 0.until(gs.matrix(i).length)) {
-			sb.append(gs.matrix(i)(j)).append(step4.delimiter);
-		}
-		sb.append("\r\n");
-	}
-	
-	val csvFileBytes = sb.toString.getBytes()	
-	
-	val csvFileContent: Enumerator[Array[Byte]] = Enumerator(csvFileBytes)
-	SimpleResult(
-	    header = ResponseHeader(200, Map(
-	        CONTENT_LENGTH -> csvFileBytes.length.toString,
-	        CONTENT_TYPE -> "text/csv",
-	        CONTENT_DISPOSITION -> ("attachment; filename=" + step4.filename)
-	        )),
-	    body = csvFileContent
-	)
-	
-	
+
+  def generateFile(gs: GenerationSession, step4: Step4): SimpleResult[Array[Byte]] = {
+
+    val sb = new StringBuilder();
+    for (i <- 0.until(gs.matrix.length)) {
+      for (j <- 0.until(gs.matrix(i).length)) {
+        sb.append(gs.matrix(i)(j)).append(step4.delimiter);
+      }
+      sb.append("\r\n");
+    }
+
+    val csvFileBytes = sb.toString.getBytes()
+
+    val csvFileContent: Enumerator[Array[Byte]] = Enumerator(csvFileBytes)
+    SimpleResult(
+      header = ResponseHeader(200, Map(
+        CONTENT_LENGTH -> csvFileBytes.length.toString,
+        CONTENT_TYPE -> "text/csv",
+        CONTENT_DISPOSITION -> ("attachment; filename=" + step4.filename)
+      )),
+      body = csvFileContent
+    )
+
+
   }
     
 

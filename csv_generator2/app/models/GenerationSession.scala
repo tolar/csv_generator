@@ -1,20 +1,37 @@
 package models
 
+import scala.collection.{mutable, SortedSet}
 
-import scala.beans.BeanProperty
-import java.beans.ConstructorProperties
-import java.util
+case class GenerationSession(rowsNoI: Int, columnsNoI: Int, cellValuesI: SortedSet[String],matrixI: Array[Array[String]], delimiterI: String, filenameI: String) {
 
-@ConstructorProperties(Array("rowsNo", "columnsNo", "cellValues", "matrix", "delimiter", "filename"))
-class GenerationSession extends Serializable {
+  def this() = this(0, 0, mutable.TreeSet[String]()(Ordering[String]), Array.ofDim[String](0, 0), ";", "file.csv" )
 
-  @BeanProperty var rowsNo: Int = 0
-  @BeanProperty var columnsNo: Int = 0
-  //@BeanProperty var cellValues: util.SortedSet[String] = util.TreeSet[String]()(Ordering[String])
-  @BeanProperty var cellValues: util.Set[String] = new util.TreeSet[String](Ordering[String])
-  @BeanProperty var matrix: Array[Array[String]] = Array.ofDim[String](rowsNo, columnsNo)
-  @BeanProperty var delimiter: String = ";"
-  @BeanProperty var filename: String = "file.csv"
+  var rowsNo: Int = rowsNoI
+  var columnsNo: Int = columnsNoI
+  var cellValues: SortedSet[String] = cellValuesI
+  var matrix: Array[Array[String]] = matrixI
+  var delimiter: String = delimiterI
+  var filename: String = filenameI
+
+/*  def apply() = {
+    this.rowsNo = 0
+    this.columnsNo = 0
+    this.cellValues = mutable.TreeSet[String]()(Ordering[String])
+    this.matrix =  Array.ofDim[String](rowsNo, columnsNo)
+    this.delimiter = ";"
+    this.filename = "file.csv"
+  }*/
+
+/*  def GenerationSession(rowsNo: Int, columnsNo: Int, cellValues: SortedSet[String],matrix: Array[Array[String]], delimiter: String, filename: String) = {
+    this.rowsNo = rowsNo
+    this.columnsNo = columnsNo
+    this.cellValues = mutable.TreeSet[String]()(Ordering[String])
+    this.matrix =  Array.ofDim[String](rowsNo, columnsNo)
+    this.delimiter = delimiter
+    this.filename = filename
+  }*/
+
+
 
   def reallocateMatrix = {
     val newMatrix = Array.ofDim[String](rowsNo, columnsNo)
@@ -76,4 +93,7 @@ class GenerationSession extends Serializable {
 	}
 
 */
+
+
 }
+

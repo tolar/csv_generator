@@ -42,48 +42,59 @@
 </head>
 <body>
 
-    <div class="container">
-        <div class="navbar navbar-inverse">
-            <div class="navbar-inner">
-                <div>
-                    <ul class="nav">
-                        <li><a href="/index">@Messages("home")</a></li>
-                        <li><a href="/registrationForm">@Messages("register")</a></li>
-                        @if(request.session.get("logged").isEmpty) {
-                        <li><a href="/loginForm">@Messages("login")</a></li>
-                        }
-                        @if(!request.session.get("logged").isEmpty) {
-                        <li><a href="/profileForm">@Messages("profile")</a></li>
-                        <li><a href="/logout">@Messages("logout")</a></li>
-                        }
-                    </ul>
-                    <p class="navbar-text pull-right">@request.session.get("username")</p>
+    <div class="wrapper">
+        <div class="container">
+
+            <div class="navbar navbar-inverse">
+                <div class="navbar-inner">
+                    <div>
+                        <ul class="nav">
+                            <li><a href="/index">@Messages("home")</a></li>
+                            @if(request.session.get("logged").isEmpty) {
+                            <li><a href="/registrationForm">@Messages("register")</a></li>
+                            <li><a href="/loginForm">@Messages("login")</a></li>
+                            }
+                            @if(!request.session.get("logged").isEmpty) {
+                            <li><a href="/profileForm">@Messages("profile")</a></li>
+                            <li><a href="/logout">@Messages("logout")</a></li>
+                            }
+                        </ul>
+                        <p class="navbar-text pull-right">@request.session.get("username")</p>
+                    </div>
                 </div>
             </div>
+
+            @if(!request.flash.get("successKey").isEmpty) {
+            <div class="alert alert-success">
+                @Messages((request.flash.get("successKey").get))
+            </div>
+            }
+
+            @if(!request.flash.get("errorKey").isEmpty) {
+            <div class="alert alert-error">
+                @Messages((request.flash.get("errorKey").get))
+            </div>
+            }
+
+            @if(activeStep > 0) {
+            <ul class="breadcrumb">
+                @breadCrumbItem(Messages("step1_headline"), (activeStep==1))
+                @breadCrumbItem(Messages("step2_headline"), (activeStep==2))
+                @breadCrumbItem(Messages("step3_headline"), (activeStep==3))
+                @breadCrumbItem(Messages("step4_headline"), (activeStep==4), false)
+            </ul>
+            }
+
+            @content
         </div>
 
-        @if(!request.flash.get("successKey").isEmpty) {
-        <div class="alert alert-success">
-            @Messages((request.flash.get("successKey").get))
+        <div class="push"></div>
+    </div>
+
+    <div class="footer thumbnail">
+        <div class="container">
+            <p class="muted credit">You can contact author of this CSV Generator on email <a href="mailto:info@@csvgenerator.cz">info@@csvgenerator.cz</a></p>
         </div>
-        }
-
-        @if(!request.flash.get("errorKey").isEmpty) {
-        <div class="alert alert-error">
-            @Messages((request.flash.get("errorKey").get))
-        </div>
-        }
-
-        @if(activeStep > 0) {
-        <ul class="breadcrumb">
-            @breadCrumbItem(Messages("step1_headline"), (activeStep==1))
-            @breadCrumbItem(Messages("step2_headline"), (activeStep==2))
-            @breadCrumbItem(Messages("step3_headline"), (activeStep==3))
-            @breadCrumbItem(Messages("step4_headline"), (activeStep==4), false)
-        </ul>
-        }
-
-        @content
     </div>
 
 
