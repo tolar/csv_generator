@@ -9,10 +9,12 @@ import scala.collection.mutable
 
 object Import extends Controller {
 
+  val maxRows: Int = 50
+  val maxColumns: Int = 50
+
   case class Import(delimiter: String = ";", ignoreString: String = "#")
 
   val importForm = Form[Import](
-
     mapping(
       "delimiter" -> text,
       "ignoreString" -> text
@@ -21,7 +23,6 @@ object Import extends Controller {
     } {
       imp => Some(imp.delimiter, imp.ignoreString)
     }
-
   )
 
   def importFile = Action {
@@ -32,67 +33,74 @@ object Import extends Controller {
   def processImport = Action(parse.multipartFormData) {
     implicit request =>
 
-    val id : Option[Import] = importForm.bindFromRequest().fold(
-      errFrm => None,
-      importData => Some(importData)
-    )
+      val id: Option[Import] = importForm.bindFromRequest().fold(
+        errFrm => None,
+        importData => Some(importData)
+      )
 
-    request.body.file("filePath").map { csvFile =>
-      id.map { importData =>
+      request.body.file("filePath").map {
+        csvFile =>
+          id.map {
+            importData =>
 
-        import java.io.File
-        val filename = csvFile.filename
-        val contentType = csvFile.contentType
-        csvFile.ref.moveTo(new File("/tmp/csv.csv"), true)
+              import java.io.File
+              val filename = csvFile.filename
+              val contentType = csvFile.contentType
+              csvFile.ref.moveTo(new File("/tmp/csv.csv"), true)
 
-        var values = mutable.TreeSet[String]()(Ordering[String])
-        var rowNo = 0
-        var columnNo = 0
-        var rows = ListBuffer[Array[String]]()
+              var values = mutable.TreeSet[String]()(Ordering[String])
+              var rowNo = 0
+              var columnNo = 0
+              var rows = ListBuffer[Array[String]]()
 
-//        var lineCounter: Int = 0
+              val lines: Iterator[String] = Source.fromFile("/tmp/csv.csv").getLines()
 
-//        Breaks.breakable {
-        for (line <- Source.fromFile("/tmp/csv.csv").getLines()) {
-          /*            lineCounter += 1
-                      if (lineCounter > 1) {
-                        Ok(views.html.importFile(importForm)).flashing("errorKey" -> "import_too_many_rows")
-                        Breaks.break
-                      }*/
-          if (!line.trim.startsWith(importData.ignoreString)) {
-            val rowCells: Array[String] = ((line.split(importData.delimiter)).toArray[String])
-            rows.+=(rowCells)
-            values ++= rowCells.filter(v => !v.trim.isEmpty).toSet
-            rowNo += 1
-            columnNo = if (rowCells.size > columnNo) rowCells.size else columnNo
+              //              if (lines.length > maxRows) {
+              //                Redirect("/importFile").flashing("errorKey" -> "import_too_many_rows")
+              //              } else {
+
+              for (line <- lines) {
+                if (!line.trim.startsWith(importData.ignoreString)) {
+                  val rowCells: Array[String] = ((line.split(importData.delimiter)).toArray[String])
+                  rows.+=(rowCells)
+                  values ++= rowCells.filter(v => !v.trim.isEmpty).toSet
+                  rowNo += 1
+                  columnNo = if (rowCells.size > columnNo) rowCells.size else columnNo
+                }
+              }
+
+              if (columnNo > maxColumns) {
+                Redirect("/importFile").flashing("errorKey" -> "import_too_many_columns")
+              } else if (rowNo > maxRows) {
+                Redirect("/importFile").flashing("errorKey" -> "import_too_many_rows")
+              } else {
+
+                val gs = controllers.Application.getSessionValue(session)
+
+                gs.filename = filename
+
+                gs.cellValues = values
+                gs.rowsNo = rowNo
+                gs.columnsNo = columnNo
+
+                rows = rows.map(row => row.padTo(columnNo, ""))
+
+                gs.matrix = rows.toArray
+
+                controllers.Application.updateSessionValue(gs, session)
+
+                Steps.step1Form = Steps.step1Form.fill(Steps.Step1(gs.rowsNo, gs.columnsNo))
+                //Ok(views.html.step1(Steps.step1Form)).flashing("successKey" -> "import_successful")
+                Redirect("/step1").flashing("successKey" -> "import_successful")
+              }
+          }.getOrElse {
+            Redirect("/importFile").flashing("errorKey" -> "import_failed")
           }
-        }
-        //        }
-
-        val gs = controllers.Application.getSessionValue(session)
-
-        gs.cellValues = values
-        gs.rowsNo = rowNo
-        gs.columnsNo = columnNo
-
-        rows = rows.map(row => row.padTo(columnNo, ""))
-
-        gs.matrix = rows.toArray
-
-        controllers.Application.updateSessionValue(gs, session)
-
-        Steps.step1Form = Steps.step1Form.fill(Steps.Step1(gs.rowsNo, gs.columnsNo))
-        Ok(views.html.step1(Steps.step1Form)).flashing("successKey" -> "import_successful")
-
       }.getOrElse {
-        BadRequest("Form binding error.")
+        Redirect("/importFile").flashing("errorKey" -> "import_failed")
       }
-    }.getOrElse {
-      BadRequest("File not attached.")
-    }
 
   }
-
 
 
 }
