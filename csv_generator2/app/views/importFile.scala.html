@@ -3,6 +3,7 @@
 @import helper._
 
 @implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+@fileSelectFieldConstructor = @{ FieldConstructor(twitterJasnyBootstrapFileInput.f) }
 
 @main(Messages("import_file_title"), -1) {
 
@@ -26,8 +27,17 @@
 
             @helper.inputFile(
                 importForm("filePath"),
-                '_label -> Messages("file_path")
+                '_label -> Messages("file")
 	        )
+
+            @helper.inputFile(
+                importForm("filePath"),
+                '_label -> Messages("file")
+                )(fileSelectFieldConstructor)
+
+            )
+
+
 
 	    <br/>
 	    

@@ -6,6 +6,7 @@ import play.api.data.Forms._
 import scala.io.Source
 import scala.collection.mutable.ListBuffer
 import scala.collection.mutable
+import org.apache.commons.lang3.StringUtils
 
 object Import extends Controller {
 
@@ -46,21 +47,16 @@ object Import extends Controller {
               import java.io.File
               val filename = csvFile.filename
               val contentType = csvFile.contentType
-              csvFile.ref.moveTo(new File("/tmp/csv.csv"), true)
 
               var values = mutable.TreeSet[String]()(Ordering[String])
               var rowNo = 0
               var columnNo = 0
               var rows = ListBuffer[Array[String]]()
 
-              val lines: Iterator[String] = Source.fromFile("/tmp/csv.csv").getLines()
-
-              //              if (lines.length > maxRows) {
-              //                Redirect("/importFile").flashing("errorKey" -> "import_too_many_rows")
-              //              } else {
+              val lines: Iterator[String] = Source.fromFile(csvFile.ref.file).getLines()
 
               for (line <- lines) {
-                if (!line.trim.startsWith(importData.ignoreString)) {
+                if (StringUtils.isNotBlank(importData.ignoreString) && !line.trim.startsWith(importData.ignoreString)) {
                   val rowCells: Array[String] = ((line.split(importData.delimiter)).toArray[String])
                   rows.+=(rowCells)
                   values ++= rowCells.filter(v => !v.trim.isEmpty).toSet

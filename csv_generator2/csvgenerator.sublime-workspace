@@ -3,23 +3,31 @@
 	{
 		"selected_items":
 		[
+			[
+				"paddi",
+				"padding-right"
+			],
+			[
+				"tra",
+				"translate"
+			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "/C/work/play/samples/scala/computer-database/app/views/editForm.scala.html",
+			"file": "/C/work/gadgets/dictionary-sms.xml",
 			"settings":
 			{
-				"buffer_size": 1162,
+				"buffer_size": 11159,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/C/work/play/samples/scala/computer-database/app/models/Models.scala",
+			"file": "project/Build.scala",
 			"settings":
 			{
-				"buffer_size": 4708,
+				"buffer_size": 681,
 				"line_ending": "Unix"
 			}
 		},
@@ -32,18 +40,21 @@
 			}
 		},
 		{
-			"file": "/C/work/play/samples/scala/computer-database/app/controllers/Application.scala",
+			"contents": "// Comment to get more information during initialization\nlogLevel := Level.Warn\n\n// The Typesafe repository \nresolvers ++= Seq(\"Typesafe repository\" at \"http://repo.typesafe.com/typesafe/releases/\",\n  \"sonatype-public\" at \"https://oss.sonatype.org/content/groups/public\",\n  \"repo.codahale.com\" at \"http://repo.codahale.com\"\n)\n\n\n// Use the Play sbt plugin for Play projects\naddSbtPlugin(\"play\" % \"sbt-plugin\" % \"2.1.1\")\n\naddSbtPlugin(\"org.scalaxb\" % \"sbt-scalaxb\" % \"1.0.2\")\n\n\n\n\n",
+			"file": "project/plugins.sbt",
+			"file_size": 496,
+			"file_write_time": 130126559261604205,
 			"settings":
 			{
-				"buffer_size": 2706,
-				"line_ending": "Unix"
+				"buffer_size": 478,
+				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/work/csv_generator/csv_generator/app/controllers/Application.java",
+			"file": "project/build.properties",
 			"settings":
 			{
-				"buffer_size": 9608,
+				"buffer_size": 18,
 				"line_ending": "Windows"
 			}
 		}
@@ -72,6 +83,11 @@
 	},
 	"file_history":
 	[
+		"/C/work/play/samples/scala/computer-database/app/views/editForm.scala.html",
+		"/C/work/play/samples/scala/computer-database/app/models/Models.scala",
+		"/C/work/temp/import_example.csv",
+		"/C/work/play/samples/scala/computer-database/app/controllers/Application.scala",
+		"/C/work/csv_generator/csv_generator/app/controllers/Application.java",
 		"/C/work/play/samples/scala/forms/app/models/User.scala",
 		"/C/work/csv_generator/csv_generator2/app/Global.scala",
 		"/C/work/csv_generator/csv_generator2/app/models/User.scala",
@@ -83,17 +99,13 @@
 		"/C/work/csv_generator/csv_generator2/project/Build.scala",
 		"/C/work/csv_generator/csv_generator2/app/views/registration.scala.html",
 		"/C/work/play/samples/scala/zentasks/app/views/tasks/index.scala.html",
-		"/C/work/csv_generator/csv_generator/app/controllers/Application.java",
-		"/C/work/play/samples/scala/computer-database/app/controllers/Application.scala",
-		"/C/work/play/samples/scala/computer-database/app/views/editForm.scala.html",
 		"/C/work/csv_generator/csv_generator/app/models/User.java",
 		"/C/work/csv_generator/csv_generator2/app/controllers/Application.scala",
 		"/C/work/csv_generator/csv_generator2/conf/messages.cs",
 		"/C/work/play/samples/scala/forms/app/views/signup/form.scala.html",
 		"/C/work/play/samples/scala/forms/app/controllers/SignUp.scala",
 		"/C/work/csv_generator/csv_generator2/conf/routes",
-		"/C/work/csv_generator/csv_generator2/conf/messages",
-		"/C/work/play/samples/scala/computer-database/app/models/Models.scala"
+		"/C/work/csv_generator/csv_generator2/conf/messages"
 	],
 	"find":
 	{
@@ -111,6 +123,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"px",
 			"Company",
 			"generate",
 			"update",
@@ -141,46 +154,46 @@
 			[
 				{
 					"buffer": 0,
-					"file": "/C/work/play/samples/scala/computer-database/app/views/editForm.scala.html",
+					"file": "/C/work/gadgets/dictionary-sms.xml",
 					"settings":
 					{
-						"buffer_size": 1162,
+						"buffer_size": 11159,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								8435,
+								8435
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 3862.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "/C/work/play/samples/scala/computer-database/app/models/Models.scala",
+					"file": "project/Build.scala",
 					"settings":
 					{
-						"buffer_size": 4708,
+						"buffer_size": 681,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4540,
-								4540
+								34,
+								34
 							]
 						],
 						"settings":
@@ -190,7 +203,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2178.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -223,56 +236,52 @@
 				},
 				{
 					"buffer": 3,
-					"file": "/C/work/play/samples/scala/computer-database/app/controllers/Application.scala",
+					"file": "project/plugins.sbt",
 					"settings":
 					{
-						"buffer_size": 2706,
+						"buffer_size": 478,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1468,
-								1468
+								416,
+								416
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Scala/Scala.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 66.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "/C/work/csv_generator/csv_generator/app/controllers/Application.java",
+					"file": "project/build.properties",
 					"settings":
 					{
-						"buffer_size": 9608,
+						"buffer_size": 18,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5676,
-								5676
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Java/Java.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Java/JavaProperties.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 2748.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
