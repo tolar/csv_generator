@@ -93,7 +93,7 @@ object Import extends Controller {
             Redirect("/importFile").flashing("errorKey" -> "import_failed")
           }
       }.getOrElse {
-        Redirect("/importFile").flashing("errorKey" -> "import_failed")
+        Redirect("/importFile").flashing("errorKey" -> "import_failed_error_file_reading")
       }
 
   }
