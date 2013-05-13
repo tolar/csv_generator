@@ -2,7 +2,17 @@
 
 @import helper._
 
+@implicitFieldConstructor = @{ FieldConstructor(selectInput.f) }
+@select.f = @{ FieldConstructor(selectInput.f) }
+
 @cellField(field: Field) = {
+
+    <select id="x" name="x">
+        @values.map{e =>
+        <option value='@e'>@e</option>
+        }
+    </select>
+
 	@select(
 	    field,
 	    values map (i => (i,i)),
