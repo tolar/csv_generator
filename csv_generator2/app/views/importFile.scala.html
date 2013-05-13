@@ -1,4 +1,4 @@
-@(importForm: Form[Import.Import])(implicit request: play.api.mvc.RequestHeader)
+@(importForm: Form[Import.Import])(implicit request: play.api.mvc.RequestHeader, lang: Lang)
 
 @import helper._
 
@@ -28,16 +28,7 @@
             @helper.inputFile(
                 importForm("filePath"),
                 '_label -> Messages("file")
-	        )
-
-            @helper.inputFile(
-                importForm("filePath"),
-                '_label -> Messages("file")
-                )(fileSelectFieldConstructor)
-
-            )
-
-
+            )(fileSelectFieldConstructor, lang)
 
 	    <br/>
 	    
