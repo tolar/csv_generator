@@ -33,7 +33,7 @@
 				@Messages("cell_value_must_not_be_empty")
 			</div>
 		}
-	
+
 		<span class=" control-group @if(step2Form.error("value")){error} ">
 				    									
 	    @helper.inputText(
@@ -47,11 +47,13 @@
 	    <input type="submit" value="@Messages("add")" class="btn"/>	    	    	    	          	    	    	    	  	    	    	   	    	   	    
 	   
 	}
-		
+
 	<a href="/step1"class="btn btn-primary" >@Messages("previous")</a> 
 	<a href="/step3"class="btn btn-primary" >@Messages("next")</a> 
 	
 	</fieldset>
+
+    <br/>
 	
 	</div>
 	</div>	

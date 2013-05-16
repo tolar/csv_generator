@@ -1,65 +1,59 @@
-@(step3Form: Form[Steps.Step3], values: Seq[String], columns: Int, rows: Int)(implicit request: play.api.mvc.RequestHeader)
+@(step3Form: Form[Steps.Step3], values: Seq[String], columns: Int, rows: Int)(implicit request: play.api.mvc.RequestHeader, lang: Lang)
 
 @import helper._
 
-@implicitFieldConstructor = @{ FieldConstructor(selectInput.f) }
-@select.f = @{ FieldConstructor(selectInput.f) }
+@selectFieldConstructor = @{ FieldConstructor(selectInput.f) }
 
 @cellField(field: Field) = {
 
-    <select id="x" name="x">
-        @values.map{e =>
-        <option value='@e'>@e</option>
-        }
-    </select>
-
-	@select(
+	@helper.select(
 	    field,
 	    values map (i => (i,i)),
 	    '_label -> "",
 	    '_default -> ""
-	)     
+	)(selectFieldConstructor, lang)
 }
 
 @cellsRow(field: Field) = {
-  
-	@repeat(field("cells"), min = 0) { cell =>   
+
+	@repeat(field("cells"), min = 0) { cell =>
 		<td>
 	    @cellField(cell)
 	    </td>
 	}
-	 
+
 }
 
 @main(Messages("step3_title"), 3) {
 
-	<div class="row">
-	<div class="span12">
-	
-	<form action="/processStep3" method="post" class="form-inline">
-	
-	<fieldset>
-    <legend>@Messages("step3_headline")</legend>
-        
-    <table>
-    
-    @repeat(step3Form("rows")) { row =>
-    	<tr>
-        @cellsRow(row)
-        </tr>
-    
-    }
-      
-	</table>
- 	
- 	</fieldset>
- 	
-	<input name="prevSubmit" type="submit" class="btn btn-primary" value="@Messages("previous")"></input>
-	<input name="nextSubmit" type="submit" class="btn btn-primary" value="@Messages("next")"></input>
-	
-	</form>
-	
-	</div>
-	</div>
+    <div class="row">
+        <div class="span12">
+
+            <form action="/processStep3" method="post" class="form-inline">
+                <fieldset>
+                    <legend>@Messages("step3_headline")</legend>
+
+                    <table>
+
+                        @repeat(step3Form("rows")) { row =>
+                        <tr>
+                            @cellsRow(row)
+                        </tr>
+
+                        }
+
+                    </table>
+
+                </fieldset>
+
+                <br/>
+
+                <input name="prevSubmit" type="submit" class="btn btn-primary" value="@Messages("previous")"></input>
+                <input name="nextSubmit" type="submit" class="btn btn-primary" value="@Messages("next")"></input>
+
+            </form>
+
+        </div>
+    </div>
 
 }
